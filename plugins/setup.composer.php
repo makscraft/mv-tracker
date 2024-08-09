@@ -8,7 +8,16 @@ class Setup
      */
     static public function postAutoloadDump()
     {
-        
+        //$accounts = new Accounts();
+        $registry = Registry :: instance();
+        $installation = new Installation();
+        //Installation :: displayDoneMessage('hello!');
+        //Installation :: generateSecurityToken();
+        $from = realpath(__DIR__.'/../vendor/makscraft/mv-framework/adminpanel');
+        $to = realpath(__DIR__.'/..').'/admin';
+
+        rename($from, $to);
+        //echo $to;
     }
 
     /**

@@ -18,6 +18,10 @@
         "classmap": [
             "models/",
             "plugins/"
+        ],
+        "exclude-from-classmap": [
+            "vendor/makscraft/mv-framework/models/",
+            "vendor/makscraft/mv-framework/plugins/"
         ]
     },
     "scripts": {
