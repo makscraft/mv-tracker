@@ -16,14 +16,13 @@
             "config/autoload.php"
         ],
         "classmap": [
-            "core/",
             "models/",
             "plugins/"
         ]
     },
     "scripts": {
-        "post-create-project-cmd": "\\Installation::finish",
-        "post-autoload-dump": "\\Installation::postAutoloadDump"
+        "post-create-project-cmd": "\\Setup::finish",
+        "post-autoload-dump": "\\Setup::postAutoloadDump"
     },
     "require": {
         "php": ">=8.0",

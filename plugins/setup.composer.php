@@ -1,5 +1,5 @@
 <?php
-class Installation
+class Setup
 {
     static public $version = '1.2';
 
