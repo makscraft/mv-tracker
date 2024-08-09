@@ -1,0 +1,30 @@
+{
+    "name": "makscraft/mv-tracker",
+    "description": "Simple task tracking system based on MV framework.",
+    "version": "3.0.0",
+    "type": "project",
+    "keywords": ["tack tracker", "php", "framework", "mvc"],
+    "homepage": "https://mv-tracker.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maxim Zaykov"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "config/autoload.php"
+        ],
+        "classmap": [
+            "core/",
+            "models/"
+        ]
+    },
+    "scripts": {
+
+    },
+    "require": {
+        "php": ">=8.0",
+        "makscraft/mv-framework": "@dev"
+    }
+}
