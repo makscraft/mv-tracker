@@ -16,10 +16,9 @@ class Installation
      */
     static public function finish()
     {
-        
+
     }
-
-
+}
     /*
     
     private $root_path = '';
