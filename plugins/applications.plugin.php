@@ -1,4 +1,4 @@
-<?
+<?php
 class Applications extends Plugin
 {
 	private $token;

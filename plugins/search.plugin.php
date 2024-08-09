@@ -1,4 +1,4 @@
-<?
+<?php
 class Search extends Plugin
 {
    public $request;

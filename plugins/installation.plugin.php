@@ -1,7 +1,26 @@
-<?
+<?php
 class Installation
 {
     static public $version = '1.2';
+
+    /**
+     * Post "composer dump-autoload" event.
+     */
+    static public function postAutoloadDump()
+    {
+        
+    }
+
+    /**
+     * Final configuration at the end of "composer create-project" command.
+     */
+    static public function finish()
+    {
+        
+    }
+
+
+    /*
     
     private $root_path = '';
     
@@ -386,3 +405,4 @@ class Installation
     }
 }
 ?>
+*/
