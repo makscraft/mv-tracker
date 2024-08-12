@@ -25,8 +25,8 @@
         ]
     },
     "scripts": {
-        "post-create-project-cmd": "\\Setup::finish",
-        "post-autoload-dump": "\\Setup::postAutoloadDump"
+        "post-create-project-cmd": "\\SetupComposer::finish",
+        "post-autoload-dump": "\\SetupComposer::postAutoloadDump"
     },
     "require": {
         "php": ">=8.0",

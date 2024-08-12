@@ -1,22 +1,33 @@
 <?php
-class Setup
+use Composer\Script\Event;
+
+class SetupComposer extends Installation
 {
     static public $version = '1.2';
 
     /**
      * Post "composer dump-autoload" event.
      */
-    static public function postAutoloadDump()
+    static public function postAutoloadDump(Event $event)
     {
-        //$accounts = new Accounts();
-        $registry = Registry :: instance();
-        $installation = new Installation();
-        //Installation :: displayDoneMessage('hello!');
-        //Installation :: generateSecurityToken();
-        $from = realpath(__DIR__.'/../vendor/makscraft/mv-framework/adminpanel');
-        $to = realpath(__DIR__.'/..').'/admin';
+        Installation :: instance(['directory' => __DIR__.'/..']);
+        self :: configureDirectory();
+        self :: generateSecurityToken();
 
-        rename($from, $to);
+        //self :: setEnvFileParameter('APP_ENV', 'development');
+
+
+        //self :: displayDoneMessage('111');
+
+        //$accounts = new Accounts();
+        // $registry = Registry :: instance();
+        // $installation = new Installation();
+        // //Installation :: displayDoneMessage('hello!');
+        // //Installation :: generateSecurityToken();
+        // $from = realpath(__DIR__.'/../vendor/makscraft/mv-framework/adminpanel');
+        // $to = realpath(__DIR__.'/..').'/admin';
+
+        //rename($from, $to);
         //echo $to;
     }
 
