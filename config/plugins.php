@@ -11,5 +11,5 @@
  * Example: ['Search', 'ShopCart']
  */
 
-$mvActivePlugins = ['Search', 'Installation'];
+$mvActivePlugins = ['Search'];
 ?>
