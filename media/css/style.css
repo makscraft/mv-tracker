@@ -1,0 +1,329 @@
+
+html{height: 100%;}
+body{height: 100%; min-width: 360px; position: relative; font: 16px/1.5 "Rubik-Regular"; background-color: #f6f5f5; 
+color: #202420}
+body.with-background #container{background: url("../images/login-background.jpg") no-repeat bottom center; 
+background-size: cover;}
+#container{min-height: 100%; position: relative;}
+#header{height: 54px; position: relative;  background: #202420; color: #fff;}
+#left-side{width: 200px; padding-top: 30px; float: left;}
+#content{position: relative; padding: 30px 0 55px 0}
+#content.right-side{float: left; width: 1050px;}
+#content div.content-wrapper{position: relative;}
+#footer{position: absolute; left: 0; bottom: 0; width: 100%; height: 130px; padding: 40px 0; text-align: center;
+    background: #202420; color: #fff; background: url("../images/footer.jpg") no-repeat; background-size: cover;}
+#footer.no-background{background: none;}
+#footer.with-background{background: transparent}
+#footer.with-background a{color: #ce4b5d; text-decoration: none}
+#sticky-footer-wrapper{padding-bottom: 130px}
+.wrapper{max-width: 1600px; height: 100%; margin: 0 auto; padding: 0 13px; box-sizing: content-box}
+.wrapper-left{max-width: 800px; width: calc(100% - 420px); height: 100%; padding: 0 10px; box-sizing: content-box; 
+position: relative}
+
+h1{font: 30px/30px Exo2-Bold; padding-bottom: 20px;}
+h1.floated{float: left; margin-right: 20px}
+h2{font: 24px/20px Exo2-Bold; padding-bottom: 25px}
+h3{font: 16px/16px Rubik-Medium; padding-bottom: 10px}
+p{margin-bottom: 10px; line-height: 1.3;}
+a{color: #3b75bc;}
+.wrapper-left h1, .document-content h1{max-width: 615px; margin-right: 20px; float: left}
+.back{display: block; background: url(../images/left-arrow-green.svg) no-repeat left center; text-decoration: none;
+    background-size: 10px 12px; padding-left: 16px; margin: 5px 23px 8px 0; float: left;}
+.wrapper-left > .back{}
+
+
+.logo {display: inline-block; float: left;  margin: 13px 100px 0 0; text-decoration: none; text-transform: uppercase;
+    color: #fff; font: 24px Rubik-Bold;}
+.logo img{width: 130px;}
+.logo span{color: #f6975d;}
+.search-area{float: left; margin-top: 11px; height: 30px}
+.search-area input.search-string{height: 30px; width: 250px; padding: 0 12px; border: none; border-radius: 3px 0 0 3px;
+    font-size: 15px}
+.search-area input.search-button{height: 30px; padding: 3px 12px; margin-left: -4px; background: #808080; border: none;
+    border-radius: 0 3px 3px 0; font-size: 15px; color: #fff;}
+p.seach-name{}
+span.search-found{background: #fce491;}
+
+.header-right{float: right; height: 100%;}
+.header-right a{color: #fff; text-decoration: none}
+.account-menu{height: 100%;}
+.account-menu li{display: block; height: 100%; line-height: 53px; float: left; font-size: 15px; position: relative;}
+.account-menu li:not(.user-menu) a{padding: 0 14px 12px 14px; height: 53px; display: inline-block;}
+.account-menu li.user-menu a{padding: 0 3px 0; color: #f6975d}
+.account-menu li.user-menu{color: #f6975d}
+.account-menu li.user-menu div.account-image{background: #ddd;}
+.account-menu li.user-menu div.account-image img{}
+.account-menu li:not(.user-menu):hover, .account-menu li:not(.user-menu).active{background: #f6f5f5;}
+.account-menu li:not(.user-menu):hover a, .account-menu li:not(.user-menu).active a{color: #202420;}
+.account-image{width: 30px; height: 30px; float: left; margin: 12px 7px 0 18px; border-radius: 15%; 
+overflow: hidden; position: relative;}
+.account-image img{display: block; max-width: 100%;}
+#menu-button{width: 24px; height: 24px; background: url("../images/menu.svg") no-repeat; background-size: contain;
+    float: right; margin-top: 15px; cursor: pointer; display: none}
+.account-menu li span.new, .bottom-menu a span.new{background: #ce4c5d; color: #fff; display: inline-block; 
+padding: 4px 6px 3px 6px; position: absolute; font-size: 13px; height: 20px; top: 3px; right: 3px; line-height: 13px; 
+border-radius: 10px; min-width: 20px}
+
+#mobile-menu{padding: 30px 20px; background: #202420; width: 280px;  position: fixed; top: 0;height: 100%;
+    z-index: 999999; overflow-x: hidden; overflow-y: auto; left: -280px; right: auto; transition: left 0.5s}
+#mobile-menu.showed{left: 0}
+#mobile-menu a, #mobile-menu span{padding: 13px 0; text-decoration: none; display: block; color: #fff; font-size: 18px}
+#mobile-menu ul li a{display: inline-block; padding-right: 15px; line-height: 18px; border-bottom: none;}
+#mobile-menu ul li.active a{color: #f6975d}
+#mobile-menu ul ul{display: none; padding: 0 0 0 30px}
+#mobile-menu #menu-close{width: 20px; height: 20px; position: absolute; top: 20px; right: 20px;
+    background: url("../images/cancel-white.svg") no-repeat center center; background-size: contain; cursor: pointer}
+
+.button{display: inline-block; color: #fff; padding: 0 15px; border-radius: 4px; border: none; text-decoration: none;
+    font-size: 15px; cursor: pointer; text-align: center}
+.button.big{height: 42px; line-height: 42px}
+.button.medium{height: 35px; line-height: 35px}
+.button.small{height: 25px; line-height: 25px; font-size: 13px}
+.button.grey{background-color: #ededed; color: #202420}
+.button.green{background-color: #1ec277}
+.button.gradient{background-image: -moz-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);}
+.button.no-border{border: none; background: transparent; color: #3b75bc; margin-left: 8px}
+.button.create-task{float: right}
+.top-buttons{margin-bottom: 30px}
+.top-buttons .tab:first-child{border-radius: 4px 0 0 4px}
+.top-buttons .tab:nth-child(2){margin-left: -4px; border-radius: 0 4px 4px 0}
+.top-buttons .button.active{background-color: #ce4c5d; color: #fff; border-radius: 4px}
+.button.mass-action{background: #1ec277 url("../images/tick.svg") no-repeat left 10px center; background-size: 15px 15px;
+    padding-left: 30px; margin-right: 11px; margin-bottom: 10px; display: block; float: left;}
+.button.options{float: right; background:  #1ec277 url("../images/table.svg") no-repeat left 10px center; 
+background-size: 15px 15px; padding-left: 30px; }
+.button.add-comment{background:  #1ec277 url("../images/chat.svg") no-repeat left 20px center; 
+background-size: 15px 15px; padding: 0 20px 0 50px; margin-bottom: 30px}
+
+div ::-webkit-scrollbar{width: 6px; background: transparent;}
+div ::-webkit-scrollbar-thumb{background: #e3e2e2}
+
+.filters-buttons, .filters-buttons>*{display: inline-block; font-size: 15px}
+.filters-buttons{margin-bottom: 10px; height: 35px;}
+#filters-header{display: inline-block; color: #fff; border-radius: 4px; text-decoration: none; font-size: 15px;
+    background: #1ec277 url(../images/filter.svg) no-repeat left 10px center; background-size: 15px 15px; height: 35px;
+    margin-right: 10px; padding: 7px 14px 6px 30px; cursor: pointer; text-align: center}
+#filters-reject{top: 0}
+#filters-hide{font-size: 13px;}
+.mobile-filters-buttons{margin: 5px 0 15px}
+.mobile-filters-buttons > *{display: inline-block}
+
+#filters-form{width: 100%; margin-bottom: 10px; padding: 20px 30px; background: #ededed; display: none;}
+#filters-form.active{display: block;}
+#filters-form div.section{float: left; width: 22.5%; margin: 0 1.875% 20px 0; position: relative; }
+#filters-form div.section:nth-of-type(4n){margin-right: 0}
+#filters-form div.filter-name{margin-bottom: 3px;}
+#filters-form div.filter-input{width: 100%}
+#filters-form div.filter-input input, #filters-form div.filter-input select{height: 28px; width: 100%; padding: 0 10px;
+    border-radius: 3px; border: none}
+#filter-date_due, .form-date-field{background: #fff url("../images/calendar.svg") no-repeat right 10px center; 
+background-size: 15px 15px}
+#filters-form div.buttons{clear: both}
+
+div.open-filters{margin: 0 15px 12px 0; padding: 21px 0 0 0; float: left;}
+div.open-filters span{margin-right: 12px;}
+div.open-filters select{padding: 0 10px; border-radius: 3px; border: none; width: 170px; height: 28px}
+
+.m2m-left, .m2m-right, .m2m-up, .m2m-down{width: 30px; height: 30px; display: block;
+position: relative; border: none; cursor: pointer; margin: 6px 0; border: none; background-repeat: no-repeat;
+background-position: center; background-size: 12px 12px; background-color: #f6f5f5}
+.m2m-left{background-image: url("../images/left-arrow-green.svg");}
+.m2m-right{background-image: url("../images/right-arrow-green.svg");}
+.m2m-up{background-image: url("../images/up-arrow-green.svg");}
+.m2m-down{background-image:  url("../images/down-arrow-green.svg");}
+.field-list{float: right; position: relative}
+.field-list .list{display: none; position: absolute; z-index: 1000; right: 0px; top: 35px; width: 445px; border-radius: 5px;
+    background: #fff; border: 1px solid #e3e2e2; box-shadow: 0px 5px 9px 0px rgba(32, 36, 32, 0.14); padding: 15px 20px}
+.field-list .column{width: calc((100% - 80px)/2); float: left; margin-bottom: 12px}
+.field-list .header{margin: 0 0 3px 0;}
+.field-list select{width: 160px; height: 140px; padding: 5px 10px; background-image: none; border: 1px solid #ddd;}
+.field-list select option{padding: 0 5px}
+.field-list .m2m-buttons{height: 110px; float: left; padding: 55px 5px 0 5px;}
+
+div.path{margin-bottom: 15px; padding-top: 6px;}
+div.path a, div.path span{font-size: 11px; margin-right: 2px; color: #b2b0b0;}
+
+#content.document-content{width: 70%;}
+#content.document-content div.attached-files{margin-bottom: 12px;}
+
+div.item-actions{float: right; position: relative; top: 7px; margin-bottom: 10px}
+div.item-actions>*{display: block; margin-bottom: 10px; cursor: pointer}
+div.item-actions.horizontal>*{display: inline-block;}
+div.item-actions.horizontal>*:first-child{margin-right: 6px}
+.task-content .item-actions .create, .document-content .item-actions .create, .edit
+{font-size: 13px; text-decoration:none; padding-left: 22px; color: #4e7fc0;
+background: url("../images/pencil-edit-blue.svg") no-repeat left center; background-size: 16px 18px}
+.delete{font-size: 13px; text-decoration:none; padding-left: 22px; color: #4e7fc0; cursor: pointer;
+background: url("../images/paper-bucket-blue.svg") no-repeat left center; background-size: 16px 18px}
+.delete.off{opacity: 0.3; cursor: default !important;}
+
+ul.projects-list{}
+ul.projects-list li{margin: 0 0 7px 0;}
+ul.projects-list li a{text-decoration: none; font-size: 14px;}
+ul.projects-list li a:hover{text-decoration: underline;}
+
+table.tasks-table{width: 100%;}
+table a{text-decoration: none}
+table tr{border-bottom: 1px solid #e3e2e2}
+table.tasks-table th{padding: 10.5px 10px; background: #fff; text-align: left; font-size: 15px;}
+table.tasks-table th a{padding-right: 18px}
+table.tasks-table th a{text-decoration: none;}
+table.tasks-table th a.active-asc{background: url(../images/up-arrow-green.svg) no-repeat right center; 
+background-size: 12px 12px}
+table.tasks-table th a.active-desc{background: url(../images/down-arrow-green.svg) no-repeat right center; 
+background-size: 12px 12px}
+table.tasks-table td{padding: 15px 10px; vertical-align: top}
+table.tasks-table tr:hover td{background: #eee;}
+table.tasks-table tr.active td{background: #ddd;}
+table.tasks-table td.bage{position: relative;}
+table.tasks-table td.bage span.see{background:  #1ec277 url("../images/chat.svg") no-repeat center;
+position: absolute; width: 20px; height: 20px; background-size: contain; border: 5px solid #1ec277;
+border-radius: 12px; top: 3px; margin-left: 3px; display: inline-block;}
+table.tasks-table td.name a{display: block; line-height: 1.2; margin-bottom: 3px}
+table.tasks-table td.name .tracker{display: block; font-size: 13px; color: #8c8c8c}
+table.tasks-table td .complete{display: block; width: 100px; height: 10px; border: 1px solid #1ec277; margin-top: 5px}
+table.tasks-table td .complete span{display: block; height: 100%; background: #1ec277}
+table.tasks-table td.actions a, table.tasks-table td.actions span{width: 16px; height: 16px;
+display: inline-block; cursor: pointer;}
+table.tasks-table td.actions{width: 90px!important; text-align: right}
+table.tasks-table td.actions a.edit{background: url(../images/pencil-edit-button.svg) no-repeat center;
+    background-size: 18px 16px; margin-right: 18px}
+table.tasks-table td.actions span.delete{background: url(../images/paper-bucket.svg) no-repeat center; 
+background-size: 15px 16px}
+table.tasks-table td.actions span.restore{background: url(../images/icon-restore.svg) no-repeat center;
+    background-size: 15px 16px;margin-right: 18px}
+.for-mobile{display: none}
+#check-all{position: relative; top: 1px}
+
+div.form-buttons{padding: 12px 0 10px 0;}
+div.form-buttons input{padding: 0 15px;}
+div.form-buttons div.limiter{float: right;}
+div.form-buttons div.pager+div.limiter{position: relative; top: 7px}
+div.form-buttons.docs div.limiter{position: relative; top: 7px}
+div.form-buttons div.limiter select{padding: 5px 15px; border: none; width: 64px; margin-left: 10px}
+div.form-buttons div.pager{float: left; padding: 0; margin: 0;}
+div.form-buttons .mass-action{margin-bottom: 0}
+
+.task-info{margin-bottom: 20px}
+.task-info span{display: inline-block; margin-right: 10px; color: #8d8d8d; font-size: 13px}
+.task-info .account-image{height: 30px; width: 30px; border: none; float: none; margin: 0 10px 0 0; 
+position: relative; top: 8px}
+.task-info span.tracker{}
+.task-description, .text{word-wrap: break-word}
+.task-files{padding: 15px 30px 0 30px; background: #ededed; margin-top: 15px}
+ul.files li{padding-left: 25px; background: url("../images/download.svg") no-repeat left center; background-size: 16px 16px;
+    margin-bottom: 2px; display: block;}
+ul.files li span.delete{cursor: pointer; margin-left: 13px; position: relative; display: none;}
+ul.files li a:hover span.delete{display: inline;}
+hr{height: 2px; background-color: #e3e2e2; margin: 25px 0; border: none}
+
+.task-params{position: absolute; right: 0; top: 55px; background: #fff; box-shadow: 0px 5px 9px 0px rgba(32, 36, 32, 0.14);
+    border-radius: 4px; padding: 25px 40px; width: 390px}
+.task-params table tr{border-bottom: none}
+.task-params table tr.line td{padding: 0}
+.task-params table tr.line td hr{margin: 20px 0}
+.task-params table td{padding: 6px 0}
+.task-params table td:first-child{padding: 6px 25px 6px 0; color: #8c8c8c}
+
+div.task-history div.section{border-bottom: 1px solid #e3e2e2; padding: 0 0 20px 0; margin-bottom: 25px}
+div.task-history div.header{font-size: 18px; font-weight: bold; margin: 0 0 10px 0;}
+div.task-history div.author{margin: 0 0 15px 0; font: 13px/1.5 "Rubik-Regular"; color: #8d8d8d;}
+div.task-history div.author .account-image{margin: -7px 10px 0 0; height: 30px; width: 30px}
+div.task-history div.author span.name{margin-right: 10px;}
+div.task-history div.author span.date{margin-right: 10px;}
+div.task-history div.section .actions span, div.task-history div.section div.files > span
+    {color: #8c8c8c; display: inline-block; margin-right: 10px}
+div.task-history div.section div.files.with-margin{margin-bottom: 15px;}
+div.task-history div.section div.files ul.files{padding: 5px 0 0 0;}
+div.task-history div.content div.controls{padding: 10px 0 0 0}
+div.task-history div.content div.controls span{margin-right: 12px; cursor: pointer;}
+div.task-history ul.files{padding: 0 0 10px 0;}
+div.task-history div.actions{margin-bottom: 10px; display: inline-block; background: #f1f9d7; padding: 0 12px; 
+border-radius: 4px; font-size: 15px;}
+
+div.full-history{position: relative; padding: 10px 0}
+div.full-history::before{content:""; display: block; width: 18px; margin-left: -9px; height: 100%; background-color: #e3e2e2;
+    position: absolute; left: 50%; top: 0; border-radius: 50px}
+div.full-history div.section{padding: 7px 30px 12px 30px; border-radius: 4px; background: #fff;
+    box-shadow: 0px 5px 9px 0px rgba(32, 36, 32, 0.14); width: 47%; max-width: 755px; min-height: 160px; position: relative}
+div.full-history div.section:not(:first-child){margin-top: -70px}
+div.full-history div.section:nth-child(2n+1)::after{content:""; display: block; position: absolute; left: 100%; top: 33px;
+    height: 15px; width: 6%; background-color: #e3e2e2}
+div.full-history div.section:nth-child(2n)::before {content:""; display: block; position: absolute; right: 100%; top: 33px;
+    height: 15px; width: 6%; background-color: #e3e2e2}
+div.full-history div.section:nth-child(2n){left: 53%}
+div.full-history a{text-decoration: none;}
+div.full-history div.task{font: 22px/23px "Exo2-SemiBold"; margin-bottom: 10px}
+div.full-history div.project{font-size: 13px; margin-bottom: 15px}
+div.full-history div.project span{color: #8c8c8c}
+div.full-history div.author{margin: 20px 0 15px 0; font-size: 13px; color: #8c8c8c;}
+div.full-history div.author span.name{margin-right: 10px;}
+div.full-history div.author span.date{margin-right: 10px;}
+div.full-history div.author span.account-image{float: none; margin: 0 10px 0 0; display: inline-block; position: relative;
+top: 8px;}
+div.full-history div.content{padding: 0 0 10px 0;}
+div.full-history div.actions{padding: 0 12px; background: #f1f9d7; border-radius: 4px; font-size: 15px;
+display: inline-block; margin-bottom: 10px;}
+div.full-history ul.files, div.task-files ul.files{padding: 0 0 10px 0;}
+div.full-history ul.files li, div.task-files ul.files li{margin-bottom: 2px;}
+
+.project-page .item-actions{position: absolute; top: 0; right: 0}
+
+div.pager{margin-bottom: 40px; padding-top: 10px;}
+div.pager>div{display: inline-block; }
+div.pager .active-page{width: 50px; height: 28px; border-radius: 5px; background: #fff; text-align: center; border: none;
+    line-height: 28px; margin: 0 11px}
+div.pager .page-amount{margin-right: 11px}
+div.pager.page-album{margin-bottom: 20px;}
+div.pager a{margin: 0 5px 0 6px; color: #646363;}
+div.pager a.active{text-decoration: none; color: #219fd1;}
+div.pager a.pager-prev, div.pager a.pager-next{display: inline-block; width: 28px; height: 28px; border-radius: 5px;
+    background-color: #ededed; background-position: center center; background-size: 9px 14px; background-repeat: no-repeat;
+    position: relative; top: 8px; margin: 0 3px}
+div.pager a.pager-prev{background-image: url("../images/left-arrow-black.svg")}
+div.pager a.pager-next{background-image: url("../images/right-arrow-black.svg")}
+
+div.documentation-content{padding: 12px 0; line-height: 22px;}
+div.documentation-content pre, div.task-description pre, div.task-history div.content pre, 
+div.full-history div.content pre{padding: 17px 15px 15px 15px;  margin: 0; text-align: left; line-height: 11px; 
+background: #eee; margin-top: 10px; overflow-x: auto;}
+div.documentation-content h1, div.documentation-content h2, div.documentation-content h3, div.task-description h1,
+div.task-description h2, div.task-description h3, div.task-history div.content h1, div.task-history div.content h2,
+div.task-history div.content h3, div.full-history div.content h1, div.full-history div.content h2, 
+div.full-history div.content h3{float: none; clear: both; display: block; margin: 0 0 20px 0; padding: 0;}
+
+div.navigation{width: 970px; height: 15px; padding-top: 16px; border-top: 1px solid #d6d6d6; margin-bottom: 39px;}
+div.navigation div.prev{float: left; background: url(../images/arrow-left.png) no-repeat left center;}
+div.navigation div.next{float: right; background: url(../images/arrow-right.png) no-repeat right center;}
+div.navigation div.prev a, div.navigation div.next a{color: #646363;}
+div.navigation div.prev a{margin-left: 24px;}
+div.navigation div.next a{margin-right: 24px;}
+
+p.search-name{margin-bottom: 6px;}
+p.search-name.no-content{margin-bottom: 20px;}
+p.search-name span.number{margin-right: 5px;}
+p.search-decription{margin-bottom: 20px;}
+p.search-project{font-size: 13px; color: #8c8c8c; margin-top: -3px;}
+
+.bottom-menu{position: fixed; bottom: 0; left: 0; width: 100%; /*height: 68px;*/ background: #202420; display: none}
+.bottom-menu > a{display: block; width: 50%; float: left; text-align: center; color: #fff; padding: 15px;
+position: relative;}
+.bottom-menu > a.active{color: #f6975d}
+.bottom-menu > a span{padding-left: 30px; line-height: 20px; background-repeat: no-repeat; background-position: left center;
+    background-size: 20px 20px}
+.bottom-menu > a .icon.tasks{background-image: url("../images/mobile/goal-white.svg")}
+.bottom-menu > a.active .icon.tasks{background-image: url("../images/mobile/goal-orange.svg")}
+.bottom-menu > a .icon.projects{background-image: url("../images/mobile/star-white.svg")}
+.bottom-menu > a.active .icon.projects{background-image: url("../images/mobile/star-orange.svg")}
+.bottom-menu > a .icon.docs{background-image: url("../images/mobile/writing-white.svg")}
+.bottom-menu > a.active .icon.docs{background-image: url("../images/mobile/writing-orange.svg")}
+.bottom-menu > a .icon.history{background-image: url("../images/mobile/time-left-white.svg")}
+.bottom-menu > a.active .icon.history{background-image: url("../images/mobile/time-left-orange.svg")}
+.bottom-menu a span.new{top: 5px; right: 15%}
+
+#footer{color: #fff; text-align: center; font-size: 15px}
+#footer a{color: #fff; display: inline-block}
+#footer a:not(:last-of-type){margin: 0 20px 5px 0}
+#overlay{display: none; width: 100%; height: 100%; position: fixed; background: #131111; opacity: 0.5; z-index: 1001; top: 0; left: 0; }

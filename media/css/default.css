@@ -1,0 +1,119 @@
+
+html{width: 100%; height: 100%; margin: 0; padding: 0;}
+*{margin: 0; padding: 0; box-sizing: border-box; }
+table{border-collapse: collapse; border-spacing: 0;}
+fieldset, img{border: 0;}
+sup{vertical-align: text-top;}
+sub{vertical-align: text-bottom;}
+input, textarea, select{font-family: inherit; font-size: inherit; font-weight: inherit; outline: none!important}
+a, img{outline: 0;}
+a{text-decoration: none;}
+label{cursor: pointer;}
+li{list-style: none;}
+input[type='button'], input[type='submit']{cursor: pointer;}
+
+.block{display: block;}
+.inline{display: inline;}
+.clear{clear: both; line-height: 0 !important; font-size: 0 !important; height: 0 !important;}
+.clearfix::after{content: ""; display: block; clear: both}
+.hidden{display: none;}
+
+.editable p{margin: 0 0 12px 0;}
+.editable ol, .editable ul{margin: 0 0 12px 10px;}
+.editable li{margin: 0 0 7px 0;}
+.editable ol li{list-style: decimal; list-style-position: inside;}
+.editable ul li{list-style: disc; list-style-position: inside;}
+.editable table{margin: 0 0 12px 0;}
+.editable table th{padding: 10px 10px; text-align: left;}
+.editable table td{padding: 10px 10px; text-align: left;}
+.editable h1, .editable h2, .editable h3, .editable h4, .editable h5, .editable h6{margin: 0 0 14px 0;}
+.editable h1{font-size: 27px; line-height: 29px;}
+.editable h2{font-size: 24px; line-height: 26px;}
+.editable h3{font-size: 22px; line-height: 24px;}
+.editable h4{font-size: 18px; line-height: 20px;}
+.editable h5{font-size: 16px; line-height: 18px;}
+.editable h6{font-size: 14px; line-height: 16px;}
+
+@font-face {
+    font-family: 'Rubik-Regular';
+    src: url('../fonts/Rubik-Regular.eot');
+    src: url('../fonts/Rubik-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Rubik-Regular.woff2') format('woff2'),
+    url('../fonts/Rubik-Regular.woff') format('woff'),
+    url('../fonts/Rubik-Regular.ttf') format('truetype'),
+    url('../fonts/Rubik-Regular.svg#Rubik-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik-Medium';
+    src: url('../fonts/Rubik-Medium.eot');
+    src: url('../fonts/Rubik-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Rubik-Medium.woff2') format('woff2'),
+    url('../fonts/Rubik-Medium.woff') format('woff'),
+    url('../fonts/Rubik-Medium.ttf') format('truetype'),
+    url('../fonts/Rubik-Medium.svg#Rubik-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rubik-Bold';
+    src: url('../fonts/Rubik-Bold.eot');
+    src: url('../fonts/Rubik-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Rubik-Bold.woff2') format('woff2'),
+    url('../fonts/Rubik-Bold.woff') format('woff'),
+    url('../fonts/Rubik-Bold.ttf') format('truetype'),
+    url('../fonts/Rubik-Bold.svg#Rubik-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exo2-Regular';
+    src: url('../fonts/Exo2-Regular.eot');
+    src: url('../fonts/Exo2-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Exo2-Regular.woff2') format('woff2'),
+    url('../fonts/Exo2-Regular.woff') format('woff'),
+    url('../fonts/Exo2-Regular.ttf') format('truetype'),
+    url('../fonts/Exo2-Regular.svg#Exo2-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exo2-Medium';
+    src: url('../fonts/Exo2-Medium.eot');
+    src: url('../fonts/Exo2-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Exo2-Medium.woff2') format('woff2'),
+    url('../fonts/Exo2-Medium.woff') format('woff'),
+    url('../fonts/Exo2-Medium.ttf') format('truetype'),
+    url('../fonts/Exo2-Medium.svg#Exo2-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exo2-Bold';
+    src: url('../fonts/Exo2-Bold.eot');
+    src: url('../fonts/Exo2-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Exo2-Bold.woff2') format('woff2'),
+    url('../fonts/Exo2-Bold.woff') format('woff'),
+    url('../fonts/Exo2-Bold.ttf') format('truetype'),
+    url('../fonts/Exo2-Bold.svg#Exo2-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exo2-SemiBold';
+    src: url('../fonts/Exo2-SemiBold.eot');
+    src: url('../fonts/Exo2-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Exo2-SemiBold.woff2') format('woff2'),
+    url('../fonts/Exo2-SemiBold.woff') format('woff'),
+    url('../fonts/Exo2-SemiBold.ttf') format('truetype'),
+    url('../fonts/Exo2-SemiBold.svg#Exo2-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}

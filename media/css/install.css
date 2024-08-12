@@ -1,0 +1,28 @@
+
+body{min-width: 360px; font: 16px/1.5 "Rubik-Regular"; background-color: #f6f5f5; color: #202420; display: flex;
+justify-content: center; height: 100%; align-items: flex-start;}
+
+#container{width: 400px; margin-top: 5%; background: #fff; padding: 25px 30px; border-radius: 4px;}
+#container div.top{display: flex; flex-direction: column; justify-content: center; align-items: center;
+margin-bottom: 10px;}
+#container div.top > img{margin-bottom: 12px;}
+#container h1{font: 29px/29px "Exo2-Bold"; margin-bottom: 3px;}
+#container h2{font: 23px/20px "Exo2-Bold"; margin-bottom: 15px; text-align: center;}
+#container form{}
+#container form div.name{margin-bottom: 2px; color: #3b75bc;}
+#container form div.field{margin-bottom: 12px;}
+#container form div.field input{height: 40px; outline: none; padding: 10px 25px 10px 20px; border-radius: 4px; 
+border: 1px solid #ddd; width: 100%;}
+#container form div.buttons{padding-top: 10px; display: flex; justify-content: center; align-items: center;}
+#container form div.buttons input[type="submit"], div.buttons a.final{color: #fff; background: #1ec277; 
+height: 40px; padding: 0 15px; display: flex; justify-content: center; align-items: center; border: none; 
+border-radius: 4px;}
+#container form div.buttons a{margin-left: 20px; color: #3b75bc;}
+div.buttons a.final{margin: 0 25px 20px 25px;}
+
+#container form div.errors{width: 100%; margin: 0 0 12px 0; padding: 10px 15px 10px 15px; background: #f9f3d7; 
+border-radius: 3px;}
+#container form div.errors p{color: #d63c1d; margin: 0 0 3px 0; font-size: 15px;}
+#container form div.errors p:last-child{margin-bottom: 0;}
+
+p.final-text{margin: 0 0 20px 0; padding-top: 5px;}

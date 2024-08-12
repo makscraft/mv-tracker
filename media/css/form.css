@@ -1,0 +1,136 @@
+input[type="text"]{border-radius: 4px; border: none}
+input[type="button"], input[type="submit"]{-webkit-appearance: button;}
+select{cursor: pointer; background-image: url("../images/down-chevron.svg"); background-position: right 10px center;
+    background-repeat: no-repeat; background-size: 10px 10px; -moz-appearance: none; text-indent: 0.01px;
+    text-overflow: '';  appearance: none !important; -ms-appearance: none; -webkit-appearance: none; padding: 10px 15px;
+    border-radius: 4px; border: none; background-color: #fff!important}
+select::-ms-expand {display: none;}
+::-webkit-input-placeholder{color:#bbb !important; opacity: 1}
+::-moz-placeholder{color:#bbb !important; opacity: 1}
+:-moz-placeholder{color:#bbb !important; opacity: 1}
+:-ms-input-placeholder{color:#bbb !important; opacity: 1}
+
+div.form-errors, div.success{width: 100%; margin: 0 0 25px 0; padding: 10px 20px 3px 20px;  background: #f9f3d7; 
+border-radius: 3px; clear: both;}
+div.form-errors p, div.success p{color: #d63c1d; margin: 0 0 8px 0;}
+div.success{background: #f1f9d7;}
+div.success p{color: #1ec277;}
+
+.registration-block{width: 450px; margin: 5% auto 0; color: #fff; background-color: rgba(0, 0, 0, 0.6); border-radius: 4px;
+    padding: 35px 70px;}
+.registration-block h1{text-align: center; font-size: 25px; line-height: 25px;}
+.registration-block.recovery > p{text-align: center; line-height: 17px; font-size: 15px; margin-bottom: 12px;}
+.registration-block .button{background-image: -moz-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgb(206,75,93) 0%, rgb(246,151,93) 100%);
+    width: 100%;}
+.registration-block div.field-name{display: none;}
+.registration-block form.regular{width: auto;}
+.registration-block form.regular .recovery{text-align: center; padding-top: 10px; margin: 0;}
+.registration-block form.regular .recovery a{color: #f6975d; text-decoration: none;}
+.registration-block div.form-errors, .registration-block div.success{margin-bottom: 10px;}
+.registration-block div.success{background: #fff;}
+.registration-block form.regular .field-input img{border-radius: 4px;}
+
+p.required-fields{color: #fff}
+form table{width: 100%}
+form.regular{width: 80%; max-width: 990px; padding-top: 15px;}
+form.regular tr{border-bottom: none}
+form.regular .field-name{padding: 0 20px 5px 0; vertical-align: top; font-size: 15px;}
+form.regular .field-input{padding-bottom: 27px;}
+form.regular .field-input input, form.regular .field-input select{height: 40px; outline: none; padding: 10px 25px 10px 20px;
+border-radius: 4px; border: 1px solid #eee; width: 100%;}
+form.regular .field-input input[name="captcha"]{width: calc(100% - 130px); float: right}
+form.regular .field-input input[type='checkbox']{width: 20px; height: 20px; position: relative; top: 1px}
+form.regular .field-name input[type='checkbox']{position: relative; margin-right: 5px;}
+form.regular .field-input.error-field input, form.regular .field-input.error-field select, 
+form.regular .field-input.error-field textarea{border: 1px solid #eee7c6; background: #f9f3d7;}
+form.regular .field-input select{cursor: pointer;}
+textarea{width: 100%; height: 280px !important; padding: 15px 15px; outline: none; border: none;
+resize: none; border-radius: 4px; margin-bottom: 20px}
+
+form.regular .field-input.code img{width: 103px; height: 42px; float: left;}
+form.regular .field-input.code input{width: 82px; float: left; margin-left: 45px;}
+form.regular textarea{margin: 0; border: 1px solid #eee;}
+form.regular div.form-buttons{padding-bottom: 20px; padding-top: 5px;}
+form.regular div.form-buttons.high{padding-top: 25px;}
+form div.file-params  span.file{display: none;}
+form div.file-params span.delete{cursor: pointer;}
+form.regular div.help-text{font-size: 13px; margin: -25px 0 25px 3px;}
+form.regular #description-area div.help-text{margin: 0 0 0 3px;}
+div.field-input div.image-input input{padding-bottom: 0 !important;}
+div.field-input div.file-params p{margin-bottom: 0;}
+
+form.regular div.single, form.regular div.double, form.regular div.triple{float: left; width: 100%;}
+form.regular div.single{padding: 0 1% 0 0;}
+form.regular div.double > div.column{width: 50%; float: left; padding: 0 1%;}
+form.regular div.triple > div.column{width: 33.33333%; float: left; padding: 0 1.2%;}
+form.regular div.double > div:first-child, form.regular div.triple > div:first-child{padding-left: 0;}
+
+form.regular div.multiple-files-data div.file-element{margin-bottom: 2px}
+form.regular div.multiple-files-data div.file-element span.file{font-size: 15px; margin-right: 3px}
+
+.form-buttons .button{display: block; min-width: 187px; float: left; background-color: #1ec277;}
+.form-buttons .button.mass-action{min-width: auto;}
+.form-buttons .cancel{display: block; float: left; margin: 8px 0 0 43px}
+.link-button{cursor: pointer; display: block; float: left; margin: 8px 0 0 43px; color: #3b75bc;}
+
+form.regular .files-input, form.regular div.field-input div.image-input input{width: auto !important; 
+height: auto !important; padding-left: 0 !important; border: none;}
+.inputfile{width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1;}
+.inputfile + label{max-width: 80%; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; display: inline-block;
+ overflow: hidden; padding:10px 30px}
+.no-js .inputfile + label{display: none;}
+.inputfile:focus + label,.inputfile.has-focus + label{outline: none!important}
+.inputfile + label{border-radius: 4px; transition: all 0.5s; background-color: #b5b3b3}
+.inputfile + label:hover{background-color: #6f7273}
+
+p.remember-me{margin-bottom: 6px; color: #f6975d}
+p.remember-me label{margin-left: 5px;}
+
+#edit-description{display: inline-block; cursor: pointer; margin: 0 0 25px 15px; background: #888; color: #fff; 
+font-size: 13px; border-radius: 3px; padding: 0 10px;}
+#edit-description.open{margin-bottom: 0;}
+#description-area{}
+
+#overlay{display: none; width: 100%; height: 100%; position: fixed; background: #eee; opacity: 0.8; z-index: 1000; 
+top: 0; left: 0;}
+#custom-modal-window{display: none; position: fixed; background: #202420; width: 550px; min-height: 80px;
+z-index: 1001; top: 15%; left: 50%; transform: translateX(-50%); padding: 25px 25px 18px 25px; border-radius: 4px;
+box-shadow: 0px 2px 25px #333; -webkit-box-shadow: 0px 2px 25px #333; color: #fff; font-size: 15px}
+#custom-modal-window div.head{position: absolute; top: 0; left: 0; width: 100%}
+#custom-modal-window div.head span.close{float: right; background: url('../images/cancel-white.svg') no-repeat center;
+background-size: cover; width: 13px; height: 13px; top: 15px; right: 15px; cursor: pointer; position: relative;}
+#custom-modal-window div.message{margin:10px 0 15px 0; font-size: 17px; line-height: 20px;}
+#custom-modal-window div.extra.active{margin-bottom: 15px;}
+#custom-modal-window select{width: 190px}
+#custom-modal-window .field span{display: inline-block; padding-right: 12px}
+#custom-modal-window div.buttons{padding-top: 15px; text-align: right;}
+#custom-modal-window div.buttons input{border: none; border-radius: 4px; height: 42px; padding: 0 20px; color: #fff}
+#custom-modal-window div.buttons #modal-button-ok{color: #fff; width: 100px; height: 42px; line-height: 42px;
+    border: none; border-radius: 4px; background: #1ec277; margin-bottom: 10px}
+#custom-modal-window div.buttons #modal-button-cancel{margin: 0 0 0 20px; border: none; background: transparent; 
+color: #fff; background: #565656; width: 100px;}
+
+#custom-modal-window.task-comment{width: 840px;}
+#custom-modal-window.task-comment div.fields-list{display: flex; margin-bottom: 20px}
+#custom-modal-window.task-comment div.fields-list > div{margin-right: 25px}
+#custom-modal-window.task-comment div.fields-list > div:last-child{margin: 0}
+#custom-modal-window.task-comment div.fields-list div.field-name{margin-bottom: 3px}
+#custom-modal-window.mass-actions .message{font-size: 20px; margin-left: 10px;}
+#custom-modal-window table tr{border:none}
+
+#custom-modal-window.mass-actions{width: auto;}
+#custom-modal-window.mass-actions table{width: 100%;}
+#custom-modal-window.mass-actions table td{padding: 0 14px 20px 10px;}
+#custom-modal-window.mass-actions div.field-name{margin-bottom: 3px;}
+#custom-modal-window.mass-actions input[type='text']{width: 238px; padding: 10px 15px; border: 1px solid #d8dbe0;}
+#custom-modal-window.mass-actions select{width: 238px; cursor: pointer;}
+
+#custom-modal-window.mass-actions input[type='text']{}
+#custom-modal-window.mass-actions select{}
+#custom-modal-window div.field-input{position: relative;}
+#custom-modal-window.mass-actions #mass-delete-button{background-color: #ce4c5d; margin: 0 20px 0 0; float: left;}
+#custom-modal-window.mass-actions textarea.edit-comment{width: 558px; height: 180px; padding: 3px 10px;
+margin-bottom: 15px;}
+#custom-modal-window.mass-actions div.buttons{margin: 0 10px;}
