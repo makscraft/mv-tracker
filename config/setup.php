@@ -26,18 +26,18 @@ $mvSetupSettings = [
 
 //Database parameters
 //You can use DATABASE_ settings in .env file instead.
-'DbEngine' => 'mysql', // mysql / sqlite
+'DbEngine' => '', // mysql / sqlite
 'DbMode' => 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION', //SQL mode for MySQL engine
 'DbFile' => 'database.sqlite', //File of sqlite database if engine is 'sqlite' location 'userfiles/database/sqlite/'
-'DbHost' => 'localhost', 
-'DbUser' => 'root',
+'DbHost' => '', 
+'DbUser' => '',
 'DbPassword' => '',
 'DbName' => '',
 
  //Project server time zone in format like 'Europe/Paris'
  //List of timezones http://php.net/manual/en/timezones.php
  //You can use APP_TIMEZONE setting in .env file instead.
-'TimeZone' => 'Asia/Novosibirsk',
+'TimeZone' => '',
 
 //Region for localization see folder ~/adminpanel/i18n/
 'Region' => 'ru',
@@ -87,5 +87,5 @@ $mvSetupSettings = [
 'SMTPPassword' => '',
 
 //Default email signature.
-'EmailSignature' => '<p>Сообщение отправлено с сайта <a href="{domain}">{domain}</a></p>'
+'EmailSignature' => '<p>Message from <a href="{domain}">{domain}</a></p>'
 ];

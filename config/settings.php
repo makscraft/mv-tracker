@@ -18,7 +18,7 @@ $mvMainSettings = [
 
 //Allowed data types for models fields
 'ModelsDataTypes' => ['bool','int','float','char','url','redirect','email','phone','password','text','enum','parent',
-					  'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'],
+					 					  'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'],
 
  //All allowed types of files for uploading.
 'AllowedFiles' => ['gif', 'jpg', 'jpeg', 'png', 'svg', 'webp', 'zip', 'rar', 'gzip', 'txt', 'doc', 'docx', 'rtf', 
@@ -62,11 +62,11 @@ $mvMainSettings = [
 
 //Not allowed names of models fields.
 'ForbiddenFieldsNames' => ['page','done','pager-limit','sort-field','sort-order', 'multi-action','multi-value',
-						   'version','continue','restore','edit'],
+						   						'version','continue','restore','edit'],
 			
 //Not allowed names of models.
 'ForbiddenModelsNames' => ['model','settings','users_logins','users_passwords',
-						   'users_rights','users_sessions','versions'],
+						   						 'users_rights','users_sessions','versions'],
 								
 //Maximum execution time of data processing during csv files uploading.
 'CsvUploadTimeLimit' => 180,
