@@ -10,34 +10,7 @@ class SetupComposer extends Installation
      */
     static public function postAutoloadDump(Event $event)
     {
-        Installation :: instance(['directory' => __DIR__.'/..']);
-
-        //self :: removeDirectory($base_to.$folder);
-        self :: moveCoreFoldersFromVendor(['adminpanel', 'extra', 'log', 'userfiles']);
-        // self :: configureDirectory();
-        // self :: generateSecurityToken();
         
-        
-
-        // self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
-        // self :: configureDatabaseMysql();
-        
-
-        //self :: setEnvFileParameter('APP_ENV', 'development');
-
-
-        //self :: displayDoneMessage('111');
-
-        //$accounts = new Accounts();
-        // $registry = Registry :: instance();
-        // $installation = new Installation();
-        // //Installation :: displayDoneMessage('hello!');
-        // //Installation :: generateSecurityToken();
-        // $from = realpath(__DIR__.'/../vendor/makscraft/mv-framework/adminpanel');
-        // $to = realpath(__DIR__.'/..').'/admin';
-
-        //rename($from, $to);
-        //echo $to;
     }
 
     /**
@@ -46,6 +19,8 @@ class SetupComposer extends Installation
     static public function finish()
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
+
+        self :: configureDirectory();
         self :: generateSecurityToken();
         self :: moveCoreFoldersFromVendor(['adminpanel', 'extra', 'log', 'userfiles']);
     }

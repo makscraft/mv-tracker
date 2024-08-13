@@ -3,7 +3,7 @@
     "description": "Simple task tracking system based on MV framework.",
     "version": "3.0.0",
     "type": "project",
-    "keywords": ["tack tracker", "php", "framework", "mvc"],
+    "keywords": ["task tracker", "project management", "php", "framework", "mvc"],
     "homepage": "https://mv-tracker.com",
     "license": "MIT",
     "authors": [
