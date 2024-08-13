@@ -32,10 +32,13 @@ class SetupComposer extends Installation
         self :: getCoreClassesForInstallation();
         self :: removeDirectory(self :: $instance['directory'].'/core');        
         self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
-        mkdir(self :: $instance['directory'].'/vendor/makscraft/mv-framework/core/');
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
+
+        $framework = self :: $instance['directory'].'/vendor/makscraft/mv-framework';
+        mkdir($framework.'/core');
+        file_put_contents($framework.'/config/autoload.php', '<?php');
 
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }
