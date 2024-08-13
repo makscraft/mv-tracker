@@ -29,6 +29,7 @@ class SetupComposer extends Installation
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
 
+        self :: getCoreClassesForInstallation();
         self :: removeDirectory(self :: $instance['directory'].'/core');
         self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
         self :: configureDirectory();
@@ -36,6 +37,15 @@ class SetupComposer extends Installation
         self :: changeAutoloaderString('/index.php');
 
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
+    }
+
+    static public function getCoreClassesForInstallation()
+    {
+        $framework = self :: $instance['directory'].'/vendor/makscraft/mv-framework/core/';
+        $classes = ['service'];
+
+        foreach($classes as $one)
+            require_once $framework.$one.'class.php';
     }
 
     static public function moveCoreFoldersFromVendor(mixed $folders = [])
