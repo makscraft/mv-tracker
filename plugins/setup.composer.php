@@ -45,7 +45,7 @@ class SetupComposer extends Installation
         $classes = ['service'];
 
         foreach($classes as $one)
-            require_once $framework.$one.'class.php';
+            require_once $framework.$one.'.class.php';
     }
 
     static public function moveCoreFoldersFromVendor(mixed $folders = [])
