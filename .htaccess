@@ -3,7 +3,7 @@ AddDefaultCharset UTF-8
 Options -Indexes
 RewriteEngine on
 
-RewriteBase /mv/tracker/
+RewriteBase /
 
 RewriteRule ^(config|core|models|plugins|views|log|customs)\/.* index.php [L]
 

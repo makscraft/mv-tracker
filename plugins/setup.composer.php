@@ -11,9 +11,11 @@ class SetupComposer extends Installation
     static public function postAutoloadDump(Event $event)
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
-        self :: moveCoreFoldersFromVendor(['core', 'adminpanel']);
-        self :: configureDirectory();
-        self :: generateSecurityToken();
+
+        //self :: removeDirectory($base_to.$folder);
+        self :: moveCoreFoldersFromVendor(['adminpanel', 'extra', 'log', 'userfiles']);
+        // self :: configureDirectory();
+        // self :: generateSecurityToken();
         
         
 
@@ -43,22 +45,20 @@ class SetupComposer extends Installation
      */
     static public function finish()
     {
-
+        Installation :: instance(['directory' => __DIR__.'/..']);
+        self :: generateSecurityToken();
+        self :: moveCoreFoldersFromVendor(['adminpanel', 'extra', 'log', 'userfiles']);
     }
 
-    static public function moveCoreFoldersFromVendor(array $folders = [])
+    static public function moveCoreFoldersFromVendor(mixed $folders = [])
     {
+        $folders = is_array($folders) ? $folders : [$folders];
         $base_from = self :: $instance['directory'].'/vendor/makscraft/mv-framework/';
         $base_to = self :: $instance['directory'].'/';
 
         foreach($folders as $folder)
-        {
-            if(!is_dir($base_from.$folder))
-                continue;
-
-            self :: removeDirectory($base_to.$folder);
-            rename($base_from.$folder, $base_to.$folder);
-        }
+            if(file_exists($base_from.$folder) || !file_exists($base_to.$folder))
+                rename($base_from.$folder, $base_to.$folder);
     }
 
     static public function configureDatabaseMysql()
