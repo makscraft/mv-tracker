@@ -9,8 +9,7 @@ class SetupComposer extends Installation
      * Post "composer dump-autoload" event.
      */
     static public function postAutoloadDump(Event $event)
-    {
-        
+    {        
     }
 
     /**
@@ -22,7 +21,9 @@ class SetupComposer extends Installation
 
         self :: configureDirectory();
         self :: generateSecurityToken();
-        self :: moveCoreFoldersFromVendor(['adminpanel', 'extra', 'log', 'userfiles']);
+        self :: changeAutoloaderString('/index.php');
+
+        self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }
 
     static public function moveCoreFoldersFromVendor(mixed $folders = [])
@@ -42,6 +43,9 @@ class SetupComposer extends Installation
 
         parent :: configureDatabaseMysql();
         self :: setFirstUserLogin(self :: runPdo());
+
+        self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
+        self :: displayFinalInstallationMessage();
     }
 
     static public function setFirstUserLogin(PDO $pdo)
@@ -76,4 +80,16 @@ class SetupComposer extends Installation
 
         self :: displaySuccessMessage('First user of MV tracker been successfully created.');
     }
+
+    static public function displayFinalInstallationMessage()
+    {
+        Installation :: instance(['directory' => __DIR__.'/..']);
+        $env = parse_ini_file(self :: $instance['directory'].DIRECTORY_SEPARATOR.'.env');
+
+        $message = "Installation complete, now you can open MV tracker in browser.".PHP_EOL;
+        $message .= " MV tracker start page http://yourdomain.com".preg_replace('/\/$/', '', $env['APP_FOLDER']).PHP_EOL;
+        $message .= " Use the admin panel to manage users and statuses http://yourdomain.com".$env['APP_FOLDER']."adminpanel";
+
+        self :: displayDoneMessage($message);
+    }    
 }
