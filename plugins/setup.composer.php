@@ -12,6 +12,7 @@ class SetupComposer extends Installation
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
         self :: moveCoreFoldersFromVendor('core');
+        //"pre-autoload-dump": "php -r \" if(!is_dir('./core')) rename('./vendor/makscraft/mv-framework/core', './core');\"",
     }
 
     /**
