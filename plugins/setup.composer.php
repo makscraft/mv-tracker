@@ -29,6 +29,7 @@ class SetupComposer extends Installation
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
 
+        self :: removeDirectory(self :: $instance['directory'].'/core');
         self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
         self :: configureDirectory();
         self :: generateSecurityToken();
