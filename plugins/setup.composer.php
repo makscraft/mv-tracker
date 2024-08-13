@@ -30,8 +30,9 @@ class SetupComposer extends Installation
         Installation :: instance(['directory' => __DIR__.'/..']);
 
         self :: getCoreClassesForInstallation();
-        self :: removeDirectory(self :: $instance['directory'].'/core');
+        self :: removeDirectory(self :: $instance['directory'].'/core');        
         self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
+        mkdir(self :: $instance['directory'].'/vendor/makscraft/mv-framework/core/');
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
