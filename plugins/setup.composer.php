@@ -38,7 +38,7 @@ class SetupComposer extends Installation
 
         $framework = self :: $instance['directory'].'/vendor/makscraft/mv-framework';
         mkdir($framework.'/core');
-        file_put_contents($framework.'/config/autoload.php', '<?php');
+        file_put_contents($framework.'/config/autoload.php', '<?php ');
 
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }
