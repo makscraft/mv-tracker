@@ -21,12 +21,14 @@
             "plugins/"
         ],
         "exclude-from-classmap": [
-            "vendor/makscraft/mv-framework/"
+            "vendor/makscraft/mv-framework/core",
+            "vendor/makscraft/mv-framework/models",
+            "vendor/makscraft/mv-framework/plugins"
         ]
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
-        "pre-autoload-dump": "php -r \" if(!is_dir('./core')) rename('vendor/makscraft/mv-framework/core', './core');\"",
+        "pre-autoload-dump": "php -r \" if(!is_dir('./core')) rename('./vendor/makscraft/mv-framework/core', './core');\"",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::configureDatabaseMysql"
     },
