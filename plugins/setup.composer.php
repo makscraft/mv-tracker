@@ -22,6 +22,7 @@ class SetupComposer extends Installation
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
+        self :: moveCoreFoldersFromVendor(['extra', 'log', 'userfiles']);
 
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }
@@ -44,7 +45,7 @@ class SetupComposer extends Installation
         parent :: configureDatabaseMysql();
         self :: setFirstUserLogin(self :: runPdo());
 
-        self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
+        self :: moveCoreFoldersFromVendor(['adminpanel', 'core']);
         self :: displayFinalInstallationMessage();
     }
 
