@@ -26,7 +26,7 @@
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
-        "pre-autoload-dump": "\\SetupComposer::preAutoloadDump",
+        "pre-autoload-dump": "php -r \" if(!is_dir('./core')) rename('vendor/makscraft/mv-framework/core', './core');\"",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::configureDatabaseMysql"
     },
