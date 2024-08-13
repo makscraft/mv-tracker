@@ -20,6 +20,10 @@
             "models/",
             "plugins/"
         ],
+        "exclude-from-files": [
+            "vendor/makscraft/mv-framework/config/autoload.php",
+            "vendor/makscraft/mv-framework/"
+        ],        
         "exclude-from-classmap": [
             "vendor/makscraft/mv-framework/"
         ]
