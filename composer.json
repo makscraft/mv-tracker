@@ -16,12 +16,12 @@
             "config/autoload.php"
         ],
         "classmap": [
+            "core/",
             "models/",
             "plugins/"
         ],
         "exclude-from-classmap": [
-            "vendor/makscraft/mv-framework/models/",
-            "vendor/makscraft/mv-framework/plugins/"
+            "vendor/makscraft/mv-framework/"
         ]
     },
     "scripts": {
