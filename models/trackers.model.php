@@ -1,4 +1,4 @@
-<?
+<?php
 class Trackers extends Model
 {
 	protected $name = "{trackers}";
@@ -10,4 +10,3 @@ class Trackers extends Model
 		array("{position}", "order", "position")
 	);
 }
-?>

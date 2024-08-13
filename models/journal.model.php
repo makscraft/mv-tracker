@@ -1,4 +1,4 @@
-<?
+<?php
 class Journal extends Model
 {
 	protected $name = "{journal}";
@@ -509,4 +509,3 @@ class Journal extends Model
 		return $data ? json_decode($data, true) : [];
 	}
 }
-?>

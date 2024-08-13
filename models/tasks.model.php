@@ -1,4 +1,4 @@
-<?
+<?php
 class Tasks extends Model
 {
 	protected $name = "{tasks}";
@@ -637,4 +637,3 @@ class Tasks extends Model
 		return "<div class=\"help-text\">Textile: &lt;pre&gt;, h1.-h3.</div>\n";
 	}	
 }
-?>

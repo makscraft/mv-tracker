@@ -1,16 +1,16 @@
-<?
+<?php
 class Documentation extends Model
 {
 	protected $name = "{documentation}";
 	
 	protected $model_elements = array(
-		array("{name}", "char", "name", array("required" => true)),		
-		array("{project}", "enum", "project", array("required" => true, "foreign_key" => "Projects")),
-		array("{author}", "enum", "author", array("foreign_key" => "Accounts")),
-		array("{date-created}", "date_time", "date_created"),
-		array("{date-updated}", "date_time", "date_updated"),
-		array("{content}", "text", "content"),
-		array("{attached-files}", "text", "files")
+			array("{name}", "char", "name", array("required" => true)),		
+			array("{project}", "enum", "project", array("required" => true, "foreign_key" => "Projects")),
+			array("{author}", "enum", "author", array("foreign_key" => "Accounts")),
+			array("{date-created}", "date_time", "date_created"),
+			array("{date-updated}", "date_time", "date_updated"),
+			array("{content}", "text", "content"),
+			array("{attached-files}", "text", "files")
 	);
 	
 	public function defineDocumentPage(Router $router)
@@ -95,4 +95,3 @@ class Documentation extends Model
 		Journal :: deleteFiles($fields["files"]);
 	}
 }
-?>

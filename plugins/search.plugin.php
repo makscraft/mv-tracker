@@ -213,4 +213,3 @@ class Search extends Plugin
       return $string;
    }
 }
-?>

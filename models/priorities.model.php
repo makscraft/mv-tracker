@@ -1,4 +1,4 @@
-<?
+<?php
 class Priorities extends Model
 {
 	protected $name = "{priorities}";
@@ -10,4 +10,3 @@ class Priorities extends Model
 		array("{position}", "order", "position")
 	);
 }
-?>

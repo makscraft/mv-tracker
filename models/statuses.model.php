@@ -1,4 +1,4 @@
-<?
+<?php
 class Statuses extends Model
 {
 	protected $name = "{statuses}";
@@ -25,4 +25,3 @@ class Statuses extends Model
 		return (bool) $this -> countRecords(array("table->" => "tasks", "id" => $id, "status->in" => $statuses));
 	}
 }
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 class Projects extends Model
 {
 	protected $name = "{projects}";
@@ -202,4 +202,3 @@ class Projects extends Model
 		return $this -> root_path."project/".$row["id"];
 	}
 }
-?>

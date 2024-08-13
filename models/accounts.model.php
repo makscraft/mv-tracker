@@ -1,4 +1,4 @@
-<?
+<?php
 class Accounts extends Model
 {
 	protected $name = "{accounts}";
@@ -328,4 +328,3 @@ class Accounts extends Model
 		$account -> update();
 	}
 }
-?>
