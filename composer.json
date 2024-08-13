@@ -26,6 +26,7 @@
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
+        "pre-autoload-dump": "\\SetupComposer::preAutoloadDump",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::configureDatabaseMysql"
     },

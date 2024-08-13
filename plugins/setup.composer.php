@@ -6,6 +6,15 @@ class SetupComposer extends Installation
     static public $version = '1.2';
 
     /**
+     * Before "composer dump-autoload" event.
+     */
+    static public function preAutoloadDump(Event $event)
+    {
+        Installation :: instance(['directory' => __DIR__.'/..']);
+        self :: moveCoreFoldersFromVendor('core');
+    }
+
+    /**
      * Post "composer dump-autoload" event.
      */
     static public function postAutoloadDump(Event $event)
