@@ -75,10 +75,10 @@ class SetupComposer extends Installation
         }
 
         $user = $accounts -> findRecordOrGetEmpty(['id' => 1]);
+        
         $user -> login = self :: $instance['login'];
-
-        $salt = Registry :: get('APP_TOKEN');
-        $user -> password = Service :: makeHash(self :: $instance['password'].$salt);
+        $user -> name = 'Root';
+        $user -> password = Service :: makeHash(self :: $instance['password'].Registry :: get('APP_TOKEN'));
         $user -> date_registration = I18n :: getCurrentDateTime('SQL');
         $user -> autologin_key = Service :: strongRandomString(50);
         $user -> active = 1;
