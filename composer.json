@@ -20,16 +20,13 @@
             "models/",
             "plugins/"
         ],
-        "exclude-from-files": [
-            "vendor/makscraft/mv-framework/config/autoload.php",
-            "vendor/makscraft/mv-framework/"
-        ],        
         "exclude-from-classmap": [
             "vendor/makscraft/mv-framework/"
         ]
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
+        "pre-autoload-dump": "\\PrepareComposer::prepareFilesystem",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::configureDatabaseMysql"
     },

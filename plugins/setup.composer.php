@@ -19,7 +19,8 @@ class SetupComposer extends Installation
      * Post "composer dump-autoload" event.
      */
     static public function postAutoloadDump(Event $event)
-    {        
+    {
+        //PrepareComposer :: preAutoloadDump();
     }
 
     /**
