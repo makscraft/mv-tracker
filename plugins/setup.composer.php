@@ -75,7 +75,7 @@ class SetupComposer extends Installation
         }
 
         $user = $accounts -> findRecordOrGetEmpty(['id' => 1]);
-        
+
         $user -> login = self :: $instance['login'];
         $user -> name = 'Root';
         $user -> password = Service :: makeHash(self :: $instance['password'].Registry :: get('APP_TOKEN'));
@@ -99,5 +99,5 @@ class SetupComposer extends Installation
         $message .= " Use the admin panel to manage users and statuses http://yourdomain.com".$env['APP_FOLDER']."adminpanel";
 
         self :: displayDoneMessage($message);
-    }    
+    }
 }
