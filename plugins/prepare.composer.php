@@ -6,8 +6,8 @@ class PrepareComposer
         $root_directory = realpath(__DIR__.'/..');
         $framework = realpath($root_directory.'/vendor/makscraft/mv-framework');
 
-        if(file_exists($root_directory.'/core/gitkeep'))
-            unlink($root_directory.'/core/gitkeep');
+        if(file_exists($root_directory.'/core/.gitkeep'))
+            unlink($root_directory.'/core/.gitkeep');
 
         if(file_exists($root_directory.'/core'))
             unlink($root_directory.'/core');
