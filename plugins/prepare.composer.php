@@ -9,7 +9,7 @@ class PrepareComposer
         if(file_exists($root_directory.'/core/.gitkeep'))
             unlink($root_directory.'/core/.gitkeep');
 
-        if(file_exists($root_directory.'/core'))
+        if(file_exists($root_directory.'/core') && !file_exists($root_directory.'/core/builder.class.php'))
             rmdir($root_directory.'/core');
 
         $files = [
