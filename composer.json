@@ -28,7 +28,7 @@
         "post-create-project-cmd": "\\SetupComposer::finish",
         "pre-autoload-dump": "\\PrepareComposer::prepareFilesystem",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
-        "database": "\\SetupComposer::configureDatabaseMysql"
+        "database": "\\SetupComposer::commandConfigureDatabase"
     },
     "require": {
         "php": ">=8.0",

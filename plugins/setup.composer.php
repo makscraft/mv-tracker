@@ -47,11 +47,11 @@ class SetupComposer extends Installation
                 rename($base_from.$folder, $base_to.$folder);
     }
 
-    static public function configureDatabaseMysql()
+    static public function commandConfigureDatabase(Event $event)
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
 
-        parent :: configureDatabaseMysql();
+        parent :: commandConfigureDatabase($event);
         self :: setFirstUserLogin(self :: runPdo());
         self :: displayFinalInstallationMessage();
     }
