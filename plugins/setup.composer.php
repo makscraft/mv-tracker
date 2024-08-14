@@ -29,7 +29,7 @@ class SetupComposer extends Installation
 
     static public function getCoreClassesForInstallation()
     {
-        $framework = self :: $instance['directory'].'/vendor/makscraft/mv-framework/core/';
+        $framework = self :: $instance['directory'].'/core/';
         $classes = ['service'];
 
         foreach($classes as $one)
