@@ -122,10 +122,14 @@ $mvAutoloadData = [
 	'datatypes_lower' => Registry :: get('DataTypesLower')
 ];
 
+$GLOBALS['mvAutoloadData'] = $mvAutoloadData;
+$GLOBALS['mvSetupSettings'] = $mvSetupSettings;
+
 //Defines class auto loader
 spl_autoload_register(function($class_name)
-{
-    global $mvAutoloadData, $mvSetupSettings;
+{	
+	$mvAutoloadData = $GLOBALS['mvAutoloadData'];
+	$mvSetupSettings = $GLOBALS['mvSetupSettings'];
 	$class_lower = strtolower($class_name);
 	
 	if(strpos($class_name, 'ModelElement') !== false || strpos($class_lower, '_model_element') !== false)
