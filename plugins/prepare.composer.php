@@ -24,6 +24,7 @@ class PrepareComposer
         }
 
         file_put_contents($framework.'/config/autoload.php', "<?php\r\n");
+        mkdir($framework.'/core');
         
         $dump_old = $root_directory.'/userfiles/database/mysql-dump.sql';
         $dump_new = $root_directory.'/customs/initial-dump.sql';
