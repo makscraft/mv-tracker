@@ -6,21 +6,10 @@ class SetupComposer extends Installation
     static public $version = '1.2';
 
     /**
-     * Before "composer dump-autoload" event.
-     */
-    static public function preAutoloadDump(Event $event)
-    {
-        Installation :: instance(['directory' => __DIR__.'/..']);
-        self :: moveCoreFoldersFromVendor('core');
-        //"pre-autoload-dump": "php -r \" if(!is_dir('./core')) rename('./vendor/makscraft/mv-framework/core', './core');\"",
-    }
-
-    /**
      * Post "composer dump-autoload" event.
      */
     static public function postAutoloadDump(Event $event)
     {
-        //PrepareComposer :: preAutoloadDump();
     }
 
     /**
@@ -31,15 +20,9 @@ class SetupComposer extends Installation
         Installation :: instance(['directory' => __DIR__.'/..']);
 
         self :: getCoreClassesForInstallation();
-        self :: removeDirectory(self :: $instance['directory'].'/core');        
-        self :: moveCoreFoldersFromVendor(['adminpanel', 'core', 'extra', 'log', 'userfiles']);
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
-
-        $framework = self :: $instance['directory'].'/vendor/makscraft/mv-framework';
-        mkdir($framework.'/core');
-        file_put_contents($framework.'/config/autoload.php', '<?php ');
 
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }

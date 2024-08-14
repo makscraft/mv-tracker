@@ -38,8 +38,6 @@ class PrepareComposer
         }
 
         if(file_exists($root_directory.'/userfiles/database/sqlite/database.sqlite'))
-            unlink($root_directory.'/userfiles/database/sqlite/database.sqlite');
-
-        
+            unlink($root_directory.'/userfiles/database/sqlite/database.sqlite');        
     }
 }
