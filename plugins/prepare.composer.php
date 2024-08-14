@@ -10,7 +10,7 @@ class PrepareComposer
             unlink($root_directory.'/core/.gitkeep');
 
         if(file_exists($root_directory.'/core'))
-            unlink($root_directory.'/core');
+            rmdir($root_directory.'/core');
 
         $files = [
             '/config/autoload.php',
