@@ -1,6 +1,4 @@
-<?
-Installation :: checkFinalInstallRemove($mv);
-
+<?php
 $account = $mv -> accounts -> checkAuthorization();
 
 if(!$account && isset($_COOKIE['autologin_key'], $_COOKIE['autologin_token']))
@@ -29,4 +27,3 @@ $language = I18n :: getRegion();
 if($account)
     if($format = Accounts :: getSetting($account, 'date_format'))
         I18n :: setDateFormat($format);
-?>

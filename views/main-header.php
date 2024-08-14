@@ -10,7 +10,7 @@
     <? endif; ?>
     <title>MV tracker</title>
     <?
-        $version = "?v".str_replace(".", "", Installation :: $version);
+        $version = "?v".str_replace('.', '', SetupComposer :: $version);
         $region = I18n :: getRegion();
 
         CacheMedia :: instance();
