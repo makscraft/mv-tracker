@@ -19,7 +19,6 @@
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
-        "pre-autoload-dump": "\\PrepareComposer::prepareFilesystem",
         "post-update-cmd": "\\Installation::postUpdate",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::commandConfigureDatabase"

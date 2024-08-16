@@ -54,8 +54,8 @@ class SetupComposer extends Installation
         // $dump_old = self :: $instance['directory'].'/userfiles/database/mysql-dump.sql';
         // $dump_new = self :: $instance['directory'].'/customs/initial-dump.sql';
 
-        if(file_exists($dump_old) && file_exists($dump_new))
-            unlink($dump_old);
+        // if(file_exists($dump_old) && file_exists($dump_new))
+        //     unlink($dump_old);
 
         parent :: commandConfigureDatabase($event);
         self :: setFirstUserLogin(self :: runPdo());
