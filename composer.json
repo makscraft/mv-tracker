@@ -12,26 +12,20 @@
         }
     ],
     "autoload": {
-        "files": [
-            "config/autoload.php"
-        ],
         "classmap": [
-            "core/",
             "models/",
             "plugins/"
-        ],
-        "exclude-from-classmap": [
-            "vendor/makscraft/mv-framework/"
         ]
     },
     "scripts": {
         "post-create-project-cmd": "\\SetupComposer::finish",
         "pre-autoload-dump": "\\PrepareComposer::prepareFilesystem",
+        "post-update-cmd": "\\Installation::postUpdate",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::commandConfigureDatabase"
     },
     "require": {
         "php": ">=8.0",
-        "makscraft/mv-framework": "@dev"
+        "makscraft/mv-core": "@dev"
     }
 }
