@@ -19,7 +19,6 @@ class SetupComposer extends Installation
     {
         Installation :: instance(['directory' => __DIR__.'/..']);
 
-        //self :: getCoreClassesForInstallation();
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
@@ -27,35 +26,12 @@ class SetupComposer extends Installation
         self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
     }
 
-    // static public function getCoreClassesForInstallation()
-    // {
-    //     $framework = self :: $instance['directory'].'/core/';
-    //     $classes = ['service'];
-
-    //     foreach($classes as $one)
-    //         require_once $framework.$one.'.class.php';
-    // }
-
-    // static public function moveCoreFoldersFromVendor(mixed $folders = [])
-    // {
-    //     $folders = is_array($folders) ? $folders : [$folders];
-    //     $base_from = self :: $instance['directory'].'/vendor/makscraft/mv-framework/';
-    //     $base_to = self :: $instance['directory'].'/';
-
-    //     foreach($folders as $folder)
-    //         if(file_exists($base_from.$folder) || !file_exists($base_to.$folder))
-    //             rename($base_from.$folder, $base_to.$folder);
-    // }
-
     static public function commandConfigureDatabase(Event $event)
     {
-        Installation :: instance(['directory' => __DIR__.'/..']);
-
-        // $dump_old = self :: $instance['directory'].'/userfiles/database/mysql-dump.sql';
-        // $dump_new = self :: $instance['directory'].'/customs/initial-dump.sql';
-
-        // if(file_exists($dump_old) && file_exists($dump_new))
-        //     unlink($dump_old);
+        Installation :: instance([
+            'directory' => __DIR__.'/..',
+            'package' => 'tracker'
+        ]);
 
         parent :: commandConfigureDatabase($event);
         self :: setFirstUserLogin(self :: runPdo());
