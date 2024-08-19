@@ -22,7 +22,8 @@
         "post-update-cmd": "\\Installation::postUpdate",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::commandConfigureDatabase",
-        "migrations": "\\Installation::commandMigrations"
+        "migrations": "\\Installation::commandMigrations",
+		"cleanup": "\\Installation::commandCleanup"
     },
     "require": {
         "php": ">=8.0",
