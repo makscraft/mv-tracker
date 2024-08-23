@@ -12,4 +12,3 @@
  */
 
 $mvActivePlugins = ['Search'];
-?>
