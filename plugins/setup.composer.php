@@ -23,7 +23,28 @@ class SetupComposer extends Installation
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
 
-        self :: displaySuccessMessage('Now please fill database settings for MySQL in .env file and run "composer database" in your project directory.');
+        $driver = in_array('sqlite', PDO :: getAvailableDrivers()) ? 'sqlite' : 'mysql';
+        self :: setEnvFileParameter('DATABASE_ENGINE', $driver);
+
+        if($driver === 'sqlite')
+        {
+            self :: configureDatabaseSQLite();
+            self :: findAndExecuteAllAvailableMigartions();
+            self :: insertInitionDatabaseContent('en');
+
+            $message = 'If you want to use MySQL database instead of SQLite, ';
+            $message .= 'please fill database settings for MySQL in .env file and run "composer database"';
+            $message .= ' in your project directory.';
+
+            echo ' - '.$message.PHP_EOL;
+        }
+        else
+        {
+            $message = ' - ;Now please fill database settings for MySQL in .env file';
+            $message .= ' and run "composer database" in your project directory.';
+
+            self :: displaySuccessMessage($message);
+        }            
     }
 
     static public function commandConfigureDatabase(Event $event)
@@ -34,7 +55,10 @@ class SetupComposer extends Installation
         ]);
 
         parent :: commandConfigureDatabase($event);
+        self :: findAndExecuteAllAvailableMigartions();
+
         self :: setFirstUserLogin(self :: runPdo());
+        self :: insertInitionDatabaseContent('en');
         self :: displayFinalInstallationMessage();
     }
 
@@ -52,7 +76,7 @@ class SetupComposer extends Installation
 
         if($accounts -> countRecords() > 1)
         {
-            self :: displaySuccessMessage('First user has been already created.');
+            self :: displaySuccessMessage(' - First user has been already created.');
             return;
         }
 
@@ -68,8 +92,55 @@ class SetupComposer extends Installation
 
         $user -> save();
 
-        self :: displaySuccessMessage('First user of MV tracker been successfully created.');
+        self :: displaySuccessMessage(' - First user of MV tracker been successfully created.');
     }
+
+    static public function commandRegion(Event $event)
+    {
+        Installation :: instance([
+            'directory' => __DIR__.'/..',
+            'package' => 'tracker'
+        ]);
+
+        self :: boot();
+        $region = parent :: commandRegion($event);
+
+        $env = parse_ini_file(self :: $instance['directory'].'/.env');
+        $env_region = $env['APP_REGION'] ?? '';
+        $projects = Database :: instance() -> getCount('projects');
+        $tasks = Database :: instance() -> getCount('tasks');
+        $logs = Database :: instance() -> getCount('log');
+
+        if($env_region !== '' || $projects > 1 || $tasks > 2 || $logs > 0)
+        {
+            $message = "Attention! Changing of the region will cause overwriting the database content of ";
+            $message .= "tables 'projects', 'tasks', 'trackers', 'priorities' and 'statuses'.";
+
+            self :: displayErrorMessage($message);
+
+            $message = "Do you want to proceed? [yes / no]";
+
+            $answer = self :: typePromptWithCoices($message, ['yes', 'y', 'no', 'n', '']);
+            
+            if($answer !== 'yes' && $answer !== 'y')
+                return;
+        }
+
+        self :: setEnvFileParameter('APP_REGION', $region);
+        self :: displaySuccessMessage(' - .env file has been configurated.');
+
+        $region_initial = $region;
+        self :: insertInitionDatabaseContent($region);
+
+        $message = 'Region settings from the "'.$region_initial.'" package have been installed.';
+
+        if(isset($data['hello']) && $data['hello'] !== '')
+            $message .= PHP_EOL.' '.$data['hello'];
+    
+        self :: displayDoneMessage($message);
+    }
+
+
 
     static public function displayFinalInstallationMessage()
     {

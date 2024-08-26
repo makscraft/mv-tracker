@@ -1,4 +1,4 @@
-<?
+<?php
 $task = $mv -> tasks -> defineTaskPage($mv -> router);
 $mv -> display404($task);
 
@@ -77,77 +77,77 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><? echo I18n :: locale("edit-task"); ?></h1>
-        <? echo $form -> displayErrors(); ?>
-        <form class="regular" enctype="multipart/form-data" method="post" action="<? echo $action_form; ?>">
+        <h1><?php echo I18n :: locale("edit-task"); ?></h1>
+        <?php echo $form -> displayErrors(); ?>
+        <form class="regular" enctype="multipart/form-data" method="post" action="<?php echo $action_form; ?>">
                <div class="single">
-                  <? echo $form -> displayVertical(array("name")); ?>
+                  <?php echo $form -> displayVertical(array("name")); ?>
                </div>
                <div class="double">
                   <div class="column">
-                     <? echo $form -> displayVertical(array("tracker")); ?>
+                     <?php echo $form -> displayVertical(array("tracker")); ?>
                   </div>
                   <div class="column">
-                     <? echo $form -> displayVertical(array("project")); ?>
-                  </div>
-               </div>
-               <div class="double">
-                  <div class="column">
-                     <? echo $form -> displayVertical(array("assigned_to")); ?>
-                  </div>
-                  <div class="column">
-                     <? echo $form -> displayVertical(array("date_due")); ?>
+                     <?php echo $form -> displayVertical(array("project")); ?>
                   </div>
                </div>
                <div class="double">
                   <div class="column">
-                     <? echo $form -> displayVertical(array("priority")); ?>
+                     <?php echo $form -> displayVertical(array("assigned_to")); ?>
                   </div>
                   <div class="column">
-                     <? echo $form -> displayVertical(array("status")); ?>
+                     <?php echo $form -> displayVertical(array("date_due")); ?>
+                  </div>
+               </div>
+               <div class="double">
+                  <div class="column">
+                     <?php echo $form -> displayVertical(array("priority")); ?>
+                  </div>
+                  <div class="column">
+                     <?php echo $form -> displayVertical(array("status")); ?>
                   </div>
                </div>
                <div class="triple">
                   <div class="column">
-                     <? echo $form -> displayVertical(array("complete")); ?>
+                     <?php echo $form -> displayVertical(array("complete")); ?>
                   </div>
                   <div class="column">
-                     <? echo $form -> displayVertical(array("hours_estimated")); ?>
+                     <?php echo $form -> displayVertical(array("hours_estimated")); ?>
                   </div>
                   <div class="column">
-                     <? echo $form -> displayVertical(array("hours_spent")); ?>
+                     <?php echo $form -> displayVertical(array("hours_spent")); ?>
                   </div>
                </div>
-               <? if($can_edit_content): ?>
+               <?php if($can_edit_content): ?>
                <div class="single">
                   <div class="field-name">
-                     <? echo I18n :: locale("description"); ?>                     
-                     <span id="edit-description"><? echo I18n :: locale("edit"); ?></span>
+                     <?php echo I18n :: locale("description"); ?>                     
+                     <span id="edit-description"><?php echo I18n :: locale("edit"); ?></span>
                   </div>
                   <div id="description-area" class="field-input hidden">
-                     <? echo $form -> displayFieldHtml("description"); ?>
-                     <? echo Tasks :: displayTextileHelp(); ?>
+                     <?php echo $form -> displayFieldHtml("description"); ?>
+                     <?php echo Tasks :: displayTextileHelp(); ?>
                   </div>
                </div>
-               <? endif; ?>
+               <?php endif; ?>
                <div class="single">
-                  <? echo $form -> displayVertical(array("comment")); ?>
+                  <?php echo $form -> displayVertical(array("comment")); ?>
                </div>               
                <div class="single">
-                  <div class="field-name"><? echo I18n :: locale("attached-files"); ?></div>
+                  <div class="field-name"><?php echo I18n :: locale("attached-files"); ?></div>
                   <div class="field-input">
-                     <? echo $form -> displayFieldHtml("files"); ?>
+                     <?php echo $form -> displayFieldHtml("files"); ?>
                   </div>
                </div>
                <div class="form-buttons clearfix">
-                   <? echo $form -> displayTokenCSRF(); ?>
-                   <input class="button big submit" type="button" value="<? echo I18n :: locale("save"); ?>"/>
-                   <a class="cancel" href="<? echo $mv -> root_path; ?>task/<? echo $task -> id; ?>">
-                       <? echo I18n :: locale("cancel"); ?>
+                   <?php echo $form -> displayTokenCSRF(); ?>
+                   <input class="button big submit" type="button" value="<?php echo I18n :: locale("save"); ?>"/>
+                   <a class="cancel" href="<?php echo $mv -> root_path; ?>task/<?php echo $task -> id; ?>">
+                       <?php echo I18n :: locale("cancel"); ?>
                    </a>
                </div>
          </form>
     </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

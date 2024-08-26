@@ -1,4 +1,4 @@
-<?
+<?php
 if($account)
 	$mv -> redirect("home");
 	
@@ -50,9 +50,9 @@ include $mv -> views_path."main-header.php";
 ?>
 	<div id="content">
 		<div class="registration-block recovery">
-			<h1><? echo I18n :: locale("password-restore"); ?></h1>
-			<p><? echo I18n :: locale("enter-account-email"); ?></p>
-            <? 
+			<h1><?php echo I18n :: locale("password-restore"); ?></h1>
+			<p><?php echo I18n :: locale("enter-account-email"); ?></p>
+            <?php 
 	            if(isset($_GET['done']))
 	            	echo "<div class=\"success\"><p>".I18n :: locale("change-password-sent")."</p></div>\n";
 	            else if(isset($_GET['wrong-token']))
@@ -60,19 +60,19 @@ include $mv -> views_path."main-header.php";
 
 	            if(!isset($_GET['done'])):
             ?>
-            <? echo $form -> displayErrors(); ?>
-            <form class="regular" method="post" action="<? echo $mv -> root_path; ?>recovery">
-                <? echo $form -> displayVertical(array("email", "captcha")); ?>
+            <?php echo $form -> displayErrors(); ?>
+            <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>recovery">
+                <?php echo $form -> displayVertical(array("email", "captcha")); ?>
 	            <div class="form-buttons clearfix">
-                   <? echo $form -> displayTokenCSFR(); ?>
-	               <input type="submit" value="<? echo I18n :: locale("restore"); ?>" class="button big"/>
+                   <?php echo $form -> displayTokenCSFR(); ?>
+	               <input type="submit" value="<?php echo I18n :: locale("restore"); ?>" class="button big"/>
 	            </div>
 	            <div class="clear"></div>
             </form>
-            <? endif; ?>
+            <?php endif; ?>
 		</div>
 		<div class="clear"></div>
 	</div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

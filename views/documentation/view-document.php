@@ -1,4 +1,4 @@
-<?
+<?php
 $document = $mv -> documentation -> defineDocumentPage($mv -> router);
 $mv -> display404($document);
 $token = $mv -> documentation -> generateDeleteToken($document -> id);
@@ -10,28 +10,28 @@ $back_url = $mv -> root_path."documentation";
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content" class="document-content">
-        <? echo $mv -> accounts -> displayReloadMessage(); ?>
-        <h1><? echo $document -> name; ?></h1>
+        <?php echo $mv -> accounts -> displayReloadMessage(); ?>
+        <h1><?php echo $document -> name; ?></h1>
         <div class="item-actions document-actions">
-            <a class="create" href="<? echo $edit_url; ?>"><? echo I18n :: locale("edit"); ?></a>
-            <span class="delete" id="delete-document-<? echo $document -> id."-".$token; ?>">
-                <? echo I18n :: locale("delete"); ?>
+            <a class="create" href="<?php echo $edit_url; ?>"><?php echo I18n :: locale("edit"); ?></a>
+            <span class="delete" id="delete-document-<?php echo $document -> id."-".$token; ?>">
+                <?php echo I18n :: locale("delete"); ?>
             </span>
         </div>
         <div class="clear"></div>
-        <? if($document -> files): ?>
+        <?php if($document -> files): ?>
              <div class="attached-files">
-                 <h3><? echo I18n :: locale("attached-files"); ?></h3>
-                 <? echo $mv -> journal -> displayFiles($document -> files, $account_id, "documentation-".$document -> id); ?>
+                 <h3><?php echo I18n :: locale("attached-files"); ?></h3>
+                 <?php echo $mv -> journal -> displayFiles($document -> files, $account_id, "documentation-".$document -> id); ?>
              </div>
-         <? endif; ?>
+         <?php endif; ?>
          <div class="documentation-content">
-             <? echo Tasks :: processDescriptionText($document -> content); ?>
+             <?php echo Tasks :: processDescriptionText($document -> content); ?>
          </div>
         <div class="form-buttons clearfix">
-             <a id="back-button" class="button green medium" href="<? echo $back_url; ?>"><? echo I18n :: locale("back"); ?></a>
+             <a id="back-button" class="button green medium" href="<?php echo $back_url; ?>"><?php echo I18n :: locale("back"); ?></a>
         </div>         
     </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

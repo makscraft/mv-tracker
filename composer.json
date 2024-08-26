@@ -23,12 +23,12 @@
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
         "database": "\\SetupComposer::commandConfigureDatabase",
         "migrations": "\\Installation::commandMigrations",
-        "region": "\\Installation::commandRegion",
+        "region": "\\SetupComposer::commandRegion",
         "service": "\\Installation::commandService",        
 		"cleanup": "\\Installation::commandCleanup"
     },
     "require": {
         "php": ">=8.0",
-        "makscraft/mv-core": "^3"
+        "makscraft/mv-core": "@dev"
     }
 }

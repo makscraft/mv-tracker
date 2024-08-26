@@ -1,11 +1,11 @@
-<?
+<?php
 session_start();
 
 $img = imagecreatetruecolor(120, 27);
 $back = imagecolorallocate($img, 255, 255, 255);
 imagefill($img, 0, 0, $back);
 
-$str = "";
+$str = '';
 $chars = array('a','b','c','d','e','f','g','h','i','j','k','m','n','p','q','r',
 			   's','t','u','v','w','x','y','z','2','3','4','5','6','7','8','9');
 
@@ -32,4 +32,3 @@ header("Content-Type: image/gif");
 imagegif($img);
 		
 $_SESSION['captcha'] = $str;
-?>

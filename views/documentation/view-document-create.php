@@ -1,4 +1,4 @@
-<?
+<?php
 $projects = $mv -> projects -> getActiveProjectsIds();
 
 $form = new Form("Documentation");
@@ -33,26 +33,26 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><? echo I18n :: locale("create-document"); ?></h1>
-        <form enctype="multipart/form-data" class="regular" method="post" action="<? echo $mv -> root_path; ?>documentation/create">
-            <?
+        <h1><?php echo I18n :: locale("create-document"); ?></h1>
+        <form enctype="multipart/form-data" class="regular" method="post" action="<?php echo $mv -> root_path; ?>documentation/create">
+            <?php
                echo $form -> displayErrors();
                echo $form -> displayVertical(["name", "project", "content"]);
                echo Tasks :: displayTextileHelp();
             ?>
             <div class="single">
-                <div class="field-name"><? echo I18n :: locale("attached-files"); ?></div>
+                <div class="field-name"><?php echo I18n :: locale("attached-files"); ?></div>
                 <div class="field-input">
-                   <? echo $form -> displayFieldHtml("files"); ?>
+                   <?php echo $form -> displayFieldHtml("files"); ?>
                 </div>
             </div>
             <div class="form-buttons clearfix">
-                <? echo $form -> displayTokenCSRF(); ?>
-                <input class="button big submit" type="button" value="<? echo I18n :: locale("create"); ?>"/>
-                <a class="cancel" href="<? echo $mv -> root_path; ?>documentation/"><? echo I18n :: locale("cancel"); ?></a>
+                <?php echo $form -> displayTokenCSRF(); ?>
+                <input class="button big submit" type="button" value="<?php echo I18n :: locale("create"); ?>"/>
+                <a class="cancel" href="<?php echo $mv -> root_path; ?>documentation/"><?php echo I18n :: locale("cancel"); ?></a>
             </div>            
         </form>
     </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

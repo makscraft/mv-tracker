@@ -1,4 +1,4 @@
-<?
+<?php
 include "../../config/autoload.php";
 Http :: isAjaxRequest('post', true);
 $mv = new Builder();
@@ -198,4 +198,3 @@ else if(isset($_POST["delete-comment"], $_POST["token"]))
 
 if(isset($_POST["save-columns"], $_POST["view"]) && $_POST["save-columns"])
 	$mv -> tasks -> setAndSaveTableColumns($_POST["view"], $account, explode(",", $_POST["save-columns"]));
-?>

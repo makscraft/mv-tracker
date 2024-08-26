@@ -1,4 +1,4 @@
-<?
+<?php
 $fields = array(array("{new-password}", "password", "password", array("required" => true,
 																	"letters_required" => true,
 																    "digits_required" => true)),
@@ -36,20 +36,20 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><? echo I18n :: locale("change-password"); ?></h1>
-        <form class="regular" method="post" action="<? echo $mv -> root_path; ?>password/">
-           <?
+        <h1><?php echo I18n :: locale("change-password"); ?></h1>
+        <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>password/">
+           <?php
                echo $form -> displayErrors();
            	   echo $mv -> accounts -> displayReloadMessage();
            	   echo $form -> displayVertical(array("password", "repeat_password"));
            ?>
            <div class="form-buttons clearfix">
-                <? echo $form -> displayTokenCSRF(); ?>
-                <input class="button big submit" type="button" value="<? echo I18n :: locale("update"); ?>" />
-                <a class="cancel" href="<? echo $mv -> root_path; ?>profile"><? echo I18n :: locale("cancel"); ?></a>
+                <?php echo $form -> displayTokenCSRF(); ?>
+                <input class="button big submit" type="button" value="<?php echo I18n :: locale("update"); ?>" />
+                <a class="cancel" href="<?php echo $mv -> root_path; ?>profile"><?php echo I18n :: locale("cancel"); ?></a>
            </div>
         </form>
     </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

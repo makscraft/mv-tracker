@@ -1,13 +1,13 @@
           <div class="form-buttons clearfix">
-              <input type="button" class="button green medium mass-action" value="<? echo I18n :: locale("with-selected"); ?>" />
-              <input type="hidden" name="csrf-action-token" value="<? echo Accounts :: generateActionToken($account); ?>" />
+              <input type="button" class="button green medium mass-action" value="<?php echo I18n :: locale("with-selected"); ?>" />
+              <input type="hidden" name="csrf-action-token" value="<?php echo Accounts :: generateActionToken($account); ?>" />
               <input type="hidden" name="mass-action-total" value="" />
               <input type="hidden" name="mass-action-fields" value="" />
-              <input type="hidden" id="filter-url-params" value="<? echo $mv -> tasks -> filter -> getUrlParams(); ?>" />
-              <? include $mv -> views_path."parts/pager-limiter.php"; ?>
+              <input type="hidden" id="filter-url-params" value="<?php echo $mv -> tasks -> filter -> getUrlParams(); ?>" />
+              <?php include $mv -> views_path."parts/pager-limiter.php"; ?>
           </div>
       </form>
-      <?
+      <?php
       	  if($mv -> tasks -> pager -> hasPages())
 	      {
       		  echo "<div class=\"pager\">".I18n :: locale("page").":";

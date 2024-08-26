@@ -1,4 +1,4 @@
-<?
+<?php
 if(!isset($_SESSION["account"]["recover"]["id"], $_SESSION["account"]["recover"]["token"]))
 	$mv -> redirect("/login");
 
@@ -47,19 +47,19 @@ include $mv -> views_path."main-header.php";
 ?>
    <div id="content">
       <div class="registration-block recovery">
-         <h1><? echo I18n :: locale("password-restore"); ?></h1>
-            <? echo $form -> displayErrors(); ?>
-            <form class="regular" method="post" action="<? echo $mv -> root_path; ?>recovery/create">
-                  <? echo $form -> displayVertical(); ?>
+         <h1><?php echo I18n :: locale("password-restore"); ?></h1>
+            <?php echo $form -> displayErrors(); ?>
+            <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>recovery/create">
+                  <?php echo $form -> displayVertical(); ?>
                <div class="form-buttons clearfix">
-                   <? echo $form -> displayTokenCSRF(); ?>
-                   <input type="submit" value="<? echo I18n :: locale("save"); ?>" class="button big"/>
+                   <?php echo $form -> displayTokenCSRF(); ?>
+                   <input type="submit" value="<?php echo I18n :: locale("save"); ?>" class="button big"/>
                </div>
                <div class="clear"></div>
             </form>
       </div>
       <div class="clear"></div>
    </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

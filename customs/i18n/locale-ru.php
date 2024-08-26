@@ -1,5 +1,5 @@
-<?
-$translations = array(
+<?php
+$translations = [
 	
 	"accounts" => "Пользователи",
 	"receive-emails" => "Получать email сообщения",
@@ -94,5 +94,4 @@ $translations = array(
     "date-format" => "Формат даты",
     "new-comments-reload" => "Добавлены новые комментарии. Обновить страницу?",
     "tasks-list-reload" => "Список текущих задач был изменен. Обновить страницу?"
-);
-?>
+];

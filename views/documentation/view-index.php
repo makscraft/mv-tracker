@@ -1,4 +1,4 @@
-<?
+<?php
 if(isset($_GET["delete"], $_GET["token"]) && is_numeric($_GET["delete"]))
 {
    if(!$mv -> registry -> getSetting("DemoMode"))
@@ -51,41 +51,41 @@ include $mv -> views_path."main-header.php";
 ?>
 <div id="content" class="documents-page">
    <div class="content-wrapper">
-      <? echo $mv -> accounts -> displayReloadMessage(); ?>
-      <h1><? echo I18n :: locale("documentation"); ?></h1>
+      <?php echo $mv -> accounts -> displayReloadMessage(); ?>
+      <h1><?php echo I18n :: locale("documentation"); ?></h1>
       <div class="open-filters">
-         <span><? echo I18n :: locale("project"); ?></span>
-         <? echo $mv -> documentation -> filter ->  display("project"); ?>
+         <span><?php echo I18n :: locale("project"); ?></span>
+         <?php echo $mv -> documentation -> filter ->  display("project"); ?>
       </div>
       <div class="item-actions">
-          <a class="create button gradient big" href="<? echo $mv -> root_path; ?>documentation/create">
-              <? echo I18n :: locale("create-document"); ?>
+          <a class="create button gradient big" href="<?php echo $mv -> root_path; ?>documentation/create">
+              <?php echo I18n :: locale("create-document"); ?>
           </a>
       </div>
       <div class="clear"></div>
-      <form action="<? echo $mv -> root_path; ?>documentation" method="post" id="items-table-form">
+      <form action="<?php echo $mv -> root_path; ?>documentation" method="post" id="items-table-form">
          <table class="tasks-table">
             <tr>
-                <th><? echo $mv -> documentation -> sorter -> displayLink("id", "#", $sorter_url); ?></th>
-                <th><? echo $mv -> documentation -> sorter -> displayLink("name", I18n :: locale("name"), $sorter_url); ?></th>
-                <th><? echo $mv -> documentation -> sorter -> displayLink("project", I18n :: locale("project"), $sorter_url); ?></th>
-                <th><? echo $mv -> documentation -> sorter -> displayLink("author", I18n :: locale("author"), $sorter_url); ?></th>
-                <th><? echo $mv -> documentation -> sorter -> displayLink("date_updated", I18n :: locale("date-updated"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("id", "#", $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("name", I18n :: locale("name"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("project", I18n :: locale("project"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("author", I18n :: locale("author"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("date_updated", I18n :: locale("date-updated"), $sorter_url); ?></th>
                 <th>&nbsp;</th>
             </tr>
-            <? echo $mv -> documentation -> display($params); ?>
+            <?php echo $mv -> documentation -> display($params); ?>
          </table>
          <div class="form-buttons docs clearfix">
-             <?
+             <?php
          	    $pager_model = $mv -> documentation;
            	    include $mv -> views_path."parts/pager.php";
       		 ?>
-             <input type="hidden" id="filter-url-params" value="<? echo $mv -> documentation -> filter -> getUrlParams(); ?>" />
-             <? include $mv -> views_path."parts/pager-limiter.php"; ?>
+             <input type="hidden" id="filter-url-params" value="<?php echo $mv -> documentation -> filter -> getUrlParams(); ?>" />
+             <?php include $mv -> views_path."parts/pager-limiter.php"; ?>
          </div>         
       </form> 
    </div>
 </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

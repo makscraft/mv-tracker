@@ -1,4 +1,4 @@
-<?
+<?php
 $form = new Form("Projects");
 $fields = array("name", "description");
 $form -> useTokenCSRF();
@@ -24,19 +24,19 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><? echo I18n :: locale("create-project"); ?></h1>
-        <form class="regular" method="post" action="<? echo $mv -> root_path; ?>projects/create">
-           <?
+        <h1><?php echo I18n :: locale("create-project"); ?></h1>
+        <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>projects/create">
+           <?php
               echo $form -> displayErrors();
            	  echo $form -> displayVertical($fields);
            ?>
            <div class="form-buttons clearfix">
-              <? echo $form -> displayTokenCSRF(); ?>
-              <input type="button" value="<? echo I18n :: locale("create"); ?>" class="button big submit" />
-              <a class="cancel" href="<? echo $mv -> root_path; ?>projects"><? echo I18n :: locale("cancel"); ?></a>
+              <?php echo $form -> displayTokenCSRF(); ?>
+              <input type="button" value="<?php echo I18n :: locale("create"); ?>" class="button big submit" />
+              <a class="cancel" href="<?php echo $mv -> root_path; ?>projects"><?php echo I18n :: locale("cancel"); ?></a>
            </div>
         </form>
     </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

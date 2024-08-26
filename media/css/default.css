@@ -36,84 +36,49 @@ input[type='button'], input[type='submit']{cursor: pointer;}
 
 @font-face {
     font-family: 'Rubik-Regular';
-    src: url('../fonts/Rubik-Regular.eot');
-    src: url('../fonts/Rubik-Regular.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Rubik-Regular.woff2') format('woff2'),
-    url('../fonts/Rubik-Regular.woff') format('woff'),
-    url('../fonts/Rubik-Regular.ttf') format('truetype'),
-    url('../fonts/Rubik-Regular.svg#Rubik-Regular') format('svg');
+    src: url('../fonts/Rubik-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Rubik-Medium';
-    src: url('../fonts/Rubik-Medium.eot');
-    src: url('../fonts/Rubik-Medium.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Rubik-Medium.woff2') format('woff2'),
-    url('../fonts/Rubik-Medium.woff') format('woff'),
-    url('../fonts/Rubik-Medium.ttf') format('truetype'),
-    url('../fonts/Rubik-Medium.svg#Rubik-Medium') format('svg');
+    src: url('../fonts/Rubik-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Rubik-Bold';
-    src: url('../fonts/Rubik-Bold.eot');
-    src: url('../fonts/Rubik-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Rubik-Bold.woff2') format('woff2'),
-    url('../fonts/Rubik-Bold.woff') format('woff'),
-    url('../fonts/Rubik-Bold.ttf') format('truetype'),
-    url('../fonts/Rubik-Bold.svg#Rubik-Bold') format('svg');
+    src: url('../fonts/Rubik-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exo2-Regular';
-    src: url('../fonts/Exo2-Regular.eot');
-    src: url('../fonts/Exo2-Regular.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Exo2-Regular.woff2') format('woff2'),
-    url('../fonts/Exo2-Regular.woff') format('woff'),
-    url('../fonts/Exo2-Regular.ttf') format('truetype'),
-    url('../fonts/Exo2-Regular.svg#Exo2-Regular') format('svg');
+    src: url('../fonts/Exo2-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exo2-Medium';
-    src: url('../fonts/Exo2-Medium.eot');
-    src: url('../fonts/Exo2-Medium.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Exo2-Medium.woff2') format('woff2'),
-    url('../fonts/Exo2-Medium.woff') format('woff'),
-    url('../fonts/Exo2-Medium.ttf') format('truetype'),
-    url('../fonts/Exo2-Medium.svg#Exo2-Medium') format('svg');
+    src: url('../fonts/Exo2-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exo2-Bold';
-    src: url('../fonts/Exo2-Bold.eot');
-    src: url('../fonts/Exo2-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Exo2-Bold.woff2') format('woff2'),
-    url('../fonts/Exo2-Bold.woff') format('woff'),
-    url('../fonts/Exo2-Bold.ttf') format('truetype'),
-    url('../fonts/Exo2-Bold.svg#Exo2-Bold') format('svg');
+    src: url('../fonts/Exo2-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Exo2-SemiBold';
-    src: url('../fonts/Exo2-SemiBold.eot');
-    src: url('../fonts/Exo2-SemiBold.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Exo2-SemiBold.woff2') format('woff2'),
-    url('../fonts/Exo2-SemiBold.woff') format('woff'),
-    url('../fonts/Exo2-SemiBold.ttf') format('truetype'),
-    url('../fonts/Exo2-SemiBold.svg#Exo2-SemiBold') format('svg');
+    src: url('../fonts/Exo2-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }

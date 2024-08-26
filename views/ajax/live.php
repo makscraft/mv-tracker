@@ -1,4 +1,4 @@
-<?
+<?php
 include "../../config/autoload.php";
 Http :: isAjaxRequest('post', true);
 $mv = new Builder();
@@ -55,4 +55,3 @@ if(isset($_POST["check-my-new-tasks"]))
 
 	Http :: responseJson($result);
 }
-?>

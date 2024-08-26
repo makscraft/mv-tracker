@@ -1,4 +1,4 @@
-<?
+<?php
 $form = new Form("Accounts", $account -> id);
 $form -> loadRecord();
 
@@ -44,21 +44,21 @@ else if($format = Accounts :: getSetting($account, "date_format"))
 include $mv -> views_path."main-header.php";
 ?>
    <div id="content">
-        <h1><? echo I18n :: locale("profile"); ?></h1>
-        <form class="regular" method="post" action="<? echo $mv -> root_path; ?>profile" enctype="multipart/form-data">
-	        <?
+        <h1><?php echo I18n :: locale("profile"); ?></h1>
+        <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>profile" enctype="multipart/form-data">
+	        <?php
 	        	echo $form -> displayErrors();
 	        	echo $mv -> accounts -> displayReloadMessage();
 	        	echo $form -> displayVertical($fields);
 	        ?>
             <div class="form-buttons clearfix high">
-                <? echo $form -> displayTokenCSRF(); ?>
-                <input class="button big submit" type="button" value="<? echo I18n :: locale("update"); ?>" />
-                <a class="cancel" href="<? echo $mv -> root_path; ?>home"><? echo I18n :: locale("cancel"); ?></a>
-                <a class="link-button" href="<? echo $mv -> root_path; ?>password/"><? echo I18n :: locale("change-password"); ?></a>
+                <?php echo $form -> displayTokenCSRF(); ?>
+                <input class="button big submit" type="button" value="<?php echo I18n :: locale("update"); ?>" />
+                <a class="cancel" href="<?php echo $mv -> root_path; ?>home"><?php echo I18n :: locale("cancel"); ?></a>
+                <a class="link-button" href="<?php echo $mv -> root_path; ?>password/"><?php echo I18n :: locale("change-password"); ?></a>
             </div>
         </form>
    </div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

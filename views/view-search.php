@@ -1,4 +1,4 @@
-<?
+<?php
 if(isset($_GET['text']) && trim($_GET['text']))
 	$search_text = trim(htmlspecialchars($_GET['text'], ENT_QUOTES));
 else
@@ -33,23 +33,23 @@ include $mv -> views_path."main-header.php";
 ?>
 	<div id="content" class="right-side">
 		<div class="content-wrapper">
-			<h1><? echo I18n :: locale("search"); ?></h1>
-            <?
+			<h1><?php echo I18n :: locale("search"); ?></h1>
+            <?php
            		echo "<p>".I18n :: locale('results-found').": ".$total."</p>\n";
            		echo $mv -> search -> display();
             ?>
             <div class="form-buttons clearfix">
-               <?
+               <?php
                	   $pager_model = $mv -> search;
             	   include $mv -> views_path."parts/pager.php";
          	   ?>            
-               <input type="hidden" id="filter-url-params" value="text=<? echo $search_text; ?>" />
-               <? include $mv -> views_path."parts/pager-limiter.php"; ?>
+               <input type="hidden" id="filter-url-params" value="text=<?php echo $search_text; ?>" />
+               <?php include $mv -> views_path."parts/pager-limiter.php"; ?>
             </div>
 
 		</div>
 		<div class="clear"></div>
 	</div>
-<?
+<?php
 include $mv -> views_path."main-footer.php";
 ?>

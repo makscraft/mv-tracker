@@ -1,4 +1,4 @@
-<?
+<?php
 $filter_fields = array("name", "tracker", "date_due", "status", "assigned_to", "priority", "complete", "description");
 
 if($base_url == "home")

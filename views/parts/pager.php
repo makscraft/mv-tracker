@@ -1,4 +1,4 @@
-<?
+<?php
 if($pager_model -> pager -> hasPages())
 {
     echo "<div class=\"pager\">".I18n :: locale("page").":";
@@ -10,4 +10,3 @@ if($pager_model -> pager -> hasPages())
     echo $pager_model -> pager -> displayNextLink(" ", $pager_url);
     echo "</div>\n";
 }
-?>

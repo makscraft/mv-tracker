@@ -1,4 +1,4 @@
-<?
+<?php
 include "../../config/autoload.php";
 $mv = new Builder();
 
@@ -21,4 +21,3 @@ if($account && isset($_GET["locale"]) && I18n :: getRegion() == $_GET["locale"])
 		
 	echo implode(",\n", $data)."\n\n};";
 }
-?>
