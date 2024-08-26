@@ -1,40 +1,40 @@
 <?php
 class Tasks extends Model
 {
-	protected $name = "{tasks}";
+	protected $name = '{tasks}';
 	
-	protected $model_elements = array(
-		array("{name}", "char", "name", array("required" => true)),
-		array("{tracker}", "enum", "tracker", array("required" => true, "foreign_key" => "Trackers")),
-		array("{project}", "enum", "project", array("required" => true, "foreign_key" => "Projects")),
-		array("{date-created}", "date_time", "date_created"),
-		array("{date-updated}", "date_time", "date_updated"),
-		array("{date-due}", "date", "date_due"),
-		array("{status}", "enum", "status", array("required" => true, "foreign_key" => "Statuses")),
-		array("{assigned-to}", "enum", "assigned_to", array("foreign_key" => "Accounts")),
-		array("{priority}", "enum", "priority", array("foreign_key" => "Priorities")),
-		array("{author}", "enum", "author", array("foreign_key" => "Accounts")),
-		array("{implementation}", "enum", "complete", array("empty_value" => "0%",
-													  "values_list" => array("10" => "10%", 
-														  					 "20" => "20%",
-																		     "30" => "30%",
-																		     "40" => "40%",
-																		     "50" => "50%",
-																		     "60" => "60%",
-																		     "70" => "70%",
-																		     "80" => "80%",
-																		     "90" => "90%",
-																		     "100" => "100%"))),
-		array("{hours-estimated}", "float", "hours_estimated"),
-		array("{hours-spent}", "float", "hours_spent"),
-		array("{description}", "text", "description"),
-		array("{attached-files}", "text", "files", ["rich_text" => true]),
-		array("{journal-records}", "many_to_one", "journal", array("related_model" => "Journal", "name_field" => "task"))
-	);
+	protected $model_elements = [
+		['{name}', 'char', 'name', ['required' => true]],
+		['{tracker}', 'enum', 'tracker', ['required' => true, 'foreign_key' => 'Trackers']],
+		['{project}', 'enum', 'project', ['required' => true, 'foreign_key' => 'Projects']],
+		['{date-created}', 'date_time', 'date_created'],
+		['{date-updated}', 'date_time', 'date_updated'],
+		['{date-due}', 'date', 'date_due'],
+		['{status}', 'enum', 'status', ['required' => true, 'foreign_key' => 'Statuses']],
+		['{assigned-to}', 'enum', 'assigned_to', ['foreign_key' => 'Accounts']],
+		['{priority}', 'enum', 'priority', ['foreign_key' => 'Priorities']],
+		['{author}', 'enum', 'author', ['foreign_key' => 'Accounts']],
+		['{implementation}', 'enum', 'complete', ['empty_value' => '0%',
+													  'values_list' => ['10' => '10%', 
+														  				'20' => '20%',
+																		'30' => '30%',
+																		'40' => '40%',
+																		'50' => '50%',
+																		'60' => '60%',
+																		'70' => '70%',
+																		'80' => '80%',
+																		'90' => '90%',
+																		'100' => '100%']]],
+		['{hours-estimated}', 'float', 'hours_estimated'],
+		['{hours-spent}', 'float', 'hours_spent'],
+		['{description}', 'text', 'description'],
+		['{attached-files}', 'text', 'files', ['rich_text' => true]],
+		['{journal-records}', 'many_to_one', 'journal', ['related_model' => 'Journal', 'name_field' => 'task']]
+	];
 	
-	private $allowed_columns = array("id", "name", "tracker", "project", "assigned_to", "priority", "date_due", 
-									"date_created", "date_updated", "complete", "status", "author", "hours_estimated", 
-									"hours_spent");
+	private $allowed_columns = ['id', 'name', 'tracker', 'project', 'assigned_to', 'priority', 'date_due', 
+								'date_created', 'date_updated', 'complete', 'status', 'author', 'hours_estimated', 
+								'hours_spent'];
 	
 	private $background_colors = [];
 	
@@ -43,13 +43,13 @@ class Tasks extends Model
 		$url_parts = $router -> getUrlParts();
 		
 		if(count($url_parts) == 3 && $url_parts[1] == "edit" && is_numeric($url_parts[2]))
-			$params = array("id" => $url_parts[2]);
+			$params = ["id" => $url_parts[2]];
 		else if(count($url_parts) == 2 && $url_parts[0] == "task" && is_numeric($url_parts[1]))
-			$params = array("id" => $url_parts[1]);
+			$params = ["id" => $url_parts[1]];
 		else
 			return false;
 			
-		return $this -> findRecord($params);
+		return $this -> find($params);
 	}
 	
 	static public function processDescriptionText($text)
@@ -494,12 +494,12 @@ class Tasks extends Model
 				
 				if(isset($changed["assigned_to"]) && $changed["assigned_to"] != $account -> id)
 					foreach($ids as $id)
-						if($task = $this -> findRecord(array("id" => $id, "assigned_to!=" => $changed["assigned_to"])))
+						if($task = $this -> find(array("id" => $id, "assigned_to!=" => $changed["assigned_to"])))
 							$needs_email[] = $id;
 						
 				if(isset($changed["status"]))
 				{
-					$status = $this -> findRecord(array("table->" => "statuses", "id" => $changed["status"]));
+					$status = $this -> find(array("table->" => "statuses", "id" => $changed["status"]));
 					
 					if($status -> closed)
 					{
@@ -536,7 +536,7 @@ class Tasks extends Model
 						
 						if($task -> assigned_to && $task -> assigned_to != $account -> id)
 						{
-							$user = $this -> findRecord(array("id" => $task -> assigned_to, "table->" => "accounts"));
+							$user = $this -> find(array("id" => $task -> assigned_to, "table->" => "accounts"));
 							$text = $tasks_closed ? "" : $task -> description;
 							
 							Journal :: sendEmail($user, $task, $text);

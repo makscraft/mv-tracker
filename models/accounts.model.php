@@ -1,44 +1,45 @@
 <?php
 class Accounts extends Model
 {
-	protected $name = "{accounts}";
+	protected $name = '{accounts}';
    
 	private $auto_login_days = 90;
    
-	protected $model_elements = array(
-		array("{active}", "bool", "active", array("on_create" => true)),
-		array("{receive-emails}", "bool", "send_emails", array("on_create" => true)),
-		array("{date-registered}", "date_time", "date_registration"),
-		array("{date-last-visit}", "date_time", "date_last_visit", array("now_on_create" => false)),
-		array("{name}", "char", "name", array("required" => true)),
-		array("{login}", "char", "login", array("required" => true, "unique" => true)),
-		array("Email", "email", "email", array("required" => true, "unique" => true)),
-		array("{password}", "password", "password", array("required" => true, "letters_required" => true,
-													  	  "digits_required" => true)),		
-		array("Password token", "char", "password_token"),
-		array("Autologin key", "char", "autologin_key"),
-		array("{phone}", "phone", "phone"),
-		array("{photo}", "image", "photo"),
-		array("Settings", "text", "settings"),
-   );
+	protected $model_elements = [
+		['{active}', 'bool', 'active', ['on_create' => true]],
+		['{receive-emails}', 'bool', 'send_emails', ['on_create' => true]],
+		['{date-registered}', 'date_time', 'date_registration'],
+		['{date-last-visit}', 'date_time', 'date_last_visit', ['now_on_create' => false]],
+		['{name}', 'char', 'name', ['required' => true]],
+		['{login}', 'char', 'login', ['required' => true, 'unique' => true]],
+		['Email', 'email', 'email', ['required' => true, 'unique' => true]],
+		['{password}', 'password', 'password', ['required' => true, 
+												'letters_required' => true,
+												'digits_required' => true]],
+		['Password token', 'char', 'password_token'],
+		['Autologin key', 'char', 'autologin_key'],
+		['{phone}', 'phone', 'phone'],
+		['{photo}', 'image', 'photo'],
+		['Settings', 'text', 'settings']
+   ];
    
-	protected $model_display_params = array(
-		"not_editable_fields" => array("date_registration", "date_last_visit"),
-		"hidden_fields" => array("password_token", "autologin_key", "settings")
-	);
+	protected $model_display_params = [
+		'not_editable_fields' => ['date_registration', 'date_last_visit'],
+		'hidden_fields' => ['password_token', 'autologin_key', 'settings']
+	];
 	
 	public function beforeCreate($fields)
 	{
-		$salt = $this -> registry -> getSetting("SecretCode");
-		return array("password" => Service :: makeHash($fields["password"].$salt));
+		$salt = $this -> registry -> getSetting('SecretCode');
+		return ['password' => Service :: makeHash($fields['password'].$salt)];
 	}
 	
 	public function beforeUpdate($id, $old_fields, $new_fields)
 	{
-		if($new_fields["password"] != $old_fields["password"])
+		if($new_fields['password'] != $old_fields['password'])
 		{
-			$salt = $this -> registry -> getSetting("SecretCode");
-			return array("password" => Service :: makeHash($new_fields["password"].$salt));
+			$salt = $this -> registry -> getSetting('SecretCode');
+			return array('password' => Service :: makeHash($new_fields['password'].$salt));
 		}
 	}
 		
@@ -73,7 +74,7 @@ class Accounts extends Model
 	      
 	public function login($login, $password, $autologin = false)
 	{
-		$account = $this -> findRecord(array("login" => $login, "active" => 1));
+		$account = $this -> find(array("login" => $login, "active" => 1));
 		$salt = $this -> registry -> getSetting("SecretCode");
       
 		if($account && ($autologin || Service :: checkHash($password.$salt, $account -> password)))
@@ -123,7 +124,7 @@ class Accounts extends Model
 	{
 		sleep(1);
 		
-		$account = $this -> findRecord(array("autologin_key" => $key, "active" => 1));
+		$account = $this -> find(array("autologin_key" => $key, "active" => 1));
    
 		if(!$account)
 		{
@@ -153,7 +154,7 @@ class Accounts extends Model
    
 	public function sendPasswordRecoveryLink($email)
 	{
-		$account = $this -> findRecord(array("email" => $email, "active" => 1));
+		$account = $this -> find(array("email" => $email, "active" => 1));
 		
 		if($account)
 		{
@@ -179,7 +180,7 @@ class Accounts extends Model
 	
 	public function checkNewPasswordParams($token, $hash, $time)
 	{
-		$account = $this -> findRecord(array("active" => 1, "password_token" => $token));
+		$account = $this -> find(array("active" => 1, "password_token" => $token));
 		$result = false;
 		
 		if(!$account)
@@ -240,9 +241,9 @@ class Accounts extends Model
 		if(is_object($data) && $data -> photo)
 			$person = $data;
 		else if(is_object($data) && $data -> author)
-			$person = $this -> findRecord(array("id" => $data -> author, "active" => 1));
+			$person = $this -> find(array("id" => $data -> author, "active" => 1));
 		else if(is_array($data) && isset($data["account"]) && $data["account"])
-			$person = $this -> findRecord(array("id" => $data["account"], "active" => 1));
+			$person = $this -> find(array("id" => $data["account"], "active" => 1));
 		
 		if($person && $person -> photo)
 			return $this -> cropImage($person -> photo, 30, 30);

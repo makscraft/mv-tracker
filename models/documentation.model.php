@@ -1,30 +1,30 @@
 <?php
 class Documentation extends Model
 {
-	protected $name = "{documentation}";
+	protected $name = '{documentation}';
 	
-	protected $model_elements = array(
-			array("{name}", "char", "name", array("required" => true)),		
-			array("{project}", "enum", "project", array("required" => true, "foreign_key" => "Projects")),
-			array("{author}", "enum", "author", array("foreign_key" => "Accounts")),
-			array("{date-created}", "date_time", "date_created"),
-			array("{date-updated}", "date_time", "date_updated"),
-			array("{content}", "text", "content"),
-			array("{attached-files}", "text", "files")
-	);
+	protected $model_elements = [
+		['{name}', 'char', 'name', ['required' => true]],		
+		['{project}', 'enum', 'project', ['required' => true, 'foreign_key' => 'Projects']],
+		['{author}', 'enum', 'author', ['foreign_key' => 'Accounts']],
+		['{date-created}', 'date_time', 'date_created'],
+		['{date-updated}', 'date_time', 'date_updated'],
+		['{content}', 'text', 'content'],
+		['{attached-files}', 'text', 'files']
+	];
 	
 	public function defineDocumentPage(Router $router)
 	{
 		$url_parts = $router -> getUrlParts();
 		
-		if(count($url_parts) == 3 && $url_parts[1] == "edit" && is_numeric($url_parts[2]))
-			$params = array("id" => $url_parts[2]);
-		else if(count($url_parts) == 2 && $url_parts[0] == "documentation" && is_numeric($url_parts[1]))
-			$params = array("id" => $url_parts[1]);
+		if(count($url_parts) == 3 && $url_parts[1] == 'edit' && is_numeric($url_parts[2]))
+			$params = ['id' => $url_parts[2]];
+		else if(count($url_parts) == 2 && $url_parts[0] == 'documentation' && is_numeric($url_parts[1]))
+			$params = ['id' => $url_parts[1]];
 		else
 			return false;
 				
-		return $this -> findRecord($params);
+		return $this -> find($params);
 	}
 	
 	public function generateDeleteToken($id)

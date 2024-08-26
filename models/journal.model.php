@@ -1,30 +1,30 @@
 <?php
 class Journal extends Model
 {
-	protected $name = "{journal}";
+	protected $name = '{journal}';
 	
-	protected $model_elements = array(
-		array("{task}", "enum", "task", array("required" => true, "foreign_key" => "Tasks", 
-											  "long_list" => true)),
-		array("{account}", "enum", "account", array("required" => true, "foreign_key" => "Accounts")),
-		array("{date}", "date_time", "date"),
-		array("{operations}", "text", "title", array("show_in_admin" => 70)),
-		array("{content}", "text", "content", array("show_in_admin" => 70)),
-		array("{attached-files}", "text", "files", array("show_in_admin" => 70, "rich_text" => true))
-	);
+	protected $model_elements = [
+		['{task}', 'enum', 'task', ['required' => true, 'foreign_key' => 'Tasks', 
+											  'long_list' => true]],
+		['{account}', 'enum', 'account', ['required' => true, 'foreign_key' => 'Accounts']],
+		['{date}', 'date_time', 'date'],
+		['{operations}', 'text', 'title', ['show_in_admin' => 70]],
+		['{content}', 'text', 'content', ['show_in_admin' => 70]],
+		['{attached-files}', 'text', 'files', ['show_in_admin' => 70, 'rich_text' => true]]
+	];
 	
 	public function displayFullHistory()
 	{
 		$html = "";
-		$rows = $this -> select(array("order->desc" => "date",
-									  "extra->" => "(`content`!='' OR `title`!='' OR `files`!='')",
-									  "limit->" => $this -> pager -> getParamsForSelect()));
+		$rows = $this -> select(["order->desc" => "date",
+								 "extra->" => "(`content`!='' OR `title`!='' OR `files`!='')",
+								 "limit->" => $this -> pager -> getParamsForSelect()]);
 		
 		$accounts_model = new Accounts();
 		
 		foreach($rows as $row)
 		{
-			$task = $this -> findRecord(array("table->" => "tasks", "id" => $row["task"]));
+			$task = $this -> find(["table->" => "tasks", "id" => $row["task"]]);
 			$mass_action = preg_match("/^[\d\,]+$/", $row["title"]);
 			
 			if(!$task && !$mass_action)
@@ -289,7 +289,7 @@ class Journal extends Model
 	
 	public function deleteOneComment($account, $id, $token)
 	{
-		if($comment = $this -> findRecord(array("id" => $id, "account" => $account -> id)))
+		if($comment = $this -> find(array("id" => $id, "account" => $account -> id)))
 			if($this -> generateCommentToken($account -> id, $comment -> id) == $token)
 			{
 				$this -> delete($comment -> id);

@@ -1,39 +1,39 @@
 <?php
 class Projects extends Model
 {
-	protected $name = "{projects}";
+	protected $name = '{projects}';
 	
-	protected $model_elements = array(
-		array("{active}", "bool", "active", array("on_create" => true)),
-		array("{name}", "char", "name", array("required" => true)),
-		array("{date-created}", "date_time", "date_created"),
-		array("{date-updated}", "date_time", "date_updated"),
-		array("{description}", "text", "description"),
-		array("{tasks}", "many_to_one", "tasks", array("related_model" => "Tasks"))
-	);
+	protected $model_elements = [
+		['{active}', 'bool', 'active', ['on_create' => true]],
+		['{name}', 'char', 'name', ['required' => true]],
+		['{date-created}', 'date_time', 'date_created'],
+		['{date-updated}', 'date_time', 'date_updated'],
+		['{description}', 'text', 'description'],
+		['{tasks}', 'many_to_one', 'tasks', ['related_model' => 'Tasks']]
+	];
 	
 	public function defineProjectPage(Router $router)
 	{
 		$url_parts = $router -> getUrlParts();
 		
-		if(count($url_parts) == 3 && $url_parts[1] == "edit" && is_numeric($url_parts[2]))
-			$params = array("id" => $url_parts[2], "active" => 1);
-		else if(count($url_parts) == 2 && $url_parts[0] == "project" && is_numeric($url_parts[1]))
-			$params = array("id" => $url_parts[1], "active" => 1);
+		if(count($url_parts) == 3 && $url_parts[1] == 'edit' && is_numeric($url_parts[2]))
+			$params = ['id' => $url_parts[2], 'active' => 1];
+		else if(count($url_parts) == 2 && $url_parts[0] == 'project' && is_numeric($url_parts[1]))
+			$params = ['id' => $url_parts[1], 'active' => 1];
 		else
 			return false;
 						
-		return $this -> findRecord($params);
+		return $this -> find($params);
 	}
 	
 	public function generateDeleteToken($project_id)
 	{
-		return md5($_SESSION["account"]["token"].$project_id.$_SERVER["HTTP_USER_AGENT"].$_SERVER["REMOTE_ADDR"]);
+		return md5($_SESSION['account']['token'].$project_id.$_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
 	}
 	
 	public function getActiveProjectsIds()
 	{
-		$ids = $this -> selectColumn(array("fields->" => "id", "active" => 1));
+		$ids = $this -> selectColumn(["fields->" => "id", "active" => 1]);
 		
 		return count($ids) ? implode(",", $ids) : "0";
 	}

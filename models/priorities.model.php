@@ -1,12 +1,12 @@
 <?php
 class Priorities extends Model
 {
-	protected $name = "{priorities}";
+	protected $name = '{priorities}';
 	
-	protected $model_elements = array(
-		array("{active}", "bool", "active", array("on_create" => true)),
-		array("{name}", "char", "name", array("required" => true, "unique" => 1)),
-		array("{color}", "char", "color"),
-		array("{position}", "order", "position")
-	);
+	protected $model_elements = [
+		['{active}', 'bool', 'active', ['on_create' => true]],
+		['{name}', 'char', 'name', ['required' => true, 'unique' => 1]],
+		['{color}', 'char', 'color'],
+		['{position}', 'order', 'position']
+	];
 }
