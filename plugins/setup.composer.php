@@ -41,7 +41,7 @@ class SetupComposer extends Installation
 
         if($driver === 'sqlite')
         {
-            self :: boot();
+            static :: boot();
             self :: configureDatabaseSQLite();
             self :: findAndExecuteAllAvailableMigartions();
             self :: insertInitionDatabaseContent('en');
