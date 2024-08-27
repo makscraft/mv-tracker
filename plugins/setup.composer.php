@@ -43,7 +43,7 @@ class SetupComposer extends Installation
         {
             static :: boot();
             self :: configureDatabaseSQLite();
-            self :: findAndExecuteAllAvailableMigartions();
+            static :: findAndExecuteAllAvailableMigartions();
             self :: insertInitionDatabaseContent('en');
 
             $message = 'If you want to use MySQL database instead of SQLite, ';
