@@ -28,6 +28,7 @@ class SetupComposer extends Installation
 
         if($driver === 'sqlite')
         {
+            self :: boot();
             self :: configureDatabaseSQLite();
             self :: findAndExecuteAllAvailableMigartions();
             self :: insertInitionDatabaseContent('en');
@@ -40,7 +41,7 @@ class SetupComposer extends Installation
         }
         else
         {
-            $message = ' - ;Now please fill database settings for MySQL in .env file';
+            $message = ' - Now please fill database settings for MySQL in .env file';
             $message .= ' and run "composer database" in your project directory.';
 
             self :: displaySuccessMessage($message);
