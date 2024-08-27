@@ -7,10 +7,13 @@ class SetupComposer extends Installation
 
     static public function instance(array $params = [])
     {
-        Installation :: instance([
-            'directory' => __DIR__.'/..',
-            'package' => 'tracker'
-        ]);
+        static :: $instance = [
+            'directory' => realpath(__DIR__.'/..'),
+            'package' => 'tracker',
+            'boot' => false
+        ];
+
+        return static :: $instance;
     }
 
     /**
