@@ -5,11 +5,20 @@ class SetupComposer extends Installation
 {
     static public $version = '1.2';
 
+    static public function instance(array $params = [])
+    {
+        Installation :: instance([
+            'directory' => __DIR__.'/..',
+            'package' => 'tracker'
+        ]);
+    }
+
     /**
      * Post "composer dump-autoload" event.
      */
     static public function postAutoloadDump(Event $event)
     {
+
     }
 
     /**
@@ -17,7 +26,7 @@ class SetupComposer extends Installation
      */
     static public function finish()
     {
-        Installation :: instance(['directory' => __DIR__.'/..']);
+        self :: instance();
 
         self :: configureDirectory();
         self :: generateSecurityToken();
@@ -50,10 +59,7 @@ class SetupComposer extends Installation
 
     static public function commandConfigureDatabase(Event $event)
     {
-        Installation :: instance([
-            'directory' => __DIR__.'/..',
-            'package' => 'tracker'
-        ]);
+        self :: instance();
 
         parent :: commandConfigureDatabase($event);
         self :: findAndExecuteAllAvailableMigartions();
@@ -98,13 +104,11 @@ class SetupComposer extends Installation
 
     static public function commandRegion(Event $event)
     {
-        Installation :: instance([
-            'directory' => __DIR__.'/..',
-            'package' => 'tracker'
-        ]);
-
+        self :: instance();
         self :: boot();
-        $region = parent :: commandRegion($event);
+
+        if(null === $region = Installation :: commandRegion($event))
+            return;
 
         $env = parse_ini_file(self :: $instance['directory'].'/.env');
         $env_region = $env['APP_REGION'] ?? '';
@@ -141,11 +145,9 @@ class SetupComposer extends Installation
         self :: displayDoneMessage($message);
     }
 
-
-
     static public function displayFinalInstallationMessage()
     {
-        Installation :: instance(['directory' => __DIR__.'/..']);
+        self :: instance();
         $env = parse_ini_file(self :: $instance['directory'].DIRECTORY_SEPARATOR.'.env');
 
         $message = "Installation complete, now you can open MV tracker in browser.".PHP_EOL;
