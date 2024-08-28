@@ -1,7 +1,7 @@
 {
     "name": "makscraft/mv-tracker",
     "description": "Simple task tracking system based on MV framework.",
-    "version": "3.0.0",
+    "version": "1.3.0",
     "type": "project",
     "keywords": ["task tracker", "project management", "php", "framework", "mvc"],
     "homepage": "https://mv-tracker.com",

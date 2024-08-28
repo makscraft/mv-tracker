@@ -13,7 +13,7 @@ $mvMainSettings = [
 //'am' - american, the same as english ('en') exept for date format.
 'SupportedRegions' => ['en', 'us', 'ru'],
 
-//Initial version of MV framework (do not change it).
+//Initial version of MV framework core files (do not change it).
 'Version' => 3.0,
 
 //Allowed data types for models fields
