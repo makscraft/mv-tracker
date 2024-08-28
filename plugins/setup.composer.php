@@ -51,7 +51,7 @@ class SetupComposer extends Installation
             $message .= 'please fill database settings for MySQL in .env file and run "composer database"';
             $message .= ' in your project directory.';
 
-            echo ' - '.$message.PHP_EOL;
+            echo ' - '.$message.PHP_EOL.PHP_EOL;
         }
         else
         {
