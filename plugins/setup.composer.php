@@ -148,7 +148,7 @@ class SetupComposer extends Installation
             return;
 
         $region_initial = $region;
-        self :: insertInitionDatabaseContent($region);
+        $data = self :: insertInitionDatabaseContent($region);
 
         $message = 'Region settings from the "'.$region_initial.'" package have been installed.';
 
