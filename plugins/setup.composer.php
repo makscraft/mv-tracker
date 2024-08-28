@@ -44,6 +44,7 @@ class SetupComposer extends Installation
             self :: boot();
             self :: configureDatabaseSQLite();
             self :: findAndExecuteAllAvailableMigartions();
+            self :: setFirstUserLogin(self :: runPdo());
             self :: insertInitionDatabaseContent('en');
             self :: displayFinalInstallationMessage();
 
@@ -70,6 +71,10 @@ class SetupComposer extends Installation
         self :: findAndExecuteAllAvailableMigartions();
 
         self :: setFirstUserLogin(self :: runPdo());
+
+        if(true !== static :: extraCheckDatabaseContentBeforeReinstall())
+            return;
+
         self :: insertInitionDatabaseContent('en');
         self :: displayFinalInstallationMessage();
     }
@@ -139,6 +144,9 @@ class SetupComposer extends Installation
         self :: setEnvFileParameter('APP_REGION', $region);
         self :: displaySuccessMessage(' - .env file has been configurated.');
 
+        if(true !== static :: extraCheckDatabaseContentBeforeReinstall())
+            return;
+
         $region_initial = $region;
         self :: insertInitionDatabaseContent($region);
 
@@ -148,6 +156,28 @@ class SetupComposer extends Installation
             $message .= PHP_EOL.' '.$data['hello'];
     
         self :: displayDoneMessage($message);
+    }
+
+    static public function extraCheckDatabaseContentBeforeReinstall()
+    {
+        self :: instance();
+        self :: boot();
+
+        $database = Database :: instance();
+        $tables = ['tasks', 'projects', 'documentation'];
+
+        foreach($tables as $table)
+            if($database -> getCount($table) > 5)
+            {
+                $message = 'You have too much content in the table "'.$table.'".'.PHP_EOL;
+                $message .= ' Operation stopped. To proceed please empty the table manually.';
+    
+                self :: displayErrorMessage($message);
+
+                return false;
+            }
+
+        return true;
     }
 
     static public function displayFinalInstallationMessage()

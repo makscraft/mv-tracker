@@ -88,7 +88,7 @@ include $mv -> views_path."main-header.php";
             </div>
             <div class="clear"></div>
             <p class="recovery">
-               <a href="<?php echo $mv -> root_path; ?>recovery"><?php echo I18n :: locale("fogot-password"); ?></a>
+               <a href="<?php echo $mv -> root_path; ?>recovery"><?php echo I18n :: locale("forgot-password"); ?></a>
             </p>
          </form>
       </div>
