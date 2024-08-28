@@ -45,6 +45,7 @@ class SetupComposer extends Installation
             self :: configureDatabaseSQLite();
             self :: findAndExecuteAllAvailableMigartions();
             self :: insertInitionDatabaseContent('en');
+            self :: displayFinalInstallationMessage();
 
             $message = 'If you want to use MySQL database instead of SQLite, ';
             $message .= 'please fill database settings for MySQL in .env file and run "composer database"';
