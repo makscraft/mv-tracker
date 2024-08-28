@@ -41,9 +41,9 @@ class SetupComposer extends Installation
 
         if($driver === 'sqlite')
         {
-            static :: boot();
+            self :: boot();
             self :: configureDatabaseSQLite();
-            static :: findAndExecuteAllAvailableMigartions();
+            self :: findAndExecuteAllAvailableMigartions();
             self :: insertInitionDatabaseContent('en');
 
             $message = 'If you want to use MySQL database instead of SQLite, ';
@@ -75,7 +75,7 @@ class SetupComposer extends Installation
 
     static public function setFirstUserLogin(PDO $pdo)
     {
-        if(!isset(self :: $instance['login'], self :: $instance['password']))
+        if(!isset(static :: $instance['login'], static :: $instance['password']))
         {
             self :: displayErrorMessage('User login and password are not found.');
             return;
@@ -93,9 +93,9 @@ class SetupComposer extends Installation
 
         $user = $accounts -> findRecordOrGetEmpty(['id' => 1]);
 
-        $user -> login = self :: $instance['login'];
+        $user -> login = static :: $instance['login'];
         $user -> name = 'Root';
-        $user -> password = Service :: makeHash(self :: $instance['password'].Registry :: get('APP_TOKEN'));
+        $user -> password = Service :: makeHash(static :: $instance['password'].Registry :: get('APP_TOKEN'));
         $user -> date_registration = I18n :: getCurrentDateTime('SQL');
         $user -> autologin_key = Service :: strongRandomString(50);
         $user -> active = 1;
@@ -114,7 +114,7 @@ class SetupComposer extends Installation
         if(null === $region = Installation :: commandRegion($event))
             return;
 
-        $env = parse_ini_file(self :: $instance['directory'].'/.env');
+        $env = parse_ini_file(static :: $instance['directory'].'/.env');
         $env_region = $env['APP_REGION'] ?? '';
         $projects = Database :: instance() -> getCount('projects');
         $tasks = Database :: instance() -> getCount('tasks');
@@ -152,7 +152,7 @@ class SetupComposer extends Installation
     static public function displayFinalInstallationMessage()
     {
         self :: instance();
-        $env = parse_ini_file(self :: $instance['directory'].DIRECTORY_SEPARATOR.'.env');
+        $env = parse_ini_file(static :: $instance['directory'].DIRECTORY_SEPARATOR.'.env');
 
         $message = "Installation complete, now you can open MV tracker in browser.".PHP_EOL;
         $message .= " MV tracker start page http://yourdomain.com".preg_replace('/\/$/', '', $env['APP_FOLDER']).PHP_EOL;
