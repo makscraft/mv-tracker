@@ -24,8 +24,8 @@
         "database": "\\SetupComposer::commandConfigureDatabase",
         "migrations": "\\Installation::commandMigrations",
         "region": "\\SetupComposer::commandRegion",
-        "service": "\\Installation::commandService",        
-		"cleanup": "\\Installation::commandCleanup"
+        "service": "\\Installation::commandService",
+        "cleanup": "\\Installation::commandCleanup"
     },
     "require": {
         "php": ">=8.0",
