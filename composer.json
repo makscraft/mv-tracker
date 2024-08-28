@@ -29,6 +29,6 @@
     },
     "require": {
         "php": ">=8.0",
-        "makscraft/mv-core": "@dev"
+        "makscraft/mv-core": "^3"
     }
 }
