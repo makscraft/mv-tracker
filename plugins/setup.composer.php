@@ -35,6 +35,7 @@ class SetupComposer extends Installation
         self :: configureDirectory();
         self :: generateSecurityToken();
         self :: changeAutoloaderString('/index.php');
+        self :: checkAndSetDirectoriesPermissions();
 
         $driver = in_array('sqlite', PDO :: getAvailableDrivers()) ? 'sqlite' : 'mysql';
         self :: setEnvFileParameter('DATABASE_ENGINE', $driver);
