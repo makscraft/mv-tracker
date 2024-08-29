@@ -49,8 +49,8 @@ class SetupComposer extends Installation
             self :: displayFinalInstallationMessage();
 
             $message = 'If you want to use MySQL database instead of SQLite, ';
-            $message .= 'please fill database settings for MySQL in .env file and run "composer database"';
-            $message .= ' in your project directory.';
+            $message .= 'please fill database settings for MySQL in .env file '.PHP_EOL;
+            $message .= ' and run "composer database" in your project directory.';
 
             echo ' - '.$message.PHP_EOL.PHP_EOL;
         }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="robots" content="noindex, nofollow" />
     <?php if($mv -> router -> getUrl() == "/login" && $hide_login_form): ?>
-    <meta http-equiv="refresh" content="1; URL=<?php echo $mv -> root_path.$after_login_path; ?>" />
+    <meta http-equiv="refresh" content="1;URL='<?php echo $mv -> root_path.$after_login_path; ?>'" />
     <?php endif; ?>
     <title>MV tracker</title>
     <?php

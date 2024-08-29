@@ -23,7 +23,7 @@ $form -> setHtmlParams("login", 'placeholder="'.I18n :: locale("login").'"');
 $form -> setHtmlParams("password", 'placeholder="'.I18n :: locale("password").'"');
 
 $form -> useTokenCSRF() -> useJqueryToken();
-$after_login_path = "";
+$after_login_path = '';
 $login_done = false;
 
 if(Http :: isPostRequest())
