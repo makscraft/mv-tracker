@@ -110,7 +110,7 @@ class SetupComposer extends Installation
 
         $user -> save();
 
-        self :: displaySuccessMessage(' - First user of MV tracker been successfully created.');
+        self :: displaySuccessMessage(' - First user of MV tracker has been successfully created.');
     }
 
     static public function commandRegion(Event $event)
