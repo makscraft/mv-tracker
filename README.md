@@ -1,4 +1,7 @@
-# MV tracker - simple task tracking system for your effective team.
+# MV tracker
+Simple task tracking system based on [MV framework](https://github.com/makscraft/mv-framework).
+
+More information on official site [MV tracker](https://mv-tracker.com/about)
 
 Installation via composer
 ---
