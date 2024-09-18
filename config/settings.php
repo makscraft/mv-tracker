@@ -10,15 +10,18 @@
 $mvMainSettings = [
 
 //Supported regional packages for internationalization located at ~adminpanel/i18n/
-//'am' - american, the same as english ('en') exept for date format.
+//'us' - american, the same as english ('en') exept for date format.
 'SupportedRegions' => ['en', 'us', 'ru'],
 
-//Initial version of MV framework core files (do not change it).
-'Version' => 3.0,
+//Initial version of MV framework (do not change it).
+'Version' => 3.1,
 
-//Allowed data types for models fields
+//Initial version of MV tracker (do not change it).
+'MvTrackerVersion' => 1.3,
+
+//Allowed data types for models' fields
 'ModelsDataTypes' => ['bool','int','float','char','url','redirect','email','phone','password','text','enum','parent',
-					 					  'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'],
+					  'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'],
 
  //All allowed types of files for uploading.
 'AllowedFiles' => ['gif', 'jpg', 'jpeg', 'png', 'svg', 'webp', 'zip', 'rar', 'gzip', 'txt', 'doc', 'docx', 'rtf', 
@@ -27,7 +30,7 @@ $mvMainSettings = [
 //All allowed types of images to for uploading.
 'AllowedImages' => ['gif', 'jpg', 'jpeg', 'png', 'svg', 'webp'],
 
-//Quality of .jpg images created by imagejpeg() function.
+//Quality of .jpg images created by GD functions when resize.
 'JpgQuality' => 90,
 
 //Mime types to check for uploaded images
@@ -48,27 +51,28 @@ $mvMainSettings = [
 //Admin panel user session maximum duration (in seconds).
 'SessionLifeTime' => 3600 * 3, 
 
- //New generated password is available to be confirmed by user.
+ //New generated password lifiteime to be confirmed by user.
 'NewPasswordLifeTime' => 10800 / 3,
 
- //After 3 incorrect passwords the ip of user is added into special list and this user must fill captcha during this time.
+ //After 3 incorrect passwords when login in admin panel the ip of user is added into special list 
+ // and during the next login attempts the users will have to fill captcha before this time lasts.
 'LoginCaptchaLifeTime' => 3600,
 
 //Time interval in seconds from last hit of user when we show that user is online.
 'UserOnlineTime' => 900,
 
-//Time interval in seconds for autologin cookies.
+//Time interval in seconds for autologin cookies for admin panel.
 'AutoLoginLifeTime' => 3600 * 24 * 31 * 3,
 
-//Not allowed names of models fields.
+//Forbidden (reserved) names of models fields.
 'ForbiddenFieldsNames' => ['page','done','pager-limit','sort-field','sort-order', 'multi-action','multi-value',
-						   						'version','continue','restore','edit'],
+						   'version','continue','restore','edit'],
 			
-//Not allowed names of models.
+//Forbidden names of models.
 'ForbiddenModelsNames' => ['model','settings','users_logins','users_passwords',
-						   						 'users_rights','users_sessions','versions'],
+						   'users_rights','users_sessions','versions'],
 								
-//Maximum execution time of data processing during csv files uploading.
+//Maximum execution time of data processing during csv files uploading in admin panel.
 'CsvUploadTimeLimit' => 180,
 
 //Maximum number of versions for each model record in admin panel (false - disables versions saving).
