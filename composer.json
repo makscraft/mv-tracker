@@ -20,11 +20,11 @@
         "post-create-project-cmd": "\\SetupComposer::finish",
         "post-update-cmd": "\\Installation::postUpdate",
         "post-autoload-dump": "\\SetupComposer::postAutoloadDump",
-        "database": "\\SetupComposer::commandConfigureDatabase",
-        "migrations": "\\Installation::commandMigrations",
-        "region": "\\SetupComposer::commandRegion",
-        "service": "\\Installation::commandService",
-        "cleanup": "\\Installation::commandCleanup"
+        "mv:database": "\\SetupComposer::commandConfigureDatabase",
+        "mv:migrations": "\\Installation::commandMigrations",
+        "mv:region": "\\SetupComposer::commandRegion",
+        "mv:service": "\\Installation::commandService",
+        "mv:cleanup": "\\Installation::commandCleanup"
     },
     "require": {
         "php": ">=8.0",
