@@ -15,6 +15,10 @@ composer create-project makscraft/mv-tracker project_name
 - All the other critical settings will be generated automatically by composer.
 - After the intallation process run your http server and check your app.
 
+Manual installation
+---
+Described on the site https://mv-tracker.com/installation
+
 Screeshots
 ---
 
