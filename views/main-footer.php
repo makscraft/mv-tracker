@@ -2,7 +2,7 @@
 </div>
 <div id="footer"<?php echo $css_footer; ?>>
     <div class="wrapper">
-        <p>&copy; <?php echo date("Y"); ?> MV tracker. All rights reserved. Version <?php echo SetupComposer :: $version; ?></p>
+        <p>&copy; <?php echo date("Y"); ?> MV tracker. All rights reserved. Version <?php echo Accounts :: getMvTrackerVersion(); ?></p>
         <a href="https://mv-tracker.com" target="_blank">MV tracker</a>
         <a href="https://mv-framework.<?php echo $language == "ru" ? "ru" : "com"; ?>" target="_blank">Powered by MV framework</a>
     </div>

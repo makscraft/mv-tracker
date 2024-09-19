@@ -13,11 +13,11 @@ $mvMainSettings = [
 //'us' - american, the same as english ('en') exept for date format.
 'SupportedRegions' => ['en', 'us', 'ru'],
 
-//Initial version of MV framework (do not change it).
-'Version' => 3.1,
+//Initial version of MV framework for internal needs (do not change it).
+'Version' => 3.15,
 
-//Initial version of MV tracker (do not change it).
-'MvTrackerVersion' => 1.3,
+//Initial version of MV tracker for internal needs (do not change it).
+'MvTrackerVersion' => 1.31,
 
 //Allowed data types for models' fields
 'ModelsDataTypes' => ['bool','int','float','char','url','redirect','email','phone','password','text','enum','parent',

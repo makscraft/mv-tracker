@@ -11,7 +11,7 @@
     <?php endif; ?>
     <title>MV tracker</title>
     <?php
-        $version = "?v".str_replace('.', '', SetupComposer :: $version);
+        $version = "?v".str_replace('.', '', Accounts :: getMvTrackerVersion());
         $region = I18n :: getRegion();
 
         CacheMedia :: instance();

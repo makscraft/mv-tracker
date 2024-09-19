@@ -328,4 +328,12 @@ class Accounts extends Model
 		$account -> settings = Service :: serializeArray($settings);
 		$account -> update();
 	}
+
+	static public function getMvTrackerVersion(): string
+	{
+		if($version = Registry :: get('MvTrackerVersion'))
+			return strval($version);
+
+		return '1.3';
+	}
 }

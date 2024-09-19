@@ -3,7 +3,7 @@ use Composer\Script\Event;
 
 class SetupComposer extends Installation
 {
-    static public $version = '1.3';
+    public const VERSION = 1.3;
 
     static public function instance(array $params = [])
     {
