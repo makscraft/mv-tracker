@@ -1,5 +1,5 @@
 # MV tracker
-Simple task tracking system based on [MV framework](https://github.com/makscraft/mv-framework).
+Simple task tracking system based on [MV framework](https://github.com/makscraft/mv-framework)
 
 More information on official site [MV tracker](https://mv-tracker.com/about)
 
