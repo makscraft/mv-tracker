@@ -331,6 +331,13 @@ class Accounts extends Model
 
 	static public function getMvTrackerVersion(): string
 	{
+		$package = 'makscraft/mv-tracker';
+
+		if(class_exists('\Composer\InstalledVersions'))
+			if(\Composer\InstalledVersions::isInstalled($package))
+				if($version = \Composer\InstalledVersions::getPrettyVersion($package))
+					return $version;
+		
 		if($version = Registry :: get('MvTrackerVersion'))
 			return strval($version);
 
