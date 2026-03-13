@@ -70,7 +70,7 @@ class Journal extends Model
 			}
 			else if($mass_action)
 			{
-				$links = array();
+				$links = [];
 				
 				foreach(explode(",", $row["title"]) as $task_id)
 					$links[] = "<a href=\"".$this -> root_path."task/".$task_id."\">#".$task_id."</a>";
@@ -134,7 +134,7 @@ class Journal extends Model
 	{
 		$html = "";
 		
-		$ids = array();
+		$ids = [];
 		$rows = $this -> select(array("fields->" => "id,title", "task" => 0, "title->like" => $task -> id));
 		
 		foreach($rows as $row)
@@ -247,7 +247,7 @@ class Journal extends Model
 		$registry = Registry::instance();
 		$allowed = $registry -> getSetting("AllowedFiles");
 		$folder = $registry -> getSetting("FilesPath").$folder;
-		$files = $copied = array();
+		$files = $copied = [];
 		
 		if(isset($_FILES[$field]))
 			foreach($_FILES[$field] as $section => $data)

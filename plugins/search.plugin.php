@@ -3,9 +3,9 @@ class Search extends Plugin
 {
    public $request;
    
-   private $models = array();
+   private $models = [];
    
-   private $results = array();
+   private $results = [];
    
    public function setModels(array $models)
    {
@@ -41,12 +41,12 @@ class Search extends Plugin
    
    public function makeSearchAndCountResults()
    {
-      $found_ids = array();
+      $found_ids = [];
       
       foreach($this -> models as $model_name => $params)
          foreach($params['fields'] as $field)
          {
-            $conditions = isset($params['conditions']) ? $params['conditions'] : array();          
+            $conditions = isset($params['conditions']) ? $params['conditions'] : [];          
             $conditions["extra->"] = "`".$field."` LIKE '%".$this -> request."%' COLLATE utf8_general_ci";
             $conditions["fields->"] = "id";
 
@@ -70,7 +70,7 @@ class Search extends Plugin
    
    public function liftRelevantResults()
    {
-      $buffer = array();
+      $buffer = [];
       $request = mb_strtolower($this -> request, "utf-8");
       
       foreach($this -> results as $model => $ids)
@@ -129,9 +129,9 @@ class Search extends Plugin
          $name = "name";
          
          if($model == "documentation")
-         	$row[$name] = I18n :: locale("documentation").": ".$row[$name];
+         	$row[$name] = I18n::locale("documentation").": ".$row[$name];
          else if($model == "projects")
-         	$row[$name] = I18n :: locale("project").": ".$row[$name];
+         	$row[$name] = I18n::locale("project").": ".$row[$name];
          else if($model == "journal")
          {
          	$task_name = $this -> models[$model]['object'] -> getEnumTitle("task", $row["task"]);
@@ -172,7 +172,7 @@ class Search extends Plugin
                $description = preg_replace("/[^\s]*$/", "", $description)." ...";
          }
          else
-            $description = Service :: cutText($description, $length, "...");
+            $description = Service::cutText($description, $length, "...");
          
          $description = $this -> markRequestString($this -> request, $description);
          $css = ($description == "" || $description == "&nbsp;") ? " no-content" : "";

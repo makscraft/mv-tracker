@@ -3,7 +3,7 @@ $form = new Form("Projects");
 $fields = array("name", "description");
 $form -> useTokenCSRF();
 
-if(Http :: isPostRequest())
+if(Http::isPostRequest())
 {
     $form -> submit() -> validate($fields);
 
@@ -13,10 +13,10 @@ if(Http :: isPostRequest())
         $record -> name = $form -> name;
         $record -> description = $form -> description;
         $record -> active = 1;
-        $record -> date_created = $record -> date_updated = I18n :: getCurrentDateTime();
+        $record -> date_created = $record -> date_updated = I18n::getCurrentDateTime();
         $record -> create();
 
-        $_SESSION["account"]["message-success"] = I18n :: locale("project-created");
+        $_SESSION["account"]["message-success"] = I18n::locale("project-created");
         $mv -> redirect("projects");
     }
 }
@@ -24,7 +24,7 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><?php echo I18n :: locale("create-project"); ?></h1>
+        <h1><?php echo I18n::locale("create-project"); ?></h1>
         <form class="regular" method="post" action="<?php echo $mv -> root_path; ?>projects/create">
            <?php
               echo $form -> displayErrors();
@@ -32,8 +32,8 @@ include $mv -> views_path."main-header.php";
            ?>
            <div class="form-buttons clearfix">
               <?php echo $form -> displayTokenCSRF(); ?>
-              <input type="button" value="<?php echo I18n :: locale("create"); ?>" class="button big submit" />
-              <a class="cancel" href="<?php echo $mv -> root_path; ?>projects"><?php echo I18n :: locale("cancel"); ?></a>
+              <input type="button" value="<?php echo I18n::locale("create"); ?>" class="button big submit" />
+              <a class="cancel" href="<?php echo $mv -> root_path; ?>projects"><?php echo I18n::locale("cancel"); ?></a>
            </div>
         </form>
     </div>

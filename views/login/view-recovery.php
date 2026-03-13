@@ -23,19 +23,19 @@ $fields = array(array("Email", "email", "email", array("required" => true)),
 
 $form = new Form($fields);
 $form -> setHtmlParams("email", 'placeholder="Email"');
-$form -> setHtmlParams("captcha", 'placeholder="'.I18n :: locale("captcha").'"');
+$form -> setHtmlParams("captcha", 'placeholder="'.I18n::locale("captcha").'"');
 $form -> useTokenCSRF() -> useJqueryToken();
 
-if(Http :: isPostRequest())
+if(Http::isPostRequest())
 {
     $form -> submit() -> validate(array("email", "captcha")); 
 
     if($form -> captcha && $_SESSION["captcha"] != $form -> captcha)
-    	$form -> addError(I18n :: locale("wrong-captcha"), "captcha");
+    	$form -> addError(I18n::locale("wrong-captcha"), "captcha");
          
     if($form -> isSubmitted() && $form -> isValid())
 		if(!$mv -> accounts -> countRecords(array("email" => $form -> email, "active" => 1)))
-			$form -> addError(I18n :: locale("email-wrong-blocked"), "email");
+			$form -> addError(I18n::locale("email-wrong-blocked"), "email");
 	
     if(!$form -> hasErrors())
     {
@@ -50,13 +50,13 @@ include $mv -> views_path."main-header.php";
 ?>
 	<div id="content">
 		<div class="registration-block recovery">
-			<h1><?php echo I18n :: locale("password-restore"); ?></h1>
-			<p><?php echo I18n :: locale("enter-account-email"); ?></p>
+			<h1><?php echo I18n::locale("password-restore"); ?></h1>
+			<p><?php echo I18n::locale("enter-account-email"); ?></p>
             <?php 
 	            if(isset($_GET['done']))
-	            	echo "<div class=\"success\"><p>".I18n :: locale("change-password-sent")."</p></div>\n";
+	            	echo "<div class=\"success\"><p>".I18n::locale("change-password-sent")."</p></div>\n";
 	            else if(isset($_GET['wrong-token']))
-	            	echo "<div class=\"form-errors\"><p>".I18n :: locale("password-not-confirmed")."</p></div>\n";
+	            	echo "<div class=\"form-errors\"><p>".I18n::locale("password-not-confirmed")."</p></div>\n";
 
 	            if(!isset($_GET['done'])):
             ?>
@@ -65,7 +65,7 @@ include $mv -> views_path."main-header.php";
                 <?php echo $form -> displayVertical(array("email", "captcha")); ?>
 	            <div class="form-buttons clearfix">
                    <?php echo $form -> displayTokenCSFR(); ?>
-	               <input type="submit" value="<?php echo I18n :: locale("restore"); ?>" class="button big"/>
+	               <input type="submit" value="<?php echo I18n::locale("restore"); ?>" class="button big"/>
 	            </div>
 	            <div class="clear"></div>
             </form>

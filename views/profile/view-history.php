@@ -8,7 +8,7 @@ $pager_url = $mv -> root_path."history";
 include $mv -> views_path."main-header.php";
 ?>
 <div id="content">
-	<h1><?php echo I18n :: locale("history"); ?></h1>
+	<h1><?php echo I18n::locale("history"); ?></h1>
 	<div class="full-history clearfix">
 	  <?php echo $mv -> journal -> displayFullHistory(); ?>
 	</div>

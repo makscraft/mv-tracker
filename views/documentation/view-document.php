@@ -13,23 +13,23 @@ include $mv -> views_path."main-header.php";
         <?php echo $mv -> accounts -> displayReloadMessage(); ?>
         <h1><?php echo $document -> name; ?></h1>
         <div class="item-actions document-actions">
-            <a class="create" href="<?php echo $edit_url; ?>"><?php echo I18n :: locale("edit"); ?></a>
+            <a class="create" href="<?php echo $edit_url; ?>"><?php echo I18n::locale("edit"); ?></a>
             <span class="delete" id="delete-document-<?php echo $document -> id."-".$token; ?>">
-                <?php echo I18n :: locale("delete"); ?>
+                <?php echo I18n::locale("delete"); ?>
             </span>
         </div>
         <div class="clear"></div>
         <?php if($document -> files): ?>
              <div class="attached-files">
-                 <h3><?php echo I18n :: locale("attached-files"); ?></h3>
+                 <h3><?php echo I18n::locale("attached-files"); ?></h3>
                  <?php echo $mv -> journal -> displayFiles($document -> files, $account_id, "documentation-".$document -> id); ?>
              </div>
          <?php endif; ?>
          <div class="documentation-content">
-             <?php echo Tasks :: processDescriptionText($document -> content); ?>
+             <?php echo Tasks::processDescriptionText($document -> content); ?>
          </div>
         <div class="form-buttons clearfix">
-             <a id="back-button" class="button green medium" href="<?php echo $back_url; ?>"><?php echo I18n :: locale("back"); ?></a>
+             <a id="back-button" class="button green medium" href="<?php echo $back_url; ?>"><?php echo I18n::locale("back"); ?></a>
         </div>         
     </div>
 <?php

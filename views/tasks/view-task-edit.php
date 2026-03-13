@@ -20,7 +20,7 @@ $mv -> tasks -> filterFormValues($form) -> changeFloatSeparator();
 $form -> useTokenCSRF();
 $action_form = $mv -> root_path."task/edit/".$task -> id;
 
-if(Http :: isPostRequest())
+if(Http::isPostRequest())
 {
     $form -> submit() -> validate($fields);
 
@@ -33,7 +33,7 @@ if(Http :: isPostRequest())
         if(!$can_edit_content)
             $task -> description = $old_data["description"];
 
-        $task -> date_updated = I18n :: getCurrentDateTime();
+        $task -> date_updated = I18n::getCurrentDateTime();
         $task -> update();
 
         $new_data = $task -> getValues();
@@ -43,7 +43,7 @@ if(Http :: isPostRequest())
 
         $form -> copyMultipleFilesToTargetFolder("files");
         $data_files = $form -> getMultipleFilesValue("files");
-        $files = MultiImagesModelElement :: packValue($data_files);
+        $files = MultiImagesModelElement::packValue($data_files);
 
         if($task -> assigned_to && $task -> assigned_to != $account -> id && ($notify || $form -> comment || $files))
         {
@@ -53,7 +53,7 @@ if(Http :: isPostRequest())
             if($notify == "closed")
             	$message = $form -> comment;
 
-            Journal :: sendEmail($assigned_to, $task, $message, $files);
+            Journal::sendEmail($assigned_to, $task, $message, $files);
             $mv -> journal -> addTaskToSee($task -> assigned_to, $task -> id);
         }
 
@@ -63,7 +63,7 @@ if(Http :: isPostRequest())
         if($form -> comment != "" || $action_comment != "" || $files)
             $comment_id = $mv -> journal -> add($account, $task, $action_comment, $form -> comment, $files);
 
-        $_SESSION["account"]["message-success"] = I18n :: locale("task-updated");
+        $_SESSION["account"]["message-success"] = I18n::locale("task-updated");
 
         $url = "task/".$task -> id;
         
@@ -77,7 +77,7 @@ if(Http :: isPostRequest())
 include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
-        <h1><?php echo I18n :: locale("edit-task"); ?></h1>
+        <h1><?php echo I18n::locale("edit-task"); ?></h1>
         <?php echo $form -> displayErrors(); ?>
         <form class="regular" enctype="multipart/form-data" method="post" action="<?php echo $action_form; ?>">
                <div class="single">
@@ -121,12 +121,12 @@ include $mv -> views_path."main-header.php";
                <?php if($can_edit_content): ?>
                <div class="single">
                   <div class="field-name">
-                     <?php echo I18n :: locale("description"); ?>                     
-                     <span id="edit-description"><?php echo I18n :: locale("edit"); ?></span>
+                     <?php echo I18n::locale("description"); ?>                     
+                     <span id="edit-description"><?php echo I18n::locale("edit"); ?></span>
                   </div>
                   <div id="description-area" class="field-input hidden">
                      <?php echo $form -> displayFieldHtml("description"); ?>
-                     <?php echo Tasks :: displayTextileHelp(); ?>
+                     <?php echo Tasks::displayTextileHelp(); ?>
                   </div>
                </div>
                <?php endif; ?>
@@ -134,16 +134,16 @@ include $mv -> views_path."main-header.php";
                   <?php echo $form -> displayVertical(array("comment")); ?>
                </div>               
                <div class="single">
-                  <div class="field-name"><?php echo I18n :: locale("attached-files"); ?></div>
+                  <div class="field-name"><?php echo I18n::locale("attached-files"); ?></div>
                   <div class="field-input">
                      <?php echo $form -> displayFieldHtml("files"); ?>
                   </div>
                </div>
                <div class="form-buttons clearfix">
                    <?php echo $form -> displayTokenCSRF(); ?>
-                   <input class="button big submit" type="button" value="<?php echo I18n :: locale("save"); ?>"/>
+                   <input class="button big submit" type="button" value="<?php echo I18n::locale("save"); ?>"/>
                    <a class="cancel" href="<?php echo $mv -> root_path; ?>task/<?php echo $task -> id; ?>">
-                       <?php echo I18n :: locale("cancel"); ?>
+                       <?php echo I18n::locale("cancel"); ?>
                    </a>
                </div>
          </form>

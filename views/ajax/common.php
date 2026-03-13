@@ -1,6 +1,6 @@
 <?php
 include "../../config/autoload.php";
-Http :: isAjaxRequest('post', true);
+Http::isAjaxRequest('post', true);
 $mv = new Builder();
 
 include_once $mv -> views_path."before-view.php";
@@ -60,13 +60,13 @@ if(isset($_POST["delete-file"], $_POST["params"]))
 	$types = array("tasks", "journal", "documentation");
 	$params = explode("-", $_POST["params"]);
 	$type = $params[0];
-	$token = Journal :: generateFileDeleteToken($account -> id, $_POST["delete-file"]);
+	$token = Journal::generateFileDeleteToken($account -> id, $_POST["delete-file"]);
 	$result = array("files_left" => "", "error" => "");
 	
 	if(!in_array($type, $types) || count($params) != 3 || !is_numeric($params[1]) || $params[2] != $token)
 	{
-		$result["error"] = I18n :: locale("error-data-transfer");
-		Http :: responseJson($result);
+		$result["error"] = I18n::locale("error-data-transfer");
+		Http::responseJson($result);
 		exit();
 	}
 	
@@ -75,9 +75,9 @@ if(isset($_POST["delete-file"], $_POST["params"]))
 		if((($type == "documentation" || $type == "tasks") && $account -> id != $record -> author) || 
 		   ($type == "journal" && $account -> id != $record -> account))
 		{
-			$result["error"] = I18n :: locale("author-delete-file");
+			$result["error"] = I18n::locale("author-delete-file");
 
-			Http :: responseJson($result);
+			Http::responseJson($result);
 			exit();
 		}
 		
@@ -99,7 +99,7 @@ if(isset($_POST["delete-file"], $_POST["params"]))
 		
 		$result["files_left"] = count($files);
 
-		Http :: responseJson($result);
+		Http::responseJson($result);
 	}
 }
 
@@ -142,9 +142,9 @@ if(isset($_POST["add-comment"], $_POST["text"], $_POST["assigned_to"], $_POST["t
 	if($task -> assigned_to != $account -> id)
 	{
 		$assigned_to = $mv -> accounts -> findRecordById($task -> assigned_to);
-		$task -> date_due = I18n :: formatDate($task -> date_due);
+		$task -> date_due = I18n::formatDate($task -> date_due);
 		
-		Journal :: sendEmail($assigned_to, $task, $text);
+		Journal::sendEmail($assigned_to, $task, $text);
 
 		if($text)
 			$mv -> journal -> addTaskToSee($task -> assigned_to, $task -> id);
@@ -171,7 +171,7 @@ else if(isset($_POST["edit-comment"], $_POST["token"], $_POST["text"]))
 	$record -> setValue("content", $_POST["text"]) -> update();
 	$content = htmlspecialchars($record -> content, ENT_QUOTES);
 	
-	echo Tasks :: processDescriptionText($content);
+	echo Tasks::processDescriptionText($content);
 }
 else if(isset($_POST["delete-comment"], $_POST["token"]))
 {
