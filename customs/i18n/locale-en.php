@@ -1,6 +1,5 @@
 <?php
 $translations = [
-		
 	"accounts" => "Users",
 	"receive-emails" => "Receive email messages",
 	"phone" => "Phone",

@@ -101,7 +101,7 @@ return [
             [
                 'name' => 'Test project',
                 'active' => 1,
-                'date_created' => I18n :: getCurrentDateTime('SQL'),
+                'date_created' => I18n::getCurrentDateTime('SQL'),
                 'descriptions' => 'Description of the test project.'
             ]
         ],
@@ -112,7 +112,7 @@ return [
                 'tracker' => 3,
                 'project' => 1,
                 'status' => 1,
-                'date_created' => I18n :: getCurrentDateTime('SQL'),
+                'date_created' => I18n::getCurrentDateTime('SQL'),
                 'assigned_to' => 1,
                 'priority' => 1,
                 'author' => 1,
@@ -126,7 +126,7 @@ return [
                 'tracker' => 1,
                 'project' => 1,
                 'status' => 3,
-                'date_created' => I18n :: getCurrentDateTime('SQL'),
+                'date_created' => I18n::getCurrentDateTime('SQL'),
                 'assigned_to' => 1,
                 'priority' => 2,
                 'author' => 1,
