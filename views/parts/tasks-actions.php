@@ -4,12 +4,12 @@ $filter_fields = array("name", "tracker", "date_due", "status", "assigned_to", "
 if($base_url == "home")
 	unset($filter_fields[array_search("assigned_to", $filter_fields)]);
 
-$mv -> tasks -> setFieldProperty("complete", "empty_value", I18nlocale("not-defined"));
+$mv -> tasks -> setFieldProperty("complete", "empty_value", I18n :: locale("not-defined"));
 $mv -> tasks -> runFilter($filter_fields);
 $mv -> tasks -> filter -> setDisplaySingleField("date_due");
 $mv -> tasks -> filter -> filterValuesList("assigned_to", array("active" => 1));
 $mv -> tasks -> filter -> filterValuesList("status", array("order->asc" => "position"));
-$mv -> tasks -> filter -> addOptionToValuesList("status", 100000, I18nlocale("all"));
+$mv -> tasks -> filter -> addOptionToValuesList("status", 100000, I18n :: locale("all"));
 
 if($mv -> tasks -> filter -> hasParams())
 {
@@ -33,7 +33,7 @@ $mass_actions_url = $mv -> tasks -> filter -> addUrlParams($mass_actions_url);
 
 $pager_url = $sorter_url = $mv -> root_path.$mv -> tasks -> filter -> addUrlParams($base_url);
 
-if(HttpisPostRequest() && isset($_POST["mass-action-total"]) && intval($_POST["mass-action-total"]))
+if(Http :: isPostRequest() && isset($_POST["mass-action-total"]) && intval($_POST["mass-action-total"]))
 {
 	if(!$mv -> registry -> getSetting("DemoMode"))
 		$mv -> tasks -> applyMassAction($account);
@@ -83,7 +83,7 @@ if(isset($_SESSION["account"]["sorting"]["tasks"]["field"]))
 										$_SESSION["account"]["sorting"]["tasks"]["order"]);
 
 if(isset($_GET["pager-limit"], $limit) && $_GET["pager-limit"] == $limit)
-	AccountssetSetting($account, "pager-limit", $limit);
+	Accounts :: setSetting($account, "pager-limit", $limit);
 
 $params["order->".$mv -> tasks -> sorter -> getOrder()] = $mv -> tasks -> sorter -> getField();
 $params["limit->"] = $mv -> tasks -> pager -> getParamsForSelect();

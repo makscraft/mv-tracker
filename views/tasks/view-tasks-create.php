@@ -11,7 +11,7 @@ $form -> useTokenCSRF();
 
 $back_url = $mv -> root_path.(isset($_SESSION["last-page"]) ? $_SESSION["last-page"] : "tasks");
 
-if(HttpisPostRequest())
+if(Http :: isPostRequest())
 {
     $form -> submit() -> validate($fields);
 
@@ -21,32 +21,32 @@ if(HttpisPostRequest())
 
         $record = $mv -> tasks -> getEmptyRecord();
         $record -> setValues($form -> getAllValues($fields));
-        $record -> date_created = I18ngetCurrentDateTime();
+        $record -> date_created = I18n :: getCurrentDateTime();
         $record -> author = $account -> id;
 
         $data_files = $form -> getMultipleFilesValue("files");
-        $record -> files = MultiImagesModelElementpackValue($data_files);
+        $record -> files = MultiImagesModelElement :: packValue($data_files);
         $record -> create();
         
         $message = "";
         $action_comment = "created";
 		        
         if($record -> assigned_to)
-            $action_comment = I18nlocale("assigned-to").": ".$record -> getEnumTitle("assigned_to");
+            $action_comment = I18n :: locale("assigned-to").": ".$record -> getEnumTitle("assigned_to");
         	
         $mv -> journal -> add($account, $record, $action_comment, $message);
 
         if($record -> assigned_to && $record -> assigned_to != $account -> id)
         {
             $assigned_to = $mv -> accounts -> findRecordById($record -> assigned_to);
-            JournalsendEmail($assigned_to, $record, $record -> description, $record -> files);
+            Journal :: sendEmail($assigned_to, $record, $record -> description, $record -> files);
             $mv -> journal -> addTaskToSee($record -> assigned_to, $record -> id);
         }
 
         if($record -> assigned_to && $record -> assigned_to == $account -> id)
             $mv -> tasks -> dropLastSeenAssignedTasks($account, $mv -> statuses, $mv -> projects);
 		
-        $_SESSION["account"]["message-success"] = I18nlocale("task-created");
+        $_SESSION["account"]["message-success"] = I18n :: locale("task-created");
         
         $mv -> redirect("task/".$record -> id);
     }
@@ -65,7 +65,7 @@ else
 include $mv -> views_path."main-header.php";
 ?>
    <div id="content">
-	  <h1><?php echo I18nlocale("create-task"); ?></h1>        
+	  <h1><?php echo I18n :: locale("create-task"); ?></h1>        
 	  <form class="regular" enctype="multipart/form-data" method="post" action="<?php echo $mv -> root_path; ?>tasks/create">
 	     <?php echo $form -> displayErrors(); ?>
                <div class="single">
@@ -108,18 +108,18 @@ include $mv -> views_path."main-header.php";
                </div>
                <div class="single">
                   <?php echo $form -> displayVertical(array("description")); ?>
-                  <?php echo TasksdisplayTextileHelp(); ?>
+                  <?php echo Tasks :: displayTextileHelp(); ?>
                </div>
                <div class="single">
-                  <div class="field-name"><?php echo I18nlocale("attached-files"); ?></div>
+                  <div class="field-name"><?php echo I18n :: locale("attached-files"); ?></div>
                   <div class="field-input">
                      <?php echo $form -> displayFieldHtml("files"); ?>
                   </div>
                </div>
                <div class="form-buttons clearfix">
                     <?php echo $form -> displayTokenCSRF(); ?>
-                    <input class="button big submit" type="button" value="<?php echo I18nlocale("create"); ?>"/>
-                    <a class="cancel" href="<?php echo $back_url; ?>"><?php echo I18nlocale("cancel"); ?></a>
+                    <input class="button big submit" type="button" value="<?php echo I18n :: locale("create"); ?>"/>
+                    <a class="cancel" href="<?php echo $back_url; ?>"><?php echo I18n :: locale("cancel"); ?></a>
                </div>
          </form>
    </div>

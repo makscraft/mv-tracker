@@ -20,17 +20,17 @@ include $mv -> views_path."main-header.php";
             let tasksToSee = [<?php echo implode(", ", $to_see); ?>];
         </script>
         <div class="top-buttons clearfix">
-            <a class="button grey big tab active" href="<?php echo $mv -> root_path; ?>home"><?php echo I18nlocale("my-tasks"); ?></a>
-            <a class="button grey big tab" href="<?php echo $mv -> root_path; ?>tasks"><?php echo I18nlocale("all-tasks"); ?></a>
-            <a class="button gradient big create-task" href="<?php echo $mv -> root_path; ?>tasks/create"><?php echo I18nlocale("create-task"); ?></a>
+            <a class="button grey big tab active" href="<?php echo $mv -> root_path; ?>home"><?php echo I18n :: locale("my-tasks"); ?></a>
+            <a class="button grey big tab" href="<?php echo $mv -> root_path; ?>tasks"><?php echo I18n :: locale("all-tasks"); ?></a>
+            <a class="button gradient big create-task" href="<?php echo $mv -> root_path; ?>tasks/create"><?php echo I18n :: locale("create-task"); ?></a>
         </div>
-        <input type="button" class="button green medium mass-action" value="<?php echo I18nlocale("with-selected"); ?>">
+        <input type="button" class="button green medium mass-action" value="<?php echo I18n :: locale("with-selected"); ?>">
         <?php include $mv -> views_path."parts/tasks-filters.php"; ?>
         <form action="<?php echo $mv -> root_path; ?>home" method="post" id="items-table-form">
             <table class="tasks-table">
                 <tr>
                     <th class="mobile-visible"><input type="checkbox" id="check-all"/></th>
-                    <th class="for-mobile"><?php echo I18nlocale("tasks"); ?></th>
+                    <th class="for-mobile"><?php echo I18n :: locale("tasks"); ?></th>
                     <?php echo $mv -> tasks -> displayTableColumns($columns, $sorter_url); ?>
                     <th class="mobile-visible">&nbsp;</th>
                 </tr>

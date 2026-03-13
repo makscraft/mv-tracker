@@ -33,9 +33,9 @@ include $mv -> views_path."main-header.php";
 ?>
 	<div id="content" class="right-side">
 		<div class="content-wrapper">
-			<h1><?php echo I18nlocale("search"); ?></h1>
+			<h1><?php echo I18n :: locale("search"); ?></h1>
             <?php
-           		echo "<p>".I18nlocale('results-found').": ".$total."</p>\n";
+           		echo "<p>".I18n :: locale('results-found').": ".$total."</p>\n";
            		echo $mv -> search -> display();
             ?>
             <div class="form-buttons clearfix">

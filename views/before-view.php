@@ -22,8 +22,8 @@ if(!$account && !$login_page_url)
         $mv -> redirect('/login');
 }
 
-$language = I18ngetRegion();
+$language = I18n :: getRegion();
 
 if($account)
-    if($format = AccountsgetSetting($account, 'date_format'))
-        I18nsetDateFormat($format);
+    if($format = Accounts :: getSetting($account, 'date_format'))
+        I18n :: setDateFormat($format);

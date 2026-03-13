@@ -1,9 +1,9 @@
 
 <div class="limiter">
-	<span><?php echo I18nlocale("pager-limit"); ?>:</span>
+	<span><?php echo I18n :: locale("pager-limit"); ?>:</span>
 	<select id="limit-per-page">
 		<?php
-		foreach(TasksgetPagerLimits() as $value)
+		foreach(Tasks :: getPagerLimits() as $value)
 		{
 			echo "<option value=\"".$value."\"";
 		

@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="robots" content="noindex, nofollow" />
     <?php if($mv -> router -> getUrl() == '/login' && $hide_login_form): ?>
-    <? $redirect = Registryget('ServerDomain').$mv -> root_path.$after_login_path; ?>
+    <? $redirect = Registry :: get('ServerDomain').$mv -> root_path.$after_login_path; ?>
     <meta http-equiv="refresh" content="1;URL='<?php echo $redirect; ?>'" />
     <?php endif; ?>
     <title>MV tracker</title>
     <?php
-        $version = "?v".str_replace('.', '', AccountsgetMvTrackerVersion());
-        $region = I18ngetRegion();
+        $version = "?v".str_replace('.', '', Accounts :: getMvTrackerVersion());
+        $region = I18n :: getRegion();
 
-        CacheMediainstance();
+        CacheMedia :: instance();
 
-        CacheMediaaddCssFile([
+        CacheMedia :: addCssFile([
             'default.css',
             'style.css',
             'form.css',
@@ -24,23 +24,23 @@
             'media.css'
         ]);
 
-        if(RouterisLocalHost())
-            echo CacheMediagetInitialFiles('css');
+        if(Router :: isLocalHost())
+            echo CacheMedia :: getInitialFiles('css');
         else
-            echo CacheMediagetCssCache();
+            echo CacheMedia :: getCssCache();
     ?>
 
     <script type="text/javascript">
         const rootPath = "<?php echo $mv -> root_path; ?>";
         const localeRegion = "<?php echo $region; ?>";
         const americanLocale = <?php echo $mv -> registry -> getSetting("AmericanFix") ? "true" : "false"; ?>;
-        const dateFormat = "<?php echo I18ngetDateFormat(); ?>";
+        const dateFormat = "<?php echo I18n :: getDateFormat(); ?>";
         <?php if($mv -> registry -> getSetting("DemoMode")): ?>
         const isDemoMode = true;
         <?php endif; ?>
     </script>
     <?php
-        CacheMediaaddJavaScriptFile([
+        CacheMedia :: addJavaScriptFile([
             'jquery.js',
             'datepicker.min.js',
             'modal.js',
@@ -48,17 +48,17 @@
         ]);
 
         if($language != 'ru')
-            CacheMediaaddJavaScriptFile('datepicker.'.$language.'.js');
+            CacheMedia :: addJavaScriptFile('datepicker.'.$language.'.js');
 
-        if(RouterisLocalHost())
-            echo CacheMediagetInitialFiles('js');
+        if(Router :: isLocalHost())
+            echo CacheMedia :: getInitialFiles('js');
         else
-            echo CacheMediagetJavaScriptCache();
+            echo CacheMedia :: getJavaScriptCache();
     ?>
     <?php if(!$login_page_url): ?>
     <script type="text/javascript" src="<?php echo $mv -> root_path; ?>views/ajax/translate.php?locale=<?php echo $region; ?>"></script>
     <?php endif; ?>
-    <?php echo FormcreateAndDisplayJqueryToken(); ?>     
+    <?php echo Form :: createAndDisplayJqueryToken(); ?>     
 
     <link rel="icon" href="<?php echo $mv -> root_path; ?>media/images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="<?php echo $mv -> root_path; ?>media/images/favicon.ico" type="image/x-icon"/>
@@ -80,7 +80,7 @@ $css_footer = $login_page_url ? ' class="no-background"' : "";
                         <form method="get" action="<?php echo $mv -> root_path ?>search">
                             <?php $search_text = isset($search_text) ? $search_text : ""; ?>
                             <input class="search-string" type="text" name="text" value="<?php echo $search_text; ?>"/>
-                            <input class="search-button" type="submit" value="<?php echo I18nlocale("search"); ?>"/>
+                            <input class="search-button" type="submit" value="<?php echo I18n :: locale("search"); ?>"/>
                         </form>
                     </div>
                     <div class="header-right">
@@ -96,7 +96,7 @@ $css_footer = $login_page_url ? ' class="no-background"' : "";
                             </li>
                             <?php $logout = $mv -> root_path."login?logout=".$mv -> accounts -> generateLogoutToken($account); ?>
                             <li class="user-menu exit">
-                               <a href="<?php echo $logout; ?>"> / <?php echo I18nlocale("exit"); ?></a>
+                               <a href="<?php echo $logout; ?>"> / <?php echo I18n :: locale("exit"); ?></a>
                             </li>
                         </ul>
                     </div>
@@ -115,7 +115,7 @@ $css_footer = $login_page_url ? ' class="no-background"' : "";
                     </a>
                 </li>
                 <?php $logout = $mv -> root_path."login?logout=".$mv -> accounts -> generateLogoutToken($account); ?>
-                <li class="user-menu"><a href="<?php echo $logout; ?>"><?php echo I18nlocale("exit"); ?></a></li>
+                <li class="user-menu"><a href="<?php echo $logout; ?>"><?php echo I18n :: locale("exit"); ?></a></li>
             </ul>
         </div>
         <?php endif; ?>

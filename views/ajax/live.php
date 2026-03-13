@@ -1,6 +1,6 @@
 <?php
 include "../../config/autoload.php";
-HttpisAjaxRequest('post', true);
+Http :: isAjaxRequest('post', true);
 $mv = new Builder();
 
 include_once $mv -> views_path."before-view.php";
@@ -53,5 +53,5 @@ if(isset($_POST["check-my-new-tasks"]))
 	if($_POST["check-my-new-tasks"] && $_POST["check-my-new-tasks"] != $tasks_ids)
 		$result["reload"] = true;
 
-	HttpresponseJson($result);
+	Http :: responseJson($result);
 }
