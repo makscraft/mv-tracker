@@ -18,24 +18,24 @@ include $mv -> views_path."main-header.php";
 ?>
     <div id="content">
         <?php echo $mv -> accounts -> displayReloadMessage(); ?>
-        <h1 class="floated"><?php echo I18n :: locale("projects"); ?></h1>        
+        <h1 class="floated"><?php echo I18nlocale("projects"); ?></h1>        
         <div class="item-actions horizontal">
             <a class="create create-project button gradient big" href="<?php echo $mv -> root_path; ?>projects/create">
-               <?php echo I18n :: locale("create-project"); ?>
+               <?php echo I18nlocale("create-project"); ?>
             </a>
             <a class="archive button green big" href="<?php echo $mv -> root_path; ?>projects/archive">
-               <?php echo I18n :: locale("projects-archive"); ?>
+               <?php echo I18nlocale("projects-archive"); ?>
             </a>
         </div>
         <div class="clear"></div>
         <table class="tasks-table">
             <tr>
-                <th><?php echo I18n :: locale("name"); ?></th>
-                <th><?php echo I18n :: locale("tasks"); ?></th>
-                <th><?php echo I18n :: locale("implementation"); ?></th>
-                <th><?php echo I18n :: locale("hours-spent"); ?></th>
-                <th><?php echo I18n :: locale("date-created"); ?></th>
-                <th><?php echo I18n :: locale("last-activity"); ?></th>
+                <th><?php echo I18nlocale("name"); ?></th>
+                <th><?php echo I18nlocale("tasks"); ?></th>
+                <th><?php echo I18nlocale("implementation"); ?></th>
+                <th><?php echo I18nlocale("hours-spent"); ?></th>
+                <th><?php echo I18nlocale("date-created"); ?></th>
+                <th><?php echo I18nlocale("last-activity"); ?></th>
                 <th>&nbsp;</th>
             </tr>
             <?php echo $mv -> projects -> display(); ?>

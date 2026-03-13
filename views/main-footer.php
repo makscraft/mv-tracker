@@ -2,7 +2,7 @@
 </div>
 <div id="footer"<?php echo $css_footer; ?>>
     <div class="wrapper">
-        <p>&copy; <?php echo date("Y"); ?> MV tracker. All rights reserved. Version <?php echo Accounts :: getMvTrackerVersion(); ?></p>
+        <p>&copy; <?php echo date("Y"); ?> MV tracker. All rights reserved. Version <?php echo AccountsgetMvTrackerVersion(); ?></p>
         <a href="https://mv-tracker.com" target="_blank">MV tracker</a>
         <a href="https://mv-framework.<?php echo $language == "ru" ? "ru" : "com"; ?>" target="_blank">Powered by MV framework</a>
     </div>
@@ -15,10 +15,10 @@ $active_projects = ($url == "projects" || $url == "project" || $url == "archive"
 ?>
 <div class="bottom-menu">
     <a href="<?php echo $mv -> root_path; ?>home"<?php echo $active_tasks; ?>>
-        <span class="icon tasks"><?php echo I18n :: locale("tasks"); ?></span>
+        <span class="icon tasks"><?php echo I18nlocale("tasks"); ?></span>
     </a>
     <a href="<?php echo $mv -> root_path; ?>projects"<?php echo $active_projects; ?>>
-        <span class="icon docs"><?php echo I18n :: locale("projects"); ?></span>
+        <span class="icon docs"><?php echo I18nlocale("projects"); ?></span>
     </a>
 </div>
 </div>

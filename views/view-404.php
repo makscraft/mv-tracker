@@ -4,7 +4,7 @@ include $mv -> views_path."main-header.php";
 ?>
    <div id="content" class="right-side">
       <div class="content-wrapper">
-         <h1><?php echo I18n :: locale("error-page-not-found"); ?></h1>
+         <h1><?php echo I18nlocale("error-page-not-found"); ?></h1>
       </div>
    </div>
 <?php

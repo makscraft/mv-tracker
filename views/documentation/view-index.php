@@ -52,14 +52,14 @@ include $mv -> views_path."main-header.php";
 <div id="content" class="documents-page">
    <div class="content-wrapper">
       <?php echo $mv -> accounts -> displayReloadMessage(); ?>
-      <h1><?php echo I18n :: locale("documentation"); ?></h1>
+      <h1><?php echo I18nlocale("documentation"); ?></h1>
       <div class="open-filters">
-         <span><?php echo I18n :: locale("project"); ?></span>
+         <span><?php echo I18nlocale("project"); ?></span>
          <?php echo $mv -> documentation -> filter ->  display("project"); ?>
       </div>
       <div class="item-actions">
           <a class="create button gradient big" href="<?php echo $mv -> root_path; ?>documentation/create">
-              <?php echo I18n :: locale("create-document"); ?>
+              <?php echo I18nlocale("create-document"); ?>
           </a>
       </div>
       <div class="clear"></div>
@@ -67,10 +67,10 @@ include $mv -> views_path."main-header.php";
          <table class="tasks-table">
             <tr>
                 <th><?php echo $mv -> documentation -> sorter -> displayLink("id", "#", $sorter_url); ?></th>
-                <th><?php echo $mv -> documentation -> sorter -> displayLink("name", I18n :: locale("name"), $sorter_url); ?></th>
-                <th><?php echo $mv -> documentation -> sorter -> displayLink("project", I18n :: locale("project"), $sorter_url); ?></th>
-                <th><?php echo $mv -> documentation -> sorter -> displayLink("author", I18n :: locale("author"), $sorter_url); ?></th>
-                <th><?php echo $mv -> documentation -> sorter -> displayLink("date_updated", I18n :: locale("date-updated"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("name", I18nlocale("name"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("project", I18nlocale("project"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("author", I18nlocale("author"), $sorter_url); ?></th>
+                <th><?php echo $mv -> documentation -> sorter -> displayLink("date_updated", I18nlocale("date-updated"), $sorter_url); ?></th>
                 <th>&nbsp;</th>
             </tr>
             <?php echo $mv -> documentation -> display($params); ?>

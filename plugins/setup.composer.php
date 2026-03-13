@@ -7,14 +7,14 @@ class SetupComposer extends Installation
 
     static public function instance(array $params = [])
     {
-        if(static :: $instance === null)
-            static :: $instance = [
+        if(static::$instance === null)
+            static::$instance = [
                 'directory' => realpath(__DIR__.'/..'),
                 'package' => 'tracker',
                 'boot' => false
             ];
 
-        return static :: $instance;
+        return static::$instance;
     }
 
     /**
@@ -30,24 +30,24 @@ class SetupComposer extends Installation
      */
     static public function finish()
     {
-        self :: instance();
+        self::instance();
 
-        self :: configureDirectory();
-        self :: generateSecurityToken();
-        self :: changeAutoloaderString('/index.php');
-        self :: checkAndSetDirectoriesPermissions();
+        self::configureDirectory();
+        self::generateSecurityToken();
+        self::changeAutoloaderString('/index.php');
+        self::checkAndSetDirectoriesPermissions();
 
-        $driver = in_array('sqlite', PDO :: getAvailableDrivers()) ? 'sqlite' : 'mysql';
-        self :: setEnvFileParameter('DATABASE_ENGINE', $driver);
+        $driver = in_array('sqlite', PDO::getAvailableDrivers()) ? 'sqlite' : 'mysql';
+        self::setEnvFileParameter('DATABASE_ENGINE', $driver);
 
         if($driver === 'sqlite')
         {
-            self :: boot();
-            self :: configureDatabaseSQLite();
-            self :: findAndExecuteAllAvailableMigartions();
-            self :: setFirstUserLogin(self :: runPdo());
-            self :: insertInitionDatabaseContent('en');
-            self :: displayFinalInstallationMessage();
+            self::boot();
+            self::configureDatabaseSQLite();
+            self::findAndExecuteAllAvailableMigartions();
+            self::setFirstUserLogin(self::runPdo());
+            self::insertInitionDatabaseContent('en');
+            self::displayFinalInstallationMessage();
 
             $message = 'If you want to use MySQL database instead of SQLite, ';
             $message .= 'please fill database settings for MySQL in .env file '.PHP_EOL;
@@ -60,111 +60,111 @@ class SetupComposer extends Installation
             $message = ' - Now please fill database settings for MySQL in .env file';
             $message .= ' and run "composer mv:database" in your project directory.';
 
-            self :: displaySuccessMessage($message);
+            self::displaySuccessMessage($message);
         }            
     }
 
     static public function commandConfigureDatabase(Event $event)
     {
-        self :: instance();
+        self::instance();
 
-        parent :: commandConfigureDatabase($event);
-        self :: findAndExecuteAllAvailableMigartions();
+        parent::commandConfigureDatabase($event);
+        self::findAndExecuteAllAvailableMigartions();
 
-        self :: setFirstUserLogin(self :: runPdo());
+        self::setFirstUserLogin(self::runPdo());
 
-        if(true !== static :: extraCheckDatabaseContentBeforeReinstall())
+        if(true !== static::extraCheckDatabaseContentBeforeReinstall())
             return;
 
-        self :: insertInitionDatabaseContent('en');
-        self :: displayFinalInstallationMessage();
+        self::insertInitionDatabaseContent('en');
+        self::displayFinalInstallationMessage();
     }
 
     static public function setFirstUserLogin(PDO $pdo)
     {
-        if(!isset(static :: $instance['login'], static :: $instance['password']))
+        if(!isset(static::$instance['login'], static::$instance['password']))
         {
-            self :: displayErrorMessage('User login and password are not found.');
+            self::displayErrorMessage('User login and password are not found.');
             return;
         }
 
-        self :: boot();
+        self::boot();
 
         $accounts = new Accounts();
 
         if($accounts -> countRecords() > 1)
         {
-            self :: displaySuccessMessage(' - First user has been already created.');
+            self::displaySuccessMessage(' - First user has been already created.');
             return;
         }
 
         $user = $accounts -> findRecordOrGetEmpty(['id' => 1]);
 
-        $user -> login = static :: $instance['login'];
+        $user -> login = static::$instance['login'];
         $user -> name = 'Root';
-        $user -> password = Service :: makeHash(static :: $instance['password'].Registry :: get('APP_TOKEN'));
-        $user -> date_registration = I18n :: getCurrentDateTime('SQL');
-        $user -> autologin_key = Service :: strongRandomString(50);
+        $user -> password = Service::makeHash(static::$instance['password'].Registry::get('APP_TOKEN'));
+        $user -> date_registration = I18n::getCurrentDateTime('SQL');
+        $user -> autologin_key = Service::strongRandomString(50);
         $user -> active = 1;
         $user -> send_emails = true;
 
         $user -> save();
 
-        self :: displaySuccessMessage(' - First user of MV tracker has been successfully created.');
+        self::displaySuccessMessage(' - First user of MV tracker has been successfully created.');
     }
 
     static public function commandRegion(Event $event)
     {
-        self :: instance();
-        self :: boot();
+        self::instance();
+        self::boot();
 
-        if(null === $region = Installation :: commandRegion($event))
+        if(null === $region = Installation::commandRegion($event))
             return;
 
-        $env = parse_ini_file(static :: $instance['directory'].'/.env');
+        $env = parse_ini_file(static::$instance['directory'].'/.env');
         $env_region = $env['APP_REGION'] ?? '';
-        $projects = Database :: instance() -> getCount('projects');
-        $tasks = Database :: instance() -> getCount('tasks');
-        $logs = Database :: instance() -> getCount('log');
+        $projects = Database::instance() -> getCount('projects');
+        $tasks = Database::instance() -> getCount('tasks');
+        $logs = Database::instance() -> getCount('log');
 
         if($env_region !== '' || $projects > 1 || $tasks > 2 || $logs > 0)
         {
             $message = "Attention! Changing of the region will cause overwriting the database content of ";
             $message .= "tables 'projects', 'tasks', 'trackers', 'priorities' and 'statuses'.";
 
-            self :: displayErrorMessage($message);
+            self::displayErrorMessage($message);
 
             $message = "Do you want to proceed? [yes / no]";
 
-            $answer = self :: typePromptWithCoices($message, ['yes', 'y', 'no', 'n', '']);
+            $answer = self::typePromptWithCoices($message, ['yes', 'y', 'no', 'n', '']);
             
             if($answer !== 'yes' && $answer !== 'y')
                 return;
         }
 
-        self :: setEnvFileParameter('APP_REGION', $region);
-        self :: displaySuccessMessage(' - .env file has been configurated.');
+        self::setEnvFileParameter('APP_REGION', $region);
+        self::displaySuccessMessage(' - .env file has been configurated.');
 
-        if(true !== static :: extraCheckDatabaseContentBeforeReinstall())
+        if(true !== static::extraCheckDatabaseContentBeforeReinstall())
             return;
 
         $region_initial = $region;
-        $data = self :: insertInitionDatabaseContent($region);
+        $data = self::insertInitionDatabaseContent($region);
 
         $message = 'Region settings from the "'.$region_initial.'" package have been installed.';
 
         if(isset($data['hello']) && $data['hello'] !== '')
             $message .= PHP_EOL.' '.$data['hello'];
     
-        self :: displayDoneMessage($message);
+        self::displayDoneMessage($message);
     }
 
     static public function extraCheckDatabaseContentBeforeReinstall()
     {
-        self :: instance();
-        self :: boot();
+        self::instance();
+        self::boot();
 
-        $database = Database :: instance();
+        $database = Database::instance();
         $tables = ['tasks', 'projects', 'documentation'];
 
         foreach($tables as $table)
@@ -173,7 +173,7 @@ class SetupComposer extends Installation
                 $message = 'You have too much content in the table "'.$table.'".'.PHP_EOL;
                 $message .= ' Operation stopped. To proceed please empty the table manually.';
     
-                self :: displayErrorMessage($message);
+                self::displayErrorMessage($message);
 
                 return false;
             }
@@ -183,13 +183,13 @@ class SetupComposer extends Installation
 
     static public function displayFinalInstallationMessage()
     {
-        self :: instance();
-        $env = parse_ini_file(static :: $instance['directory'].DIRECTORY_SEPARATOR.'.env');
+        self::instance();
+        $env = parse_ini_file(static::$instance['directory'].DIRECTORY_SEPARATOR.'.env');
 
         $message = "Installation complete, now you can open MV tracker in browser.".PHP_EOL;
         $message .= " MV tracker start page http://yourdomain.com".preg_replace('/\/$/', '', $env['APP_FOLDER']).PHP_EOL;
         $message .= " Use the admin panel to manage users and statuses http://yourdomain.com".$env['APP_FOLDER']."adminpanel";
 
-        self :: displayDoneMessage($message);
+        self::displayDoneMessage($message);
     }
 }
