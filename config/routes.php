@@ -17,7 +17,6 @@
  */
 
 $mvFrontendRoutes = [
-
 '/' => 'view-index.php',
 'e404' => 'view-404.php',
 'fallback' => 'view-default.php',

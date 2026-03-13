@@ -17,15 +17,18 @@ $mvMainSettings = [
 'Version' => 3.15,
 
 //Initial version of MV tracker for internal needs (do not change it).
-'MvTrackerVersion' => 1.31,
+'MvTrackerVersion' => 1.4,
 
 //Allowed data types for models' fields
-'ModelsDataTypes' => ['bool','int','float','char','url','redirect','email','phone','password','text','enum','parent',
-					  'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'],
+'ModelsDataTypes' => [
+	'bool','int','float','char','url','redirect','email','phone','password','text','enum','parent',
+	'order','date','date_time','image','multi_images','file','many_to_one','many_to_many','group'
+],
 
  //All allowed types of files for uploading.
-'AllowedFiles' => ['gif', 'jpg', 'jpeg', 'png', 'svg', 'webp', 'zip', 'rar', 'gzip', 'txt', 'doc', 'docx', 'rtf', 
-                   'xls','xlsx', 'csv', 'pdf'],
+'AllowedFiles' => [
+	'gif', 'jpg', 'jpeg', 'png', 'svg', 'webp', 'zip', 'rar', 'gzip', 'txt', 'doc', 'docx', 'rtf',  'xls','xlsx', 'csv', 'pdf'
+],
 
 //All allowed types of images to for uploading.
 'AllowedImages' => ['gif', 'jpg', 'jpeg', 'png', 'svg', 'webp'],
@@ -65,12 +68,11 @@ $mvMainSettings = [
 'AutoLoginLifeTime' => 3600 * 24 * 31 * 3,
 
 //Forbidden (reserved) names of models fields.
-'ForbiddenFieldsNames' => ['page','done','pager-limit','sort-field','sort-order', 'multi-action','multi-value',
-						   'version','continue','restore','edit'],
+'ForbiddenFieldsNames' => [
+	'page','done','pager-limit','sort-field','sort-order', 'multi-action','multi-value', 'version','continue','restore','edit'],
 			
 //Forbidden names of models.
-'ForbiddenModelsNames' => ['model','settings','users_logins','users_passwords',
-						   'users_rights','users_sessions','versions'],
+'ForbiddenModelsNames' => ['model','settings','users_logins','users_passwords', 'users_rights','users_sessions','versions'],
 								
 //Maximum execution time of data processing during csv files uploading in admin panel.
 'CsvUploadTimeLimit' => 180,
