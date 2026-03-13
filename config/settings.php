@@ -14,7 +14,7 @@ $mvMainSettings = [
 'SupportedRegions' => ['en', 'us', 'ru'],
 
 //Initial version of MV framework for internal needs (do not change it).
-'Version' => 3.15,
+'Version' => 3.42,
 
 //Initial version of MV tracker for internal needs (do not change it).
 'MvTrackerVersion' => 1.4,
