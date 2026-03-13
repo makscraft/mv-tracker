@@ -14,27 +14,38 @@ class Tasks extends Model
 		['{assigned-to}', 'enum', 'assigned_to', ['foreign_key' => 'Accounts']],
 		['{priority}', 'enum', 'priority', ['foreign_key' => 'Priorities']],
 		['{author}', 'enum', 'author', ['foreign_key' => 'Accounts']],
-		['{implementation}', 'enum', 'complete', ['empty_value' => '0%',
-													  'values_list' => ['10' => '10%', 
-														  				'20' => '20%',
-																		'30' => '30%',
-																		'40' => '40%',
-																		'50' => '50%',
-																		'60' => '60%',
-																		'70' => '70%',
-																		'80' => '80%',
-																		'90' => '90%',
-																		'100' => '100%']]],
+		['{implementation}', 'enum', 'complete', [
+				'empty_value' => '0%',
+				'values_list' => [
+					'10' => '10%', 
+					'20' => '20%',
+					'30' => '30%',
+					'40' => '40%',
+					'50' => '50%',
+					'60' => '60%',
+					'70' => '70%',
+					'80' => '80%',
+					'90' => '90%',
+					'100' => '100%'
+				]
+			]
+		],
 		['{hours-estimated}', 'float', 'hours_estimated'],
 		['{hours-spent}', 'float', 'hours_spent'],
 		['{description}', 'text', 'description'],
 		['{attached-files}', 'text', 'files', ['rich_text' => true]],
-		['{journal-records}', 'many_to_one', 'journal', ['related_model' => 'Journal', 'name_field' => 'task']]
+		['{journal-records}', 'many_to_one', 'journal', [
+				'related_model' => 'Journal',
+				'name_field' => 'task'
+			]
+		]
 	];
 	
-	private $allowed_columns = ['id', 'name', 'tracker', 'project', 'assigned_to', 'priority', 'date_due', 
-								'date_created', 'date_updated', 'complete', 'status', 'author', 'hours_estimated', 
-								'hours_spent'];
+	private $allowed_columns = [
+		'id', 'name', 'tracker', 'project', 'assigned_to', 'priority', 'date_due', 
+		'date_created', 'date_updated', 'complete', 'status', 'author', 
+		'hours_estimated', 'hours_spent'
+	];
 	
 	private $background_colors = [];
 	
@@ -63,7 +74,7 @@ class Tasks extends Model
 			
 			foreach($matches as $url)
 			{
-				$re = Service :: prepareRegularExpression($url);
+				$re = Service::prepareRegularExpression($url);
 				$text = preg_replace("/".$re."\s/", "<a target=\"_blank\" href=\"".$url."\">".$url."</a> ", $text);
 				$text = preg_replace("/".$re."$/", "<a target=\"_blank\" href=\"".$url."\">".$url."</a> ", $text);
 			}
@@ -97,11 +108,11 @@ class Tasks extends Model
 		$today = date("Y-m-d");
 		
 		if($parts[0] == $today)
-			return I18n :: locale("today")." ".I18n :: formatDate($date, "H:i");
+			return I18n::locale("today")." ".I18n::formatDate($date, "H:i");
 		else if($parts[0] == date("Y-m-d", strtotime("-1 day", strtotime($today))))
-			return I18n :: locale("yesterday")." ".I18n :: formatDate($date, "H:i");
+			return I18n::locale("yesterday")." ".I18n::formatDate($date, "H:i");
 		
-		return I18n :: formatDate($date, "no-seconds");
+		return I18n::formatDate($date, "no-seconds");
 	}
 	
 	static public function getPagerLimits()
@@ -129,7 +140,7 @@ class Tasks extends Model
 		if(isset($_SESSION["account"]["columns"][$view]))
 			return $_SESSION["account"]["columns"][$view];
 			
-		if($setting = Accounts :: getSetting($account, "columns-".$view))
+		if($setting = Accounts::getSetting($account, "columns-".$view))
 		{
 			$setting = $_SESSION["account"]["columns"][$view] = explode(",", $setting);
 			return $setting;
@@ -157,9 +168,9 @@ class Tasks extends Model
 		if($view == "my-tasks" || $view == "all-tasks" || $view == "projects")
 		{
 			$_SESSION["account"]["columns"][$view] = $save;
-			Accounts :: setSetting($account, "columns-".$view, implode(",", $save));
+			Accounts::setSetting($account, "columns-".$view, implode(",", $save));
 			
-			echo Accounts :: getSetting($account, "columns-".$view);
+			echo Accounts::getSetting($account, "columns-".$view);
 		}
 	}
 	
@@ -194,9 +205,9 @@ class Tasks extends Model
 			if($column == "id")
 				$title = "#";
 			else if(isset($changes[$column]))
-				$title = I18n :: locale($changes[$column]);
+				$title = I18n::locale($changes[$column]);
 			else
-				$title = I18n :: locale(str_replace("_", "-", $column));
+				$title = I18n::locale(str_replace("_", "-", $column));
 			
 			$html .= "<th>".$this -> sorter -> displayLink($column, $title, $sorter_url)."</th>\n";
 		}
@@ -234,7 +245,7 @@ class Tasks extends Model
 		$rows = $this -> select($params);
 		
 		if(!count($rows))
-			return "<tr><td class=\"name mobile-visible\" colspan=\"12\">".I18n :: locale("no-records-found")."</td></tr>\n";
+			return "<tr><td class=\"name mobile-visible\" colspan=\"12\">".I18n::locale("no-records-found")."</td></tr>\n";
 		
 		$this -> getBackgroudColors();
 		
@@ -282,7 +293,7 @@ class Tasks extends Model
 				else if($column == "date_created" || $column == "date_updated" || $column == "date_due")
 				{
 					if($row[$column] && $row[$column] != "0000-00-00" && $row[$column] != "0000-00-00 00:00:00")
-						$html .= "<td>".I18n :: formatDate($row[$column], "no-seconds")."</td>\n";
+						$html .= "<td>".I18n::formatDate($row[$column], "no-seconds")."</td>\n";
 					else
 						$html .= "<td>-</td>\n";
 				}
@@ -302,9 +313,9 @@ class Tasks extends Model
 			$can_delete = ($account && $account -> id == $row["author"]) ? "" : " off";
 			
 			$html .= "<td class=\"actions mobile-visible\">\n";
-			$html .= "<a class=\"edit\" title=\"".I18n :: locale("edit")."\" href=\"";
+			$html .= "<a class=\"edit\" title=\"".I18n::locale("edit")."\" href=\"";
 			$html .= $this -> root_path."task/edit/".$row["id"]."\"></a>\n";
-			$html .= "<span class=\"delete".$can_delete."\" title=\"".I18n :: locale("delete")."\" ";
+			$html .= "<span class=\"delete".$can_delete."\" title=\"".I18n::locale("delete")."\" ";
 			$html .= "id=\"task-delete-".$row["id"]."-".$token."\"></span>\n";
 			$html .= "</td>\n";
 			$html .= "</tr>\n";			
@@ -315,13 +326,13 @@ class Tasks extends Model
 	
 	public function definePagerLimit($account)
 	{
-		$limits = self :: getPagerLimits();
+		$limits = self::getPagerLimits();
 		
 		if(isset($_GET["pager-limit"]) && in_array($_GET["pager-limit"], $limits))
 			$limit = $_SESSION["account"]["pager-limit"] = intval($_GET["pager-limit"]);
 		else if(isset($_SESSION["account"]["pager-limit"]) && in_array($_SESSION["account"]["pager-limit"], $limits))
 			$limit = intval($_SESSION["account"]["pager-limit"]);
-		else if($value = Accounts :: getSetting($account, "pager-limit"))
+		else if($value = Accounts::getSetting($account, "pager-limit"))
 			$limit = $value;
 		else
 			$limit = 20;
@@ -405,34 +416,34 @@ class Tasks extends Model
 		if(isset($new_data["assigned_to"]) && $new_data["assigned_to"] && $new_data["assigned_to"] != $old_data["assigned_to"])
 			if($old_data["assigned_to"])
 			{
-				$comment = I18n :: locale("task-reassigned-from")." ".$this -> getEnumTitle("assigned_to", $old_data["assigned_to"]);
-				$comment .= " ".I18n :: locale("to-person")." ".$this -> getEnumTitle("assigned_to", $new_data["assigned_to"]);
+				$comment = I18n::locale("task-reassigned-from")." ".$this -> getEnumTitle("assigned_to", $old_data["assigned_to"]);
+				$comment .= " ".I18n::locale("to-person")." ".$this -> getEnumTitle("assigned_to", $new_data["assigned_to"]);
 			}
 			else
-				$comment = I18n :: locale("assigned-to").": ".$this -> getEnumTitle("assigned_to", $new_data["assigned_to"]);
+				$comment = I18n::locale("assigned-to").": ".$this -> getEnumTitle("assigned_to", $new_data["assigned_to"]);
 		
 		if(isset($new_data["complete"]) && $new_data["complete"] && $new_data["complete"] != $old_data["complete"])
 		{
 			$comment .= $comment ? ", " : "";
-			$comment .= I18n :: locale("implementation").": ".$new_data["complete"]."%";
+			$comment .= I18n::locale("implementation").": ".$new_data["complete"]."%";
 		}
 		
 		if(isset($new_data["status"]) && $new_data["status"] && $new_data["status"] != $old_data["status"])
 		{
 			$comment .= $comment ? ", " : "";
-			$comment .= I18n :: locale("status").": ".$this -> getEnumTitle("status", $new_data["status"]);
+			$comment .= I18n::locale("status").": ".$this -> getEnumTitle("status", $new_data["status"]);
 		}
 		
 		if(isset($new_data["hours_estimated"]) && $new_data["hours_estimated"] && $new_data["hours_estimated"] != $old_data["hours_estimated"])
 		{
 			$comment .= $comment ? ", " : "";
-			$comment .= I18n :: locale("hours-estimated").": ".$new_data["hours_estimated"];
+			$comment .= I18n::locale("hours-estimated").": ".$new_data["hours_estimated"];
 		}
 		
 		if(isset($new_data["hours_spent"]) && $new_data["hours_spent"] && $new_data["hours_spent"] != $old_data["hours_spent"])
 		{
 			$comment .= $comment ? ", " : "";
-			$comment .= I18n :: locale("hours-spent").": ".$new_data["hours_spent"];
+			$comment .= I18n::locale("hours-spent").": ".$new_data["hours_spent"];
 		}		
 		
 		return $comment;
@@ -461,12 +472,12 @@ class Tasks extends Model
 
 		$_POST = array_merge($_POST, $fields);
 
-		$token = Accounts :: generateActionToken($account);
+		$token = Accounts::generateActionToken($account);
 		
 		if(!isset($_POST["csrf-action-token"]) || $_POST["csrf-action-token"] != $token || !$total || 
 		   $total != count($ids))
 		{
-			$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+			$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 			return;
 		}
 		
@@ -482,7 +493,7 @@ class Tasks extends Model
 				if($value != "")
 				{
 					if($key == "date_due")
-						$changed[$key] = I18n :: dateForSQL($value);
+						$changed[$key] = I18n::dateForSQL($value);
 					else
 						$changed[$key] = $value;
 				}
@@ -512,7 +523,7 @@ class Tasks extends Model
 				}
 				
 				$this -> updateManyRecords($changed, array("id->in" => implode(",", $ids)));
-				$_SESSION["account"]["message-success"] = I18n :: locale("tasks-updated");
+				$_SESSION["account"]["message-success"] = I18n::locale("tasks-updated");
 				
 				if(isset($changed["assigned_to"]) || isset($changed["complete"]) || isset($changed["status"]) || 
 				   isset($changed["hours_spent"]))
@@ -539,7 +550,7 @@ class Tasks extends Model
 							$user = $this -> find(array("id" => $task -> assigned_to, "table->" => "accounts"));
 							$text = $tasks_closed ? "" : $task -> description;
 							
-							Journal :: sendEmail($user, $task, $text);
+							Journal::sendEmail($user, $task, $text);
 							sleep(1);
 							
 							$sent ++;
@@ -554,12 +565,12 @@ class Tasks extends Model
 	{
 		$ids = $this -> getMassActionIds();
 		$total = isset($_GET["mass-delete"]) ? intval($_GET["mass-delete"]) : 0;
-		$token = Accounts :: generateActionToken($account);
+		$token = Accounts::generateActionToken($account);
 		
 		if(!isset($_POST["csrf-action-token"]) || $_POST["csrf-action-token"] != $token || !$total ||
 		   $total != count($ids))
 		{
-			$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+			$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 			return;
 		}
 		
@@ -576,7 +587,7 @@ class Tasks extends Model
 			$journal -> deleteTaskComments($task -> id);
 		}
 			
-		$_SESSION["account"]["message-success"] = I18n :: locale("tasks-deleted");
+		$_SESSION["account"]["message-success"] = I18n::locale("tasks-deleted");
 	}
 	
 	public function deleteOneTask($id, $token)
@@ -589,11 +600,11 @@ class Tasks extends Model
 				$journal = new Journal();
 				$journal -> deleteTaskComments($task -> id);
 				
-				$_SESSION["account"]["message-success"] = I18n :: locale("task-deleted");
+				$_SESSION["account"]["message-success"] = I18n::locale("task-deleted");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	public function deleteProjectTasks($project_id)
@@ -610,7 +621,7 @@ class Tasks extends Model
 	
 	public function afterFinalDelete($id, $fields)
 	{
-		Journal :: deleteFiles($fields["files"]);
+		Journal::deleteFiles($fields["files"]);
 	}
 	
 	public function afterRestore($id, $fields)
@@ -620,7 +631,7 @@ class Tasks extends Model
 		
 		foreach($rows as $row)
 		{
-			$row["content"] = Service :: unserializeArray($row["content"]);
+			$row["content"] = Service::unserializeArray($row["content"]);
 			
 			if($row["content"]["task"] == $id)
 				$garbage -> setId($row["id"]) -> restore();

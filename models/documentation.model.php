@@ -5,7 +5,11 @@ class Documentation extends Model
 	
 	protected $model_elements = [
 		['{name}', 'char', 'name', ['required' => true]],		
-		['{project}', 'enum', 'project', ['required' => true, 'foreign_key' => 'Projects']],
+		['{project}', 'enum', 'project', [
+				'required' => true,
+				'foreign_key' => 'Projects'
+			]
+		],
 		['{author}', 'enum', 'author', ['foreign_key' => 'Accounts']],
 		['{date-created}', 'date_time', 'date_created'],
 		['{date-updated}', 'date_time', 'date_updated'],
@@ -41,7 +45,7 @@ class Documentation extends Model
 		$rows = $this -> select($params);
 		
 		if(!count($rows))
-			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n :: locale("no-records-found")."</td></tr>\n";
+			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n::locale("no-records-found")."</td></tr>\n";
 		
 		foreach($rows as $row)
 		{
@@ -64,11 +68,11 @@ class Documentation extends Model
 			$html .= "</span></span></td>\n";
 			$html .= "<td>".($project ? $project : "-")."</td>\n";
 			$html .= "<td>".($author ? $author : "-")."</td>\n";
-			$html .= "<td>".I18n :: formatDate($date, "no-seconds")."</td>\n";
+			$html .= "<td>".I18n::formatDate($date, "no-seconds")."</td>\n";
 			$html .= "<td class=\"actions mobile-visible\">\n";
-			$html .= "<a class=\"edit\" title=\"".I18n :: locale("edit")."\" href=\"";
+			$html .= "<a class=\"edit\" title=\"".I18n::locale("edit")."\" href=\"";
 			$html .= $this -> root_path."documentation/edit/".$row["id"]."\"></a>\n";
-			$html .= "<span class=\"delete\" title=\"".I18n :: locale("delete")."\" id=\"document-delete-";
+			$html .= "<span class=\"delete\" title=\"".I18n::locale("delete")."\" id=\"document-delete-";
 			$html .= $row["id"]."-".$token."\"></span>\n";
 			$html .= "</td>\n";
 			$html .= "</tr>\n";
@@ -83,15 +87,15 @@ class Documentation extends Model
 			if($this -> generateDeleteToken($id) == $token)
 			{
 				$this -> delete($id);
-				$_SESSION["account"]["message-success"] = I18n :: locale("document-deleted");
+				$_SESSION["account"]["message-success"] = I18n::locale("document-deleted");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	public function afterFinalDelete($id, $fields)
 	{
-		Journal :: deleteFiles($fields["files"]);
+		Journal::deleteFiles($fields["files"]);
 	}
 }

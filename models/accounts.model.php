@@ -13,9 +13,12 @@ class Accounts extends Model
 		['{name}', 'char', 'name', ['required' => true]],
 		['{login}', 'char', 'login', ['required' => true, 'unique' => true]],
 		['Email', 'email', 'email', ['required' => true, 'unique' => true]],
-		['{password}', 'password', 'password', ['required' => true, 
-												'letters_required' => true,
-												'digits_required' => true]],
+		['{password}', 'password', 'password', [
+				'required' => true, 
+				'letters_required' => true,
+				'digits_required' => true
+			]
+		],
 		['Password token', 'char', 'password_token'],
 		['Autologin key', 'char', 'autologin_key'],
 		['{phone}', 'phone', 'phone'],
@@ -31,7 +34,7 @@ class Accounts extends Model
 	public function beforeCreate($fields)
 	{
 		$salt = $this -> registry -> getSetting('SecretCode');
-		return ['password' => Service :: makeHash($fields['password'].$salt)];
+		return ['password' => Service::makeHash($fields['password'].$salt)];
 	}
 	
 	public function beforeUpdate($id, $old_fields, $new_fields)
@@ -39,21 +42,21 @@ class Accounts extends Model
 		if($new_fields['password'] != $old_fields['password'])
 		{
 			$salt = $this -> registry -> getSetting('SecretCode');
-			return array('password' => Service :: makeHash($new_fields['password'].$salt));
+			return array('password' => Service::makeHash($new_fields['password'].$salt));
 		}
 	}
 		
 	public function generateSessionToken($account)
 	{
 		$token = $account -> id.$this -> registry -> getSetting('SecretCode');
-		$token .= Debug :: browser().session_id();
+		$token .= Debug::browser().session_id();
 		
 		return md5($token);
 	}
 	
 	static public function generateActionToken($account)
 	{
-		$token = $_SERVER["HTTP_USER_AGENT"].Registry :: instance() -> getSetting('SecretCode').$account -> id;
+		$token = $_SERVER["HTTP_USER_AGENT"].Registry::instance() -> getSetting('SecretCode').$account -> id;
 		$token .= $_SESSION["account"]["token"].$_SERVER["REMOTE_ADDR"];
 		
 		return md5($token);
@@ -77,13 +80,13 @@ class Accounts extends Model
 		$account = $this -> find(array("login" => $login, "active" => 1));
 		$salt = $this -> registry -> getSetting("SecretCode");
       
-		if($account && ($autologin || Service :: checkHash($password.$salt, $account -> password)))
+		if($account && ($autologin || Service::checkHash($password.$salt, $account -> password)))
 		{
 			$_SESSION["account"]["id"] = $account -> id;
 			$_SESSION["account"]["password"] = md5($account -> password);
 			$_SESSION["account"]["token"] = $this -> generateSessionToken($account);
 			
-			$account -> date_last_visit = I18n :: getCurrentDateTime();
+			$account -> date_last_visit = I18n::getCurrentDateTime();
 			$account -> update();         
 			
 			return $account;
@@ -112,10 +115,10 @@ class Accounts extends Model
 	public function remember($account)
 	{
 		$key = $account -> autologin_key;
-		$token = Service :: makeHash(Debug :: browser().$account -> password.$account -> email, 12);
+		$token = Service::makeHash(Debug::browser().$account -> password.$account -> email, 12);
 		
-		setcookie("autologin_key", $key, time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router :: isHttps(), true);
-		setcookie("autologin_token", $token, time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router :: isHttps(), true);
+		setcookie("autologin_key", $key, time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router::isHttps(), true);
+		setcookie("autologin_token", $token, time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router::isHttps(), true);
 		
 		return $this;
 	}
@@ -132,9 +135,9 @@ class Accounts extends Model
 			return;
 		}
    
-		$string = Debug :: browser().$account -> password.$account -> email;
+		$string = Debug::browser().$account -> password.$account -> email;
         
-		if(Service :: checkHash($string, $token))
+		if(Service::checkHash($string, $token))
 		{
 			$this -> remember($account);
 			
@@ -146,8 +149,8 @@ class Accounts extends Model
    
 	public function dropAutoLogin()
 	{
-		setcookie("autologin_key", "", time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router :: isHttps(), true);
-		setcookie("autologin_token", "", time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router :: isHttps(), true);
+		setcookie("autologin_key", "", time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router::isHttps(), true);
+		setcookie("autologin_token", "", time() + 86400 * $this -> auto_login_days, $this -> root_path, "", Router::isHttps(), true);
 
 		return $this;
 	}
@@ -158,21 +161,21 @@ class Accounts extends Model
 		
 		if($account)
 		{
-			$token = Service :: strongRandomString(35);
+			$token = Service::strongRandomString(35);
 			$time = time();
-			$hash = Service :: makeHash($this -> generatePasswordRecoveryString($account, $token, $time));
+			$hash = Service::makeHash($this -> generatePasswordRecoveryString($account, $token, $time));
 			
 			$url = $this -> registry -> getSetting("DomainName").$this -> root_path."recovery";
 			$url .= "?token=".$token."&hash=".$hash."&time=".$time;
 			
-			$message = "<p>".I18n :: locale("hello").", ".$account -> name.",<br />\n";
-			$message .= I18n :: locale("to-password-link")."<br /><br />\n";
+			$message = "<p>".I18n::locale("hello").", ".$account -> name.",<br />\n";
+			$message .= I18n::locale("to-password-link")."<br /><br />\n";
 			$message .= "<a href=\"".$url."\">".$url."</a></p>\n";
 			
 			$account -> password_token = $token;
 			$account -> update();
 			
-			Email :: send($account -> email, I18n :: locale("password-restore"), $message);
+			Email::send($account -> email, I18n::locale("password-restore"), $message);
 			
 			return true;
 		}
@@ -188,13 +191,13 @@ class Accounts extends Model
 			
 		$string = $this -> generatePasswordRecoveryString($account, $token, $time);
 			
-		if($account && Service :: checkHash($string, $hash))
+		if($account && Service::checkHash($string, $hash))
 		{
 			if(time() - $time > 3600 * 24)
 				return false;
 					
 			$account -> password_token = "";
-			$account -> autologin_key = Service :: strongRandomString(50);
+			$account -> autologin_key = Service::strongRandomString(50);
 			$account -> update();
 				
 			return $account;
@@ -208,10 +211,10 @@ class Accounts extends Model
 		$html = "";      
 		$url_parts = $router -> getUrlParts();
 
-		$pathes = array("home" => I18n :: locale("tasks"),
-						"projects" => I18n :: locale("projects"),
-						"documentation" => I18n :: locale("documentation"),
-						"history" => I18n :: locale("history"));
+		$pathes = array("home" => I18n::locale("tasks"),
+						"projects" => I18n::locale("projects"),
+						"documentation" => I18n::locale("documentation"),
+						"history" => I18n::locale("history"));
 
 		foreach($pathes as $url => $title)
 		{
@@ -268,12 +271,12 @@ class Accounts extends Model
 	
 	static public function rotateUploadedImage($image)
 	{
-		$image = Service :: addFileRoot($image);
+		$image = Service::addFileRoot($image);
 		
 		if(!is_file($image))
 			return;
 			
-		$extension = Service :: getExtension($image);
+		$extension = Service::getExtension($image);
 		$exif = @exif_read_data($image);
 		$result = "";
 		$rotate = false;
@@ -288,13 +291,13 @@ class Accounts extends Model
 				$rotate = 90;
 		}
 		else
-			return Service :: removeFileRoot($image);
+			return Service::removeFileRoot($image);
 			
 		if(!$rotate)
-			return Service :: removeFileRoot($image);
+			return Service::removeFileRoot($image);
 			
 		$directory = dirname($image)."/";
-		$image_name = Service :: removeExtension(basename($image));
+		$image_name = Service::removeExtension(basename($image));
 		
 		if($extension == "jpg" || $extension == "jpeg")
 		{
@@ -309,12 +312,12 @@ class Accounts extends Model
 			imagepng($result, $image_name);
 		}
 		
-		return Service :: removeFileRoot($image_name);
+		return Service::removeFileRoot($image_name);
 	}
 	
 	static public function getSetting($account, $key)
 	{
-		$settings = Service :: unserializeArray($account -> settings);
+		$settings = Service::unserializeArray($account -> settings);
 		
 		if(isset($settings[$key]))
 			return $settings[$key];
@@ -322,10 +325,10 @@ class Accounts extends Model
 	
 	static public function setSetting($account, $key, $value)
 	{
-		$settings = Service :: unserializeArray($account -> settings);
+		$settings = Service::unserializeArray($account -> settings);
 		
 		$settings[$key] = $value;
-		$account -> settings = Service :: serializeArray($settings);
+		$account -> settings = Service::serializeArray($settings);
 		$account -> update();
 	}
 
@@ -338,7 +341,7 @@ class Accounts extends Model
 				if($version = \Composer\InstalledVersions::getPrettyVersion($package))
 					return $version;
 		
-		if($version = Registry :: get('MvTrackerVersion'))
+		if($version = Registry::get('MvTrackerVersion'))
 			return strval($version);
 
 		return '1.3';

@@ -45,7 +45,7 @@ class Projects extends Model
 									  "limit->" => $this -> pager -> getParamsForSelect()));
 		
 		if(!count($rows))
-			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n :: locale("no-records-found")."</td></tr>\n";
+			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n::locale("no-records-found")."</td></tr>\n";
 		
 		$tasks = new Tasks();
 		$statuses = new Statuses();
@@ -62,7 +62,7 @@ class Projects extends Model
 			$ready = $this -> db -> getCell($sql);
 
 			$sql = "SELECT SUM(`hours_spent`) FROM `tasks` WHERE `project`='".$row["id"]."' AND `status` IN(".$open.")";
-			$time_spent = Service :: roundTo05((float) $this -> db -> getCell($sql));
+			$time_spent = Service::roundTo05((float) $this -> db -> getCell($sql));
 			
 			$params["fields->"] = "id";			
 			$ids = $tasks -> selectColumn($params);
@@ -80,11 +80,11 @@ class Projects extends Model
 			
 			$html .= "<tr>\n";
 			$html .= "<td class=\"name mobile-visible\"><a href=\"".$url."\">".$row["name"]."</a>\n";
-			$html .= "<span class=\"tracker\"><span class=\"for-mobile\">".I18n :: locale("tasks").": ";
+			$html .= "<span class=\"tracker\"><span class=\"for-mobile\">".I18n::locale("tasks").": ";
 			$html .= $active_tasks;
 			
 			if($active_tasks)
-				$html .= ", ".I18n :: locale("implementation").": ".ceil($ready)."%";
+				$html .= ", ".I18n::locale("implementation").": ".ceil($ready)."%";
 			
 			$html .= "</span></span></td>\n";
 			$html .= "<td>".($active_tasks ? $active_tasks : "-")."</td>\n";
@@ -96,12 +96,12 @@ class Projects extends Model
 
 			$html .= "<td>".$time_spent."</td>\n";
 			
-			$html .= "<td>".I18n :: formatDate($row["date_created"], "no-seconds")."</td>\n";
-			$html .= "<td>".($last_action ? I18n :: formatDate($last_action["date"], "no-seconds") : "-")."</td>\n";
+			$html .= "<td>".I18n::formatDate($row["date_created"], "no-seconds")."</td>\n";
+			$html .= "<td>".($last_action ? I18n::formatDate($last_action["date"], "no-seconds") : "-")."</td>\n";
 			$html .= "<td class=\"actions mobile-visible\">\n";
-			$html .= "<a class=\"edit\" title=\"".I18n :: locale("edit")."\" href=\"";
+			$html .= "<a class=\"edit\" title=\"".I18n::locale("edit")."\" href=\"";
 			$html .= $this -> root_path."project/edit/".$row["id"]."\"></a>\n";
-			$html .= "<span class=\"delete\" title=\"".I18n :: locale("delete")."\" id=\"project-delete-";
+			$html .= "<span class=\"delete\" title=\"".I18n::locale("delete")."\" id=\"project-delete-";
 			$html .= $row["id"]."-".$token."\"></a>\n";
 			$html .= "</td>\n";
 			$html .= "</tr>\n";
@@ -117,7 +117,7 @@ class Projects extends Model
 									  "limit->" => $this -> pager -> getParamsForSelect()));
 		
 		if(!count($rows))
-			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n :: locale("no-records-found")."</td></tr>\n";
+			return "<tr><td class=\"name mobile-visible\" colspan=\"10\">".I18n::locale("no-records-found")."</td></tr>\n";
 		
 		foreach($rows as $row)
 		{
@@ -128,11 +128,11 @@ class Projects extends Model
 				
 			$html .= "<tr>\n";
 			$html .= "<td class=\"name mobile-visible\">".$row["name"]."</td>\n";
-			$html .= "<td>".($last_action ? I18n :: formatDate($last_action["date_created"], "only-date") : "-")."</td>\n";
-			$html .= "<td>".($last_action ? I18n :: formatDate($last_action["date_updated"], "only-date") : "-")."</td>\n";
+			$html .= "<td>".($last_action ? I18n::formatDate($last_action["date_created"], "only-date") : "-")."</td>\n";
+			$html .= "<td>".($last_action ? I18n::formatDate($last_action["date_updated"], "only-date") : "-")."</td>\n";
 			$html .= "<td class=\"actions mobile-visible\">\n";
-			$html .= "<span class=\"restore\" title=\"".I18n :: locale("restore")."\" id=\"project-restore-".$row["id"]."-".$token."\"></span>\n";
-			$html .= "<span class=\"delete\" title=\"".I18n :: locale("delete")."\" id=\"project-delete-".$row["id"]."-".$token."\"></span>\n";
+			$html .= "<span class=\"restore\" title=\"".I18n::locale("restore")."\" id=\"project-restore-".$row["id"]."-".$token."\"></span>\n";
+			$html .= "<span class=\"delete\" title=\"".I18n::locale("delete")."\" id=\"project-delete-".$row["id"]."-".$token."\"></span>\n";
 			$html .= "</td>\n";
 			$html .= "</tr>\n";
 		}
@@ -150,11 +150,11 @@ class Projects extends Model
 				$tasks = new Tasks();
 				$tasks -> deleteProjectTasks($id);
 				
-				$_SESSION["account"]["message-success"] = I18n :: locale("project-deleted");
+				$_SESSION["account"]["message-success"] = I18n::locale("project-deleted");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	public function restoreProject($id, $token)
@@ -163,11 +163,11 @@ class Projects extends Model
 			if($this -> generateDeleteToken($id) == $token)
 			{
 				$record -> setValue("active", 1) -> update();
-				$_SESSION["account"]["message-success"] = I18n :: locale("project-restored");
+				$_SESSION["account"]["message-success"] = I18n::locale("project-restored");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	public function archiveProject($id, $token)
@@ -176,11 +176,11 @@ class Projects extends Model
 			if($this -> generateDeleteToken($id) == $token)
 			{
 				$record -> setValue("active", 0) -> update();
-				$_SESSION["account"]["message-success"] = I18n :: locale("project-archived");
+				$_SESSION["account"]["message-success"] = I18n::locale("project-archived");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	public function afterRestore($id, $fields)
@@ -190,7 +190,7 @@ class Projects extends Model
 		
 		foreach($rows as $row)
 		{
-			$row["content"] = Service :: unserializeArray($row["content"]);
+			$row["content"] = Service::unserializeArray($row["content"]);
 			
 			if($row["content"]["project"] == $id)
 				$garbage -> setId($row["id"]) -> restore();

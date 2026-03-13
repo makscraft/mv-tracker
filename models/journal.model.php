@@ -4,36 +4,51 @@ class Journal extends Model
 	protected $name = '{journal}';
 	
 	protected $model_elements = [
-		['{task}', 'enum', 'task', ['required' => true, 'foreign_key' => 'Tasks', 
-											  'long_list' => true]],
-		['{account}', 'enum', 'account', ['required' => true, 'foreign_key' => 'Accounts']],
+		['{task}', 'enum', 'task', [
+				'required' => true,
+				'foreign_key' => 'Tasks', 
+				'long_list' => true
+			]
+		],
+		['{account}', 'enum', 'account', [
+				'required' => true,
+				'foreign_key' => 'Accounts'
+			]
+		],
 		['{date}', 'date_time', 'date'],
 		['{operations}', 'text', 'title', ['show_in_admin' => 70]],
 		['{content}', 'text', 'content', ['show_in_admin' => 70]],
-		['{attached-files}', 'text', 'files', ['show_in_admin' => 70, 'rich_text' => true]]
+		['{attached-files}', 'text', 'files', [
+				'show_in_admin' => 70,
+				'rich_text' => true
+			]
+		]
 	];
 	
 	public function displayFullHistory()
 	{
-		$html = "";
-		$rows = $this -> select(["order->desc" => "date",
-								 "extra->" => "(`content`!='' OR `title`!='' OR `files`!='')",
-								 "limit->" => $this -> pager -> getParamsForSelect()]);
+		$html = '';
+
+		$rows = $this -> select([
+			'order->desc' => 'date',
+			'extra->' => "(`content`!='' OR `title`!='' OR `files`!='')",
+			'limit->' => $this -> pager -> getParamsForSelect()
+		]);
 		
 		$accounts_model = new Accounts();
 		
 		foreach($rows as $row)
 		{
-			$task = $this -> find(["table->" => "tasks", "id" => $row["task"]]);
-			$mass_action = preg_match("/^[\d\,]+$/", $row["title"]);
+			$task = $this -> find(['table->' => 'tasks', 'id' => $row['task']]);
+			$mass_action = preg_match('/^[\d\,]+$/', $row['title']);
 			
 			if(!$task && !$mass_action)
 				continue;
 			
-			if(!$mass_action && ($task -> date_created == $row["date"] || $row["title"] == "created"))
+			if(!$mass_action && ($task -> date_created == $row['date'] || $row['title'] == 'created'))
 			{
-				$row["content"] = $task -> description;
-				$row["title"] = ($row["title"] == "created") ? "" : $row["title"];
+				$row['content'] = $task -> description;
+				$row['title'] = ($row['title'] == 'created') ? '' : $row['title'];
 			}
 			
 			$html .= "<div class=\"section\">\n";
@@ -43,13 +58,13 @@ class Journal extends Model
 			if($name = $this -> getEnumTitle("account", $row["account"]))
 				$html .= "<span class=\"name\">".$name."</span>\n";
 			
-			$html .= "<span class=\"date\">".Tasks :: processDateTimeValue($row["date"])."</span></div>\n";
+			$html .= "<span class=\"date\">".Tasks::processDateTimeValue($row["date"])."</span></div>\n";
             
 			if($task)
 			{
 				$html .= "<div class=\"task\"><a href=\"".$this -> root_path."task/".$task -> id."\">";
 				$html .= $task -> name."</a></div>\n";
-				$html .= "<div class=\"project\"><span>".I18n :: locale("project").": </span>";
+				$html .= "<div class=\"project\"><span>".I18n::locale("project").": </span>";
 				$html .= "<a href=\"".$this -> root_path."project/".$task -> project."\">";
 				$html .= $task -> getEnumTitle("project")."</a></div>\n";
 			}
@@ -60,7 +75,7 @@ class Journal extends Model
 				foreach(explode(",", $row["title"]) as $task_id)
 					$links[] = "<a href=\"".$this -> root_path."task/".$task_id."\">#".$task_id."</a>";
 				
-				$html .= "<div class=\"task\">".I18n :: locale("tasks")." ".implode(", ", $links)."</div>\n";
+				$html .= "<div class=\"task\">".I18n::locale("tasks")." ".implode(", ", $links)."</div>\n";
 				$row["title"] = $row["content"];
 				$row["content"] = "";
 			}
@@ -70,10 +85,10 @@ class Journal extends Model
 
 			if($row["content"])
 			{
-				$row["content"] = Service :: cutText($row["content"], 300, "...");
+				$row["content"] = Service::cutText($row["content"], 300, "...");
 				
 				$html .= "<div class=\"content\"><div class=\"text\">";
-				$html .= Tasks :: processDescriptionText($row["content"])."</div>\n</div>\n";
+				$html .= Tasks::processDescriptionText($row["content"])."</div>\n</div>\n";
 			}
 			
 			$html .= $this -> displayFiles($row["files"])."</div>\n";
@@ -84,8 +99,8 @@ class Journal extends Model
 	
 	public function displayFiles($files, $account_id = false, $type = false)
 	{
-		$html = "";
-		$files = MultiImagesModelElement :: unpackValue($files);
+		$html = '';
+		$files = MultiImagesModelElement::unpackValue($files);
 		
 		if(!is_array($files) || !count($files))
 			return;
@@ -101,7 +116,7 @@ class Journal extends Model
 				if($account_id && $type)
 				{
 					$delete = "<span class=\"delete\" id=\"".$type."-";
-					$delete .= self :: generateFileDeleteToken($account_id, basename($file))."\">".I18n :: locale("delete")."</span>\n";
+					$delete .= self::generateFileDeleteToken($account_id, basename($file))."\">".I18n::locale("delete")."</span>\n";
 				}
 				else
 					$delete = "";
@@ -156,7 +171,7 @@ class Journal extends Model
 			{
 				$skip_first = true;
 				
-				if($row["title"] == "created" || strpos($row["title"], I18n :: locale("assigned-to").":") !== false)
+				if($row["title"] == "created" || strpos($row["title"], I18n::locale("assigned-to").":") !== false)
 				    continue;
 			}
 			*/
@@ -182,7 +197,7 @@ class Journal extends Model
 			if($name = $this -> getEnumTitle("account", $row["account"]))
 				$html .= "<span class=\"name\">".$name."</span>\n";
 			
-			$html .= " <span class=\"date\">".Tasks :: processDateTimeValue($row["date"])."</span></div>\n";
+			$html .= " <span class=\"date\">".Tasks::processDateTimeValue($row["date"])."</span></div>\n";
 
 			if($row["title"])
 				$html .= "<div class=\"actions\">".$row["title"]."</div>\n";
@@ -190,22 +205,22 @@ class Journal extends Model
 			if($row["files"])
 			{
 				$css = $row["content"] ? " with-margin" : "";
-				$html.= "<div class=\"files".$css."\"><span>".I18n :: locale("attached-files").":</span>";
+				$html.= "<div class=\"files".$css."\"><span>".I18n::locale("attached-files").":</span>";
             	$html .= $this -> displayFiles($row["files"], $account_id, "journal-".$row["id"])."</div>\n";
 			}
 
 			if($row["content"])
 			{				
 				$html .= "<div class=\"content\"><div class=\"text\">";
-				$html .= Tasks :: processDescriptionText($row["content"])."</div>\n";
+				$html .= Tasks::processDescriptionText($row["content"])."</div>\n";
 				
 				if($account_id)
 				{
 					$token = $this -> generateCommentToken($account -> id, $row["id"]);
 					$css_id = " id=\"comment-".$row["id"]."-".$row["task"]."-".$token."\"";
 					
-					$html .= "<div class=\"controls\"".$css_id."><span class=\"edit\">".I18n :: locale("edit")."</span>";
-					$html .= "<span class=\"delete\">".I18n :: locale("delete")."</span></div>\n";
+					$html .= "<div class=\"controls\"".$css_id."><span class=\"edit\">".I18n::locale("edit")."</span>";
+					$html .= "<span class=\"delete\">".I18n::locale("delete")."</span></div>\n";
 				}
 				
 				$html .= "</div>\n";
@@ -229,7 +244,7 @@ class Journal extends Model
 	
 	static public function uploadFiles($field, $folder)
 	{
-		$registry = Registry :: instance();
+		$registry = Registry::instance();
 		$allowed = $registry -> getSetting("AllowedFiles");
 		$folder = $registry -> getSetting("FilesPath").$folder;
 		$files = $copied = array();
@@ -244,7 +259,7 @@ class Journal extends Model
 		
 		foreach($files as $file)
 		{			
-			$extension = Service :: getExtension($file['name']);
+			$extension = Service::getExtension($file['name']);
 			
 			if($extension == "jpeg")
 				$extension = "jpg";
@@ -252,8 +267,8 @@ class Journal extends Model
 			if($file["error"] || !is_uploaded_file($file["tmp_name"]) || !in_array($extension, $allowed))
 				continue;
 
-			$name = Service :: removeExtension($file["name"]);
-			$name = I18n :: translitUrl($name);
+			$name = Service::removeExtension($file["name"]);
+			$name = I18n::translitUrl($name);
 						
 			$path = $folder.$name.".".$extension;
 					
@@ -268,7 +283,7 @@ class Journal extends Model
 			move_uploaded_file($file["tmp_name"], $path);
 			
 			if(is_file($path))
-				$copied[] = Service :: removeFileRoot($path);
+				$copied[] = Service::removeFileRoot($path);
 		}
 		
 		return implode("-*//*-", $copied);
@@ -279,7 +294,7 @@ class Journal extends Model
 		if(!$files)
 			return;
 		
-		$root = Registry :: instance() -> getSetting("IncludePath");
+		$root = Registry::instance() -> getSetting("IncludePath");
 		$files = explode("-*//*-", $files);
 		
 		foreach($files as $file)
@@ -293,21 +308,21 @@ class Journal extends Model
 			if($this -> generateCommentToken($account -> id, $comment -> id) == $token)
 			{
 				$this -> delete($comment -> id);
-				$_SESSION["account"]["message-success"] = I18n :: locale("comment-deleted");
+				$_SESSION["account"]["message-success"] = I18n::locale("comment-deleted");
 				return true;
 			}
 			else
-				$_SESSION["account"]["message-error"] = I18n :: locale("error-wrong-token");
+				$_SESSION["account"]["message-error"] = I18n::locale("error-wrong-token");
 	}
 	
 	static public function rotateUploadedImage($image)
 	{
-		$image = Service :: addFileRoot($image);
+		$image = Service::addFileRoot($image);
 		
 		if(!is_file($image))
 			return;
 			
-		$extension = Service :: getExtension($image);
+		$extension = Service::getExtension($image);
 		$exif = @exif_read_data($image);
 		$result = "";
 		$rotate = false;
@@ -322,13 +337,13 @@ class Journal extends Model
 				$rotate = 90;
 		}
 		else
-			return Service :: removeFileRoot($image);
+			return Service::removeFileRoot($image);
 			
 		if(!$rotate)
-			return Service :: removeFileRoot($image);
+			return Service::removeFileRoot($image);
 			
 		$directory = dirname($image)."/";
-		$image_name = Service :: removeExtension(basename($image));
+		$image_name = Service::removeExtension(basename($image));
 		
 		if($extension == "jpg" || $extension == "jpeg")
 		{
@@ -343,7 +358,7 @@ class Journal extends Model
 			imagepng($result, $image_name);
 		}
 		
-		return Service :: removeFileRoot($image_name);
+		return Service::removeFileRoot($image_name);
 	}
 	
 	static public function sendEmail($account, $task, $text, $files = null)
@@ -351,50 +366,50 @@ class Journal extends Model
 		if(!is_object($account) || !$account -> send_emails)
 			return false;
 		
-		$url = Service :: setFullHttpPath("task/".$task -> id);
+		$url = Service::setFullHttpPath("task/".$task -> id);
 		
 		$message = "<p><a style=\"background: #eaeaea; text-decoration: none; padding: 3px 10px; ";
-		$message .= "border-radius: 3px;\" href=\"".$url."\">".I18n :: locale("go-to-task")."</a></p>\n";
-		$message .= "<ul>\n<li>".I18n :: locale("author").": ".$task -> getEnumTitle("author")."</li>\n";
-		$message .= "<li>".I18n :: locale("priority").": ".$task -> getEnumTitle("priority")."</li>\n";
-		$message .= "<li>".I18n :: locale("tracker").": ".$task -> getEnumTitle("tracker")."</li>\n";
-		$message .= "<li>".I18n :: locale("status").": ".$task -> getEnumTitle("status")."</li>\n";
-		$message .= "<li>".I18n :: locale("assigned-to").": ".$task -> getEnumTitle("assigned_to")."</li>\n";
+		$message .= "border-radius: 3px;\" href=\"".$url."\">".I18n::locale("go-to-task")."</a></p>\n";
+		$message .= "<ul>\n<li>".I18n::locale("author").": ".$task -> getEnumTitle("author")."</li>\n";
+		$message .= "<li>".I18n::locale("priority").": ".$task -> getEnumTitle("priority")."</li>\n";
+		$message .= "<li>".I18n::locale("tracker").": ".$task -> getEnumTitle("tracker")."</li>\n";
+		$message .= "<li>".I18n::locale("status").": ".$task -> getEnumTitle("status")."</li>\n";
+		$message .= "<li>".I18n::locale("assigned-to").": ".$task -> getEnumTitle("assigned_to")."</li>\n";
 		
 		if($task -> date_due && $task -> date_due != "0000-00-00")
 		{
 			$date = $task -> date_due;
 			
 			if(preg_match("/^\d{4}-\d{2}-\d{2}$/", $date))
-				$date = I18n :: formatDate($date);
+				$date = I18n::formatDate($date);
 			
-			$message .= "<li>".I18n :: locale("date-due").": ".$date."</li>\n";
+			$message .= "<li>".I18n::locale("date-due").": ".$date."</li>\n";
 		}
 		
 		if($task -> hours_estimated)
-			$message .= "<li>".I18n :: locale("hours-estimated").": ".$task -> hours_estimated."</li>\n";
+			$message .= "<li>".I18n::locale("hours-estimated").": ".$task -> hours_estimated."</li>\n";
 		
 		if($task -> hours_spent)
-			$message .= "<li>".I18n :: locale("hours-spent").": ".$task -> hours_spent."</li>\n";
+			$message .= "<li>".I18n::locale("hours-spent").": ".$task -> hours_spent."</li>\n";
 		
 		if($task -> complete)
-			$message .= "<li>".I18n :: locale("implementation").": ".$task -> getEnumTitle("complete")."</li>\n";
+			$message .= "<li>".I18n::locale("implementation").": ".$task -> getEnumTitle("complete")."</li>\n";
 		
 		$message .= "</ul>\n";
 		
 		if($text != "")
 		{
 			$message .= "<p style=\"padding: 12px 15px; border-radius: 5px; background: #f6f5f5;\">";
-			$message .= Tasks :: processDescriptionText($text)."</p>\n";
+			$message .= Tasks::processDescriptionText($text)."</p>\n";
 		}
 		
 		if($files)
 		{
-			$message .= "<p>".I18n :: locale("attached-files")."</p>\n<ul>\n";
+			$message .= "<p>".I18n::locale("attached-files")."</p>\n<ul>\n";
 			
-			foreach(MultiImagesModelElement :: unpackValue($files) as $file)
+			foreach(MultiImagesModelElement::unpackValue($files) as $file)
 			{
-				$path = Service :: setFullHttpPath($file['image']);
+				$path = Service::setFullHttpPath($file['image']);
 				$message .= "<li><a target=\"_blank\" href=\"".$path."\">".basename($file['image'])."</a></li>\n";
 			}
 			
@@ -404,7 +419,7 @@ class Journal extends Model
 		$subject = $task -> getEnumTitle("project")." #".$task -> id." ".$task -> name;
 		$subject = str_replace("&quot;", '"', $subject);
 		
-		Email :: send($account -> email, $subject, $message);
+		Email::send($account -> email, $subject, $message);
 	}
 	
 	static public function needsNotification($old_data, $new_data)
@@ -429,7 +444,7 @@ class Journal extends Model
 		$record = $this -> getEmptyRecord();
 		
 		$record -> task = is_object($task) ? $task -> id : 0;
-		$record -> date = I18n :: getCurrentDateTime();
+		$record -> date = I18n::getCurrentDateTime();
 		$record -> account = $account -> id;
 		$record -> title = $action_comment;
 		$record -> content = $comment;
@@ -448,7 +463,7 @@ class Journal extends Model
 	
 	public function afterFinalDelete($id, $fields)
 	{
-		Journal :: deleteFiles($fields["files"]);
+		Journal::deleteFiles($fields["files"]);
 	}
 	
 	public function createSearchUrl($row)
